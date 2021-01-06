@@ -27,6 +27,13 @@ struct AddBeeView: View {
                         .padding()
                 }
                 
+                if newBee.detected != nil {
+                    Image(uiImage: newBee.detected!)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding()
+                }
+                
                 Text("Date:")
                 Text(newBee.date.description(with: nil))
                 

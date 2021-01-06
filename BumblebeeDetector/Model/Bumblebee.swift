@@ -11,52 +11,28 @@ import UIKit
 struct Bumblebee {
     var date: Date
     var image: UIImage {
+        // when setting the image, try to detect the bumblebee and crop it out
         didSet {
-//            self.detected =
-            print("DETECT HERE")
             do {
                 let model = try BumblebeeModel.init()
                 
+                // try to create a buffer from the image, and then use the model to get a prediction
                 if let bufferImage = buffer(from: image) {
-                    var prediction = try model.prediction(image: bufferImage, iouThreshold: nil, confidenceThreshold: nil)
-                    print("idk")
-                    print(prediction.coordinates)
+                    let prediction = try model.prediction(image: bufferImage, iouThreshold: nil, confidenceThreshold: nil)
                     
+                    let coordinates = prediction.coordinates
+                    
+                    // crop the bee out
+                    let cropped = crop(image: image, x: coordinates[0].doubleValue, y: coordinates[1].doubleValue, width: coordinates[2].doubleValue, height: coordinates[3].doubleValue)
+                    
+                    detected = cropped
                 }
             } catch let error {
-                print("idk error")
+                print("Error when detecting the bee on the image")
                 print(error.localizedDescription)
             }
         }
     }
+    
     var detected: UIImage?
-}
-
-
-
-
-
-func buffer(from image: UIImage) -> CVPixelBuffer? {
-  let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
-  var pixelBuffer : CVPixelBuffer?
-  let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(image.size.width), Int(image.size.height), kCVPixelFormatType_32ARGB, attrs, &pixelBuffer)
-  guard (status == kCVReturnSuccess) else {
-    return nil
-  }
-
-  CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
-  let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
-
-  let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
-  let context = CGContext(data: pixelData, width: Int(image.size.width), height: Int(image.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
-
-  context?.translateBy(x: 0, y: image.size.height)
-  context?.scaleBy(x: 1.0, y: -1.0)
-
-  UIGraphicsPushContext(context!)
-  image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
-  UIGraphicsPopContext()
-  CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
-
-  return pixelBuffer
 }

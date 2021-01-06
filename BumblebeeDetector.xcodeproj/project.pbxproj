@@ -11,6 +11,7 @@
 		D30352F125A4F0700049C77C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30352F025A4F0700049C77C /* ContentView.swift */; };
 		D30352F325A4F0710049C77C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30352F225A4F0710049C77C /* Assets.xcassets */; };
 		D30352F625A4F0710049C77C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30352F525A4F0710049C77C /* Preview Assets.xcassets */; };
+		D3B23D7D25A6532700C67B68 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B23D7C25A6532700C67B68 /* Utils.swift */; };
 		D3D0B3F825A4FE860011E322 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B3F725A4FE860011E322 /* ImagePicker.swift */; };
 		D3D0B42325A511950011E322 /* Bumblebee.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42225A511950011E322 /* Bumblebee.swift */; };
 		D3D0B42B25A51A560011E322 /* AddBeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42A25A51A560011E322 /* AddBeeView.swift */; };
@@ -24,6 +25,7 @@
 		D30352F225A4F0710049C77C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D30352F525A4F0710049C77C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D30352F725A4F0710049C77C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3B23D7C25A6532700C67B68 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		D3D0B3F725A4FE860011E322 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D3D0B42225A511950011E322 /* Bumblebee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bumblebee.swift; sourceTree = "<group>"; };
 		D3D0B42A25A51A560011E322 /* AddBeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBeeView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				D30352EE25A4F0700049C77C /* BumblebeeDetectorApp.swift */,
+				D3B23D7C25A6532700C67B68 /* Utils.swift */,
 				D3D0B42625A51A370011E322 /* View */,
 				D3D0B42825A51A3F0011E322 /* Model */,
 				D30352F225A4F0710049C77C /* Assets.xcassets */,
@@ -169,6 +172,7 @@
 				D3D0B3F825A4FE860011E322 /* ImagePicker.swift in Sources */,
 				D3D0B42B25A51A560011E322 /* AddBeeView.swift in Sources */,
 				D3D0B42325A511950011E322 /* Bumblebee.swift in Sources */,
+				D3B23D7D25A6532700C67B68 /* Utils.swift in Sources */,
 				D30352F125A4F0700049C77C /* ContentView.swift in Sources */,
 				D3D0B42F25A523010011E322 /* BumblebeeModel.mlmodel in Sources */,
 				D30352EF25A4F0700049C77C /* BumblebeeDetectorApp.swift in Sources */,
