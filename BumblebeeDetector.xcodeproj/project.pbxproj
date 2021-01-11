@@ -63,7 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				D30352EE25A4F0700049C77C /* BumblebeeDetectorApp.swift */,
-				D3B23D7C25A6532700C67B68 /* Utils.swift */,
+				D3FE202E25ACD87500E8B55B /* Util */,
 				D3D0B42625A51A370011E322 /* View */,
 				D3D0B42825A51A3F0011E322 /* Model */,
 				D30352F225A4F0710049C77C /* Assets.xcassets */,
@@ -85,7 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				D30352F025A4F0700049C77C /* ContentView.swift */,
-				D3D0B3F725A4FE860011E322 /* ImagePicker.swift */,
 				D3D0B42A25A51A560011E322 /* AddBeeView.swift */,
 			);
 			path = View;
@@ -98,6 +97,15 @@
 				D3D0B42E25A523010011E322 /* BumblebeeModel.mlmodel */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D3FE202E25ACD87500E8B55B /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				D3B23D7C25A6532700C67B68 /* Utils.swift */,
+				D3D0B3F725A4FE860011E322 /* ImagePicker.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

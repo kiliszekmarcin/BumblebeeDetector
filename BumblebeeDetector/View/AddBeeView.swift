@@ -27,8 +27,8 @@ struct AddBeeView: View {
                         .padding()
                 }
                 
-                if newBee.detected != nil {
-                    Image(uiImage: newBee.detected!)
+                if newBee.detectedImage != nil {
+                    Image(uiImage: newBee.detectedImage!)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .padding()
@@ -40,7 +40,7 @@ struct AddBeeView: View {
                 Spacer()
             }
         }.sheet(isPresented: $isShowPhotoLibrary) {
-            ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.image)
+            ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.image, selectedVideoUrl: self.$newBee.videoURL)
         }
     }
 }
