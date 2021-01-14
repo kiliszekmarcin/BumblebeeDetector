@@ -11,12 +11,13 @@ struct AddBeeView: View {
     @State private var newBee = Bumblebee(
         date: Date(),
         image: UIImage(named: "placeholderBee.png")!
+//        ,uiImgFrames: [UIImage(named: "placeholderBee.png")!, UIImage(named: "placeholderBeeInverted.png")!]
     )
 
     @State private var isShowPhotoLibrary = false
     
     var body: some View {
-        NavigationView {
+        ScrollView {
             VStack {
                 Button(action: {
                     self.isShowPhotoLibrary = true
@@ -39,7 +40,9 @@ struct AddBeeView: View {
                 
                 Spacer()
             }
-        }.sheet(isPresented: $isShowPhotoLibrary) {
+        }
+        .navigationBarTitle("Track a new bee")
+        .sheet(isPresented: $isShowPhotoLibrary) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.image, selectedVideoUrl: self.$newBee.videoURL)
         }
     }

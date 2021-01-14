@@ -29,6 +29,8 @@ struct Bumblebee {
                         let cropped = crop(image: image, x: coordinates[0].doubleValue, y: coordinates[1].doubleValue, width: coordinates[2].doubleValue, height: coordinates[3].doubleValue)
                         
                         detectedImage = cropped
+                    } else {
+                        detectedImage = nil
                     }
                 }
             } catch let error {
@@ -51,7 +53,8 @@ struct Bumblebee {
                 
                 generator.appliesPreferredTrackTransform = true
                 
-                for index in 0 ..< Int(duration) {
+//                for index in 0 ..< Int(duration) {
+                for index in stride(from: 0, to: duration, by: 1/30) {
                     let time = CMTimeMakeWithSeconds(Float64(index), preferredTimescale: 600)
                     let img:CGImage
                     do {
@@ -61,6 +64,7 @@ struct Bumblebee {
                     }
                     
                     frames.append(img)
+                    uiImgFrames.append(UIImage(cgImage: img))
                 }
                 
                 if !frames.isEmpty {
@@ -71,4 +75,5 @@ struct Bumblebee {
     }
     
     var frames: [CGImage] = []
+    var uiImgFrames: [UIImage] = []
 }
