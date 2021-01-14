@@ -35,6 +35,15 @@ struct AddBeeView: View {
                         .padding()
                 }
                 
+                if !newBee.uiImgFrames.isEmpty {
+                    AnimationView(
+                        imageSize: CGSize(width: 200, height: 200),
+                        animatedImage: UIImage.animatedImage(with: newBee.uiImgFrames, duration: TimeInterval(newBee.uiImgFrames.count / 30))
+                    ).frame(width: 200, height: 200, alignment: .center)
+                    
+                    Text(String(newBee.uiImgFrames.count) + " images")
+                }
+                
                 Text("Date:")
                 Text(newBee.date.description(with: nil))
                 
