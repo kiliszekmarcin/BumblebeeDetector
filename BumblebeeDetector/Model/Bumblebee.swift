@@ -45,35 +45,65 @@ struct Bumblebee {
     var videoURL: URL? {
         didSet {
             do {
-                frames = []
+                // when video url is set, extract the frames.
+                detections = []
                 
                 let asset = AVAsset(url: videoURL!)
                 let duration = CMTimeGetSeconds(asset.duration)
                 let generator = AVAssetImageGenerator(asset:asset)
-                
+                let model: BumblebeeModel
+
                 generator.appliesPreferredTrackTransform = true
                 
-//                for index in 0 ..< Int(duration) {
-                for index in stride(from: 0, to: duration, by: 1/30) {
-                    let time = CMTimeMakeWithSeconds(Float64(index), preferredTimescale: 600)
-                    let img:CGImage
-                    do {
-                        try img = generator.copyCGImage(at: time, actualTime: nil)
-                    } catch {
-                        return
+                do {
+                    try model = BumblebeeModel.init()
+                    
+                    // set the original image to the first frame
+                    image = UIImage(cgImage: try generator.copyCGImage(at: CMTime(value: 0, timescale: 600), actualTime: nil))
+                    
+                    //DEBUGGING
+                    let start = DispatchTime.now()
+                    var counter = 0
+                    
+                    // increments of 1/30 s
+                    for index in stride(from: 0, to: duration, by: 1/30) {
+                        counter += 1
+                        
+                        let time = CMTimeMakeWithSeconds(Float64(index), preferredTimescale: 600)
+                        let img = try generator.copyCGImage(at: time, actualTime: nil)
+                        
+                        // save the image (only the detection to preserve memory)
+                        // try to create a buffer from the image, and then use the model to get a prediction
+//                        let bufferImage = pixelBufferFromCGImage(image: img) TODO: FIND A WAY TO MAKE THIS WORK TO AVOID CONVERSION
+                        let uiimg = UIImage(cgImage: img)
+                        let bufferImage = buffer(from: uiimg)!
+                        let prediction = try model.prediction(image: bufferImage, iouThreshold: nil, confidenceThreshold: nil)
+                        
+                        let coordinates = prediction.coordinates
+                        
+                        // check if there's any detection present
+                        if coordinates.count != 0 {
+                            // crop the bee out
+                            let cropped = crop(image: uiimg, x: coordinates[0].doubleValue, y: coordinates[1].doubleValue, width: coordinates[2].doubleValue, height: coordinates[3].doubleValue)
+                            
+                            // add the detection to the array
+                            detections.append(cropped)
+                        }
                     }
                     
-                    frames.append(img)
-                    uiImgFrames.append(UIImage(cgImage: img))
-                }
-                
-                if !frames.isEmpty {
-                    image = UIImage(cgImage: frames.first!)
+                    let end = DispatchTime.now()
+                    
+                    let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // <<<<< Difference in nano seconds (UInt64)
+                    let timeInterval = Double(nanoTime) / 1_000_000_000 // Technically could overflow for long running tests
+
+                    print("Time to extract \(counter) frames from a \(duration)s long video and classify them (\(detections.count)) detections): \(timeInterval) seconds")
+                } catch {
+                    print("Error while processing the video")
+                    print(error.localizedDescription)
                 }
             }
         }
     }
     
-    var frames: [CGImage] = []
-    var uiImgFrames: [UIImage] = []
+    var detections: [UIImage] = []
 }

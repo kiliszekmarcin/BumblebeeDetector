@@ -48,3 +48,29 @@ func buffer(from image: UIImage) -> CVPixelBuffer? {
 
   return pixelBuffer
 }
+
+// adapted from https://stackoverflow.com/questions/38318387/swift-cgimage-to-cvpixelbuffer
+func pixelBufferFromCGImage(image: CGImage) -> CVPixelBuffer {
+    var pxbuffer: CVPixelBuffer? = nil
+    let options: NSDictionary = [:]
+
+    let width =  image.width
+    let height = image.height
+    let bytesPerRow = image.bytesPerRow
+    
+    let dataFromImageDataProvider = CFDataCreateMutableCopy(kCFAllocatorDefault, 0, image.dataProvider!.data)
+
+    CVPixelBufferCreateWithBytes(
+        kCFAllocatorDefault,
+        width,
+        height,
+        kCVPixelFormatType_32ARGB,
+        CFDataGetMutableBytePtr(dataFromImageDataProvider),
+        bytesPerRow,
+        nil,
+        nil,
+        options,
+        &pxbuffer
+    )
+    return pxbuffer!;
+}

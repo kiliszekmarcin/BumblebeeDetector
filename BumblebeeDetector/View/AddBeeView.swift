@@ -19,6 +19,8 @@ struct AddBeeView: View {
     var body: some View {
         ScrollView {
             VStack {
+                Text("Original image")
+                    .font(.headline)
                 Button(action: {
                     self.isShowPhotoLibrary = true
                 }) {
@@ -28,20 +30,25 @@ struct AddBeeView: View {
                         .padding()
                 }
                 
-                if newBee.detectedImage != nil {
+                if newBee.detectedImage != nil || !newBee.detections.isEmpty {
+                    Text("Deteced bee")
+                        .font(.headline)
+                }
+                
+                if newBee.detectedImage != nil && newBee.detections.isEmpty {
                     Image(uiImage: newBee.detectedImage!)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .padding()
                 }
                 
-                if !newBee.uiImgFrames.isEmpty {
+                if !newBee.detections.isEmpty {
                     AnimationView(
                         imageSize: CGSize(width: 200, height: 200),
-                        animatedImage: UIImage.animatedImage(with: newBee.uiImgFrames, duration: TimeInterval(newBee.uiImgFrames.count / 30))
+                        animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
                     ).frame(width: 200, height: 200, alignment: .center)
                     
-                    Text(String(newBee.uiImgFrames.count) + " images")
+                    Text(String(newBee.detections.count) + " images")
                 }
                 
                 Text("Date:")
@@ -51,7 +58,9 @@ struct AddBeeView: View {
             }
         }
         .navigationBarTitle("Track a new bee")
-        .sheet(isPresented: $isShowPhotoLibrary) {
+        .sheet(isPresented: $isShowPhotoLibrary, onDismiss: {
+            print("dismissed")
+        }) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.image, selectedVideoUrl: self.$newBee.videoURL)
         }
     }
