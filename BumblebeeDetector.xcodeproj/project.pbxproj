@@ -17,6 +17,7 @@
 		D3D0B42325A511950011E322 /* Bumblebee.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42225A511950011E322 /* Bumblebee.swift */; };
 		D3D0B42B25A51A560011E322 /* AddBeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42A25A51A560011E322 /* AddBeeView.swift */; };
 		D3D0B42F25A523010011E322 /* BumblebeeModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42E25A523010011E322 /* BumblebeeModel.mlmodel */; };
+		D3D1918925D2E98300DD9161 /* Localisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D1918825D2E98300DD9161 /* Localisation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		D3D0B42225A511950011E322 /* Bumblebee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bumblebee.swift; sourceTree = "<group>"; };
 		D3D0B42A25A51A560011E322 /* AddBeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBeeView.swift; sourceTree = "<group>"; };
 		D3D0B42E25A523010011E322 /* BumblebeeModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BumblebeeModel.mlmodel; sourceTree = "<group>"; };
+		D3D1918825D2E98300DD9161 /* Localisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localisation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				D3B23D7C25A6532700C67B68 /* Utils.swift */,
+				D3D1918825D2E98300DD9161 /* Localisation.swift */,
 				D3D0B3F725A4FE860011E322 /* ImagePicker.swift */,
 				D3875A0925B0A097002C1B80 /* AnimationView.swift */,
 			);
@@ -188,6 +191,7 @@
 				D30352F125A4F0700049C77C /* ContentView.swift in Sources */,
 				D3D0B42F25A523010011E322 /* BumblebeeModel.mlmodel in Sources */,
 				D30352EF25A4F0700049C77C /* BumblebeeDetectorApp.swift in Sources */,
+				D3D1918925D2E98300DD9161 /* Localisation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
