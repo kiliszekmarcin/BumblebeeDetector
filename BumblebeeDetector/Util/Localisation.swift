@@ -28,10 +28,6 @@ class BeeLocaliser {
                 let coordinates = prediction.coordinates
                 
                 if coordinates.count != 0 {
-//                    return (x: coordinates[0].doubleValue,
-//                            y: coordinates[1].doubleValue,
-//                            width: coordinates[2].doubleValue,
-//                            height: coordinates[3].doubleValue)
                     return crop(image: image,
                                 x: coordinates[0].doubleValue,
                                 y: coordinates[1].doubleValue,
@@ -60,13 +56,7 @@ class BeeLocaliser {
         generator.appliesPreferredTrackTransform = true //????
         
         do {
-            // DEBUGGING
-            let start = DispatchTime.now()
-            var counter = 0
-            
             for index in stride(from: 0, through: duration, by: 1/30) {
-                counter += 1
-                
                 let time = CMTimeMakeWithSeconds(Float64(index), preferredTimescale: 600)
                 let img = try generator.copyCGImage(at: time, actualTime: nil)
                 
@@ -74,12 +64,6 @@ class BeeLocaliser {
                     detections.append(detection)
                 }
             }
-            
-            let end = DispatchTime.now()
-            
-            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // <<<<< Difference in nano seconds (UInt64)
-            let timeInterval = Double(nanoTime) / 1_000_000_000 // Technically could overflow for long running tests
-            print("Time to extract \(counter) frames from a \(duration)s long video and classify them (\(detections.count)) detections): \(timeInterval) seconds")
         } catch let error {
             print("Error when detecting from video")
             print(error.localizedDescription)
@@ -87,10 +71,6 @@ class BeeLocaliser {
         
         return detections
     }
-    
-//    func cropImage(image: UIImage, coordinates: (x: Double, y: Double, width: Double, height: Double)) -> UIImage {
-//        return crop(image: image, x: coordinates.x, y: coordinates.y, width: coordinates.width, height: coordinates.height)
-//    }
 }
 
 
