@@ -46,6 +46,26 @@ class BeeLocaliser {
         return nil
     }
     
+    func detectBee(onImage image: CGImage) -> CGImage? {
+        do {
+            let modelInput = try BumblebeeModelInput.init(imageWith: image, iouThreshold: nil, confidenceThreshold: nil)
+            let prediction = try model.prediction(input: modelInput)
+            let coordinates = prediction.coordinates
+            
+            if coordinates.count != 0 {
+                return image.cropping(to: CGRect(x: Double(image.width) * (coordinates[0].doubleValue - coordinates[2].doubleValue / 2),
+                                                 y: Double(image.height) * (coordinates[1].doubleValue - coordinates[3].doubleValue / 2),
+                                                 width: coordinates[2].doubleValue * Double(image.width),
+                                                 height: coordinates[3].doubleValue * Double(image.height)))
+            }
+        } catch let error {
+            print("Error when predicting bumblebee location")
+            print(error.localizedDescription)
+        }
+    
+        return nil
+    }
+    
     func detectBee(onVideo url: URL) -> [UIImage] {
         var detections: [UIImage] = []
         
@@ -60,8 +80,8 @@ class BeeLocaliser {
                 let time = CMTimeMakeWithSeconds(Float64(index), preferredTimescale: 600)
                 let img = try generator.copyCGImage(at: time, actualTime: nil)
                 
-                if let detection = detectBee(onImage: UIImage(cgImage: img)) {
-                    detections.append(detection)
+                if let detection = detectBee(onImage: img) {
+                    detections.append(UIImage(cgImage: detection))
                 }
             }
         } catch let error {
