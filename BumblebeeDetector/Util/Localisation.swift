@@ -66,6 +66,35 @@ class BeeLocaliser {
         return nil
     }
     
+    func detectAndScaleBee(onImage image: CGImage) -> UIImage? {
+        do {
+            let modelInput = try BumblebeeModelInput.init(imageWith: image, iouThreshold: nil, confidenceThreshold: nil)
+            let prediction = try model.prediction(input: modelInput)
+            let coordinates = prediction.coordinates
+            
+            if coordinates.count != 0 {
+                let croppedImage = image.cropping(to: CGRect(x: Double(image.width) * (coordinates[0].doubleValue - coordinates[2].doubleValue / 2),
+                                                             y: Double(image.height) * (coordinates[1].doubleValue - coordinates[3].doubleValue / 2),
+                                                             width: coordinates[2].doubleValue * Double(image.width),
+                                                             height: coordinates[3].doubleValue * Double(image.height)))
+                
+                let uiimage = UIImage(cgImage: croppedImage!)
+                let imageSize = CGSize(width: coordinates[2].doubleValue * Double(image.width), height: coordinates[3].doubleValue * Double(image.height))
+                let renderer = UIGraphicsImageRenderer(size: imageSize)
+                let scaledImage = renderer.image { _ in
+                    uiimage.draw(in: CGRect(origin: .zero, size: imageSize))
+                }
+                
+                return scaledImage
+            }
+        } catch let error {
+            print("Error when predicting bumblebee location")
+            print(error.localizedDescription)
+        }
+    
+        return nil
+    }
+    
     func detectBee(onVideo url: URL) -> [UIImage] {
         var detections: [UIImage] = []
         
@@ -80,8 +109,8 @@ class BeeLocaliser {
                 let time = CMTimeMakeWithSeconds(Float64(index), preferredTimescale: 600)
                 let img = try generator.copyCGImage(at: time, actualTime: nil)
                 
-                if let detection = detectBee(onImage: img) {
-                    detections.append(UIImage(cgImage: detection))
+                if let detection = detectAndScaleBee(onImage: img) {
+                    detections.append(detection)
                 }
             }
         } catch let error {
