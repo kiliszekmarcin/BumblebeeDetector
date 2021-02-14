@@ -12,15 +12,15 @@ struct Bumblebee {
     var date: Date
     var image: UIImage
     
-    var detectedImage: UIImage?
-    
     var videoURL: URL? {
         didSet {
             let localiser = BeeLocaliser()
             
-            detections = localiser.detectBee(onVideo: videoURL!)
+            detections = localiser.detectBee(onVideo: videoURL!, fps: 16)
             
-            print(detections.count)
+            if let firstImage = detections.first {
+                image = firstImage
+            }
         }
     }
     

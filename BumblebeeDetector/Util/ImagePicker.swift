@@ -50,7 +50,6 @@ struct ImagePicker: UIViewControllerRepresentable {
             }
             
             else if let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
-                print(videoURL)
                 parent.selectedVideoUrl = videoURL
             }
             

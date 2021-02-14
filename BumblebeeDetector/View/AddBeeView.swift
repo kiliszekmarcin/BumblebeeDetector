@@ -30,18 +30,6 @@ struct AddBeeView: View {
                         .padding()
                 }
                 
-                if newBee.detectedImage != nil || !newBee.detections.isEmpty {
-                    Text("Deteced bee")
-                        .font(.headline)
-                }
-                
-                if newBee.detectedImage != nil && newBee.detections.isEmpty {
-                    Image(uiImage: newBee.detectedImage!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .padding()
-                }
-                
                 if !newBee.detections.isEmpty {
                     AnimationView(
                         imageSize: CGSize(width: 200, height: 200),
@@ -59,7 +47,7 @@ struct AddBeeView: View {
         }
         .navigationBarTitle("Track a new bee")
         .sheet(isPresented: $isShowPhotoLibrary, onDismiss: {
-            print("dismissed")
+//            print("dismissed")
         }) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.image, selectedVideoUrl: self.$newBee.videoURL)
         }

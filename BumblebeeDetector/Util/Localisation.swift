@@ -19,54 +19,9 @@ class BeeLocaliser {
             fatalError("Could not initialise the model: " + error.localizedDescription)
         }
     }
-    
-    func detectBee(onImage image: UIImage) -> UIImage? {
-        if let cgimage = image.cgImage {
-            do {
-                let modelInput = try BumblebeeModelInput.init(imageWith: cgimage, iouThreshold: nil, confidenceThreshold: nil)
-                let prediction = try model.prediction(input: modelInput)
-                let coordinates = prediction.coordinates
-                
-                if coordinates.count != 0 {
-                    return crop(image: image,
-                                x: coordinates[0].doubleValue,
-                                y: coordinates[1].doubleValue,
-                                width: coordinates[2].doubleValue,
-                                height: coordinates[3].doubleValue)
-                }
-            } catch let error {
-                print("Error when predicting bumblebee location")
-                print(error.localizedDescription)
-            }
-            
-        } else {
-            print("Failed to convert UIImage to CIImage")
-        }
-        
-        return nil
-    }
-    
-    func detectBee(onImage image: CGImage) -> CGImage? {
-        do {
-            let modelInput = try BumblebeeModelInput.init(imageWith: image, iouThreshold: nil, confidenceThreshold: nil)
-            let prediction = try model.prediction(input: modelInput)
-            let coordinates = prediction.coordinates
-            
-            if coordinates.count != 0 {
-                return image.cropping(to: CGRect(x: Double(image.width) * (coordinates[0].doubleValue - coordinates[2].doubleValue / 2),
-                                                 y: Double(image.height) * (coordinates[1].doubleValue - coordinates[3].doubleValue / 2),
-                                                 width: coordinates[2].doubleValue * Double(image.width),
-                                                 height: coordinates[3].doubleValue * Double(image.height)))
-            }
-        } catch let error {
-            print("Error when predicting bumblebee location")
-            print(error.localizedDescription)
-        }
-    
-        return nil
-    }
-    
-    func detectAndScaleBee(onImage image: CGImage) -> UIImage? {
+
+    /// Detects a bee on CGImage, and returns a UIImage scaled down to fit the size of the detection
+    func detectBee(onImage image: CGImage) -> UIImage? {
         do {
             let modelInput = try BumblebeeModelInput.init(imageWith: image, iouThreshold: nil, confidenceThreshold: nil)
             let prediction = try model.prediction(input: modelInput)
@@ -78,6 +33,7 @@ class BeeLocaliser {
                                                              width: coordinates[2].doubleValue * Double(image.width),
                                                              height: coordinates[3].doubleValue * Double(image.height)))
                 
+                // scale the uiimage down
                 let uiimage = UIImage(cgImage: croppedImage!)
                 let imageSize = CGSize(width: coordinates[2].doubleValue * Double(image.width), height: coordinates[3].doubleValue * Double(image.height))
                 let renderer = UIGraphicsImageRenderer(size: imageSize)
@@ -95,7 +51,8 @@ class BeeLocaliser {
         return nil
     }
     
-    func detectBee(onVideo url: URL) -> [UIImage] {
+    /// Detects the bumblebee on the video. Requires a URL and fps, and returns an array of images.
+    func detectBee(onVideo url: URL, fps: Int = 30) -> [UIImage] {
         var detections: [UIImage] = []
         
         let asset = AVAsset(url: url)
@@ -107,12 +64,14 @@ class BeeLocaliser {
         generator.appliesPreferredTrackTransform = true
         
         do {
-            for index in stride(from: 0.0, through: duration, by: 1.0/16.0) {
+            for index in stride(from: 0.0, through: duration, by: 1.0/Double(fps)) {
+                // get image from the generator
                 let time = CMTimeMakeWithSeconds(Float64(index), preferredTimescale: 600)
                 let img = try generator.copyCGImage(at: time, actualTime: nil)
                 
+                // detect the bee
                 autoreleasepool {
-                    if let detection = detectAndScaleBee(onImage: img) {
+                    if let detection = detectBee(onImage: img) {
                         detections.append(detection)
                     }
                 }
