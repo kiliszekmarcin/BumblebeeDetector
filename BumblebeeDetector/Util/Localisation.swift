@@ -102,10 +102,12 @@ class BeeLocaliser {
         let duration = CMTimeGetSeconds(asset.duration)
         let generator = AVAssetImageGenerator(asset: asset)
         
-        generator.appliesPreferredTrackTransform = true //????
+        generator.requestedTimeToleranceAfter = .zero
+        generator.requestedTimeToleranceBefore = .zero
+        generator.appliesPreferredTrackTransform = true
         
         do {
-            for index in stride(from: 0, through: duration, by: 1/30) {
+            for index in stride(from: 0.0, through: duration, by: 1.0/16.0) {
                 let time = CMTimeMakeWithSeconds(Float64(index), preferredTimescale: 600)
                 let img = try generator.copyCGImage(at: time, actualTime: nil)
                 
