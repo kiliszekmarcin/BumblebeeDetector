@@ -109,8 +109,10 @@ class BeeLocaliser {
                 let time = CMTimeMakeWithSeconds(Float64(index), preferredTimescale: 600)
                 let img = try generator.copyCGImage(at: time, actualTime: nil)
                 
-                if let detection = detectAndScaleBee(onImage: img) {
-                    detections.append(detection)
+                autoreleasepool {
+                    if let detection = detectAndScaleBee(onImage: img) {
+                        detections.append(detection)
+                    }
                 }
             }
         } catch let error {
