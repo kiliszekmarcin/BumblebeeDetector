@@ -34,11 +34,13 @@ struct AddBeeView: View {
                         .resizable()
                         .scaledToFill()
                         .frame(width: 250, height: 250)
+                        .blur(radius: self.isShowActivity ? 5.0 : 0)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.white, lineWidth: 4))
                         .shadow(radius: 7)
                         .offset(y: newBee.backgroundImage == nil ? 0 : -130)
                         .padding(.bottom, newBee.backgroundImage == nil ? 0 : -130)
+                        .overlay(self.isShowActivity ? ProgressView("Loading") : nil)
                     
                     if !newBee.detections.isEmpty {
                         AnimationView(
@@ -60,9 +62,13 @@ struct AddBeeView: View {
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .padding()
-                    .background(Color(UIColor.systemBlue))
+                    .background(
+                        !(self.isShowActivity || !self.newBee.detections.isEmpty)
+                            ? Color(UIColor.systemBlue) : Color(UIColor.systemGray)
+                    )
                     .foregroundColor(Color.white)
                     .cornerRadius(10)
+                    .disabled(self.isShowActivity || !self.newBee.detections.isEmpty)
                     
                     Button("Detect") {
                         if let url = newBee.videoURL {
@@ -86,9 +92,13 @@ struct AddBeeView: View {
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .padding()
-                    .background(Color(UIColor.systemBlue))
+                    .background(
+                        !(self.isShowActivity || !self.newBee.detections.isEmpty)
+                            ? Color(UIColor.systemBlue) : Color(UIColor.systemGray)
+                    )
                     .foregroundColor(Color.white)
                     .cornerRadius(10)
+                    .disabled(self.isShowActivity || !self.newBee.detections.isEmpty)
                 }
                 .padding()
                 .shadow(radius: 7)
@@ -96,15 +106,6 @@ struct AddBeeView: View {
                 ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
             }
         }
-        .disabled(isShowActivity)
-        .blur(radius: isShowActivity ? 2 : 0)
-        .overlay(
-            VStack {
-                if isShowActivity {
-                    ProgressView()
-                }
-            }
-        )
     }
 }
 
