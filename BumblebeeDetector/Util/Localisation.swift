@@ -11,6 +11,7 @@ import AVFoundation
 
 class BeeLocaliser {
     let model: BumblebeeModel
+    var firstFrame: UIImage?
     
     init() {
         do {
@@ -64,6 +65,8 @@ class BeeLocaliser {
         generator.appliesPreferredTrackTransform = true
         
         do {
+            self.firstFrame = UIImage(cgImage: try generator.copyCGImage(at: CMTime(seconds: 0.0, preferredTimescale: 600), actualTime: nil))
+            
             for index in stride(from: 0.0, through: duration, by: 1.0/Double(fps)) {
                 // get image from the generator
                 let time = CMTimeMakeWithSeconds(Float64(index), preferredTimescale: 600)
@@ -82,6 +85,10 @@ class BeeLocaliser {
         }
         
         return detections
+    }
+    
+    func getFirstFrame() -> UIImage? {
+        return self.firstFrame
     }
 }
 

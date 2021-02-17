@@ -21,8 +21,8 @@ struct AddBeeView: View {
             ScrollView {
                 VStack {
                     // top background (could be a map later?)
-                    if newBee.firstFrame != nil {
-                        Image(uiImage: newBee.firstFrame!)
+                    if newBee.backgroundImage != nil {
+                        Image(uiImage: newBee.backgroundImage!)
                             .resizable()
                             .scaledToFill()
                             .frame(width: UIScreen.main.bounds.width, height: 300)
@@ -36,8 +36,8 @@ struct AddBeeView: View {
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.white, lineWidth: 4))
                         .shadow(radius: 7)
-                        .offset(y: newBee.firstFrame == nil ? 0 : -130)
-                        .padding(.bottom, newBee.firstFrame == nil ? 0 : -130)
+                        .offset(y: newBee.backgroundImage == nil ? 0 : -130)
+                        .padding(.bottom, newBee.backgroundImage == nil ? 0 : -130)
                     
                     if !newBee.detections.isEmpty {
                         AnimationView(
@@ -64,7 +64,18 @@ struct AddBeeView: View {
                     .cornerRadius(10)
                     
                     Button("Detect") {
-                        print("Detect pressed")
+                        if let url = newBee.videoURL {
+                            let localiser = BeeLocaliser()
+                            
+                            newBee.detections = localiser.detectBee(onVideo: url, fps: 16)
+                            
+                            if let firstImage = newBee.detections.first {
+                                newBee.profileImage = firstImage
+                            }
+                            
+                            // get the background image
+                            newBee.backgroundImage = localiser.getFirstFrame()
+                        }
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .padding()
@@ -89,7 +100,7 @@ struct AddBeeView_Previews: PreviewProvider {
     static let exampleBee = Bumblebee(
         date: Date(),
         profileImage: UIImage(named: "frame1.png")!,
-        firstFrame: UIImage(named: "background.png"),
+        backgroundImage: UIImage(named: "background.png"),
         detections: [
             UIImage(named: "frame1.png")!,
             UIImage(named: "frame2.png")!,
