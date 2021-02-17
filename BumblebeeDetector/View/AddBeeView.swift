@@ -15,6 +15,7 @@ struct AddBeeView: View {
     )
 
     @State private var isShowPhotoLibrary = false
+    @State private var isShowActivity = false
     
     var body: some View {
         ZStack() {
@@ -65,16 +66,22 @@ struct AddBeeView: View {
                     
                     Button("Detect") {
                         if let url = newBee.videoURL {
-                            let localiser = BeeLocaliser()
+                            self.isShowActivity = true
                             
-                            newBee.detections = localiser.detectBee(onVideo: url, fps: 16)
-                            
-                            if let firstImage = newBee.detections.first {
-                                newBee.profileImage = firstImage
+                            DispatchQueue(label: "beeDetection").async {
+                                let localiser = BeeLocaliser()
+                                
+                                newBee.detections = localiser.detectBee(onVideo: url, fps: 16)
+                                
+                                if let firstImage = newBee.detections.first {
+                                    newBee.profileImage = firstImage
+                                }
+                                
+                                // get the background image
+                                newBee.backgroundImage = localiser.getFirstFrame()
+                                
+                                self.isShowActivity = false
                             }
-                            
-                            // get the background image
-                            newBee.backgroundImage = localiser.getFirstFrame()
                         }
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
@@ -89,6 +96,15 @@ struct AddBeeView: View {
                 ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
             }
         }
+        .disabled(isShowActivity)
+        .blur(radius: isShowActivity ? 2 : 0)
+        .overlay(
+            VStack {
+                if isShowActivity {
+                    ProgressView()
+                }
+            }
+        )
     }
 }
 
