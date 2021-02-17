@@ -10,7 +10,8 @@ import UIKit
 
 struct Bumblebee {
     var date: Date
-    var image: UIImage
+    var profileImage: UIImage // bee's first detection
+    var firstFrame: UIImage? // first whole frame to display in the background
     
     var videoURL: URL? {
         didSet {
@@ -19,7 +20,7 @@ struct Bumblebee {
             detections = localiser.detectBee(onVideo: videoURL!, fps: 16)
             
             if let firstImage = detections.first {
-                image = firstImage
+                profileImage = firstImage
             }
         }
     }

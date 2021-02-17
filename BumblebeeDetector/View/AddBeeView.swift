@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct AddBeeView: View {
-    @State private var newBee = Bumblebee(
+    @State var newBee = Bumblebee(
         date: Date(),
-        image: UIImage(named: "placeholderBee.png")!
+        profileImage: UIImage(named: "placeholderBee.png")!
 //        ,uiImgFrames: [UIImage(named: "placeholderBee.png")!, UIImage(named: "placeholderBeeInverted.png")!]
     )
 
@@ -19,43 +19,90 @@ struct AddBeeView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text("Original image")
-                    .font(.headline)
-                Button(action: {
-                    self.isShowPhotoLibrary = true
-                }) {
-                    Image(uiImage: newBee.image)
+                // top background (could be a map later?)
+                if newBee.firstFrame != nil {
+                    Image(uiImage: newBee.firstFrame!)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .padding()
+                        .scaledToFill()
+//                        .ignoresSafeArea(edges: .top)
+                        .frame(width: UIScreen.main.bounds.width, height: 300)
                 }
+                
+                // bee circle
+                Image(uiImage: newBee.profileImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 250, height: 250)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                    .shadow(radius: 7)
+                    .offset(y: newBee.firstFrame == nil ? 0 : -130)
+                    .padding(.bottom, newBee.firstFrame == nil ? 0 : -130)
+                
+                Spacer()
+                
+                // buttons area TODO: camera roll / camera
+                HStack(spacing: 10.0) {
+                    Button("Select a video") {
+                        self.isShowPhotoLibrary = true
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .padding()
+                    .background(Color(UIColor.systemBlue))
+                    .foregroundColor(Color.white)
+                    .cornerRadius(10)
+                    
+                    Button("Detect") {
+                        print("Detect pressed")
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .padding()
+                    .background(Color(UIColor.systemBlue))
+                    .foregroundColor(Color.white)
+                    .cornerRadius(10)
+                }.padding()
                 
                 if !newBee.detections.isEmpty {
                     AnimationView(
                         imageSize: CGSize(width: 200, height: 200),
                         animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
                     ).frame(width: 200, height: 200, alignment: .center)
-                    
-                    Text(String(newBee.detections.count) + " images")
                 }
-                
-                Text("Date:")
-                Text(newBee.date.description(with: nil))
-                
-                Spacer()
             }
         }
         .navigationBarTitle("Track a new bee")
         .sheet(isPresented: $isShowPhotoLibrary, onDismiss: {
 //            print("dismissed")
         }) {
-            ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.image, selectedVideoUrl: self.$newBee.videoURL)
+            ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
         }
     }
 }
 
 struct AddBeeView_Previews: PreviewProvider {
+    static let placeholderBee = Bumblebee(
+        date: Date(),
+        profileImage: UIImage(named: "placeholderBee.png")!
+    )
+    static let exampleBee = Bumblebee(
+        date: Date(),
+        profileImage: UIImage(named: "frame1.png")!,
+        firstFrame: UIImage(named: "background.png"),
+        detections: [
+            UIImage(named: "frame1.png")!,
+            UIImage(named: "frame2.png")!,
+            UIImage(named: "frame3.png")!,
+            UIImage(named: "frame4.png")!,
+            UIImage(named: "frame5.png")!
+        ]
+    )
+    
     static var previews: some View {
-        AddBeeView()
+        Group {
+            AddBeeView(newBee: placeholderBee)
+                .previewDisplayName("Placeholder")
+            AddBeeView(newBee: exampleBee)
+                .previewDisplayName("Example bee")
+        }
     }
 }

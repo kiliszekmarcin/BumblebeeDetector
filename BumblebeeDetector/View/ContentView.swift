@@ -16,7 +16,7 @@ struct ContentView: View {
             List {
                 ForEach(bees, id: \.date) { bee in
                     HStack{
-                        Image(uiImage: bee.image)
+                        Image(uiImage: bee.profileImage)
                             .resizable()
                             .scaledToFill()
                             .frame(width: 50, height: 50)
@@ -26,7 +26,7 @@ struct ContentView: View {
                 }
             }
                 
-            .navigationBarTitle("Idk")
+            .navigationBarTitle("Detected bumblebees")
             .navigationBarItems(trailing:
                 NavigationLink(destination: AddBeeView()) {
                     Image(systemName: "plus")
