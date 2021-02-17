@@ -17,28 +17,39 @@ struct AddBeeView: View {
     @State private var isShowPhotoLibrary = false
     
     var body: some View {
-        ScrollView {
-            VStack {
-                // top background (could be a map later?)
-                if newBee.firstFrame != nil {
-                    Image(uiImage: newBee.firstFrame!)
+        ZStack() {
+            ScrollView {
+                VStack {
+                    // top background (could be a map later?)
+                    if newBee.firstFrame != nil {
+                        Image(uiImage: newBee.firstFrame!)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: UIScreen.main.bounds.width, height: 300)
+                    }
+                    
+                    // bee circle
+                    Image(uiImage: newBee.profileImage)
                         .resizable()
                         .scaledToFill()
-//                        .ignoresSafeArea(edges: .top)
-                        .frame(width: UIScreen.main.bounds.width, height: 300)
-                }
-                
-                // bee circle
-                Image(uiImage: newBee.profileImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 250, height: 250)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                    .shadow(radius: 7)
-                    .offset(y: newBee.firstFrame == nil ? 0 : -130)
-                    .padding(.bottom, newBee.firstFrame == nil ? 0 : -130)
-                
+                        .frame(width: 250, height: 250)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                        .shadow(radius: 7)
+                        .offset(y: newBee.firstFrame == nil ? 0 : -130)
+                        .padding(.bottom, newBee.firstFrame == nil ? 0 : -130)
+                    
+                    if !newBee.detections.isEmpty {
+                        AnimationView(
+                            imageSize: CGSize(width: 200, height: 200),
+                            animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
+                        ).frame(width: 200, height: 200, alignment: .center)
+                    }
+                }.frame(width: UIScreen.main.bounds.width)
+            }
+            .navigationBarTitle("Track a new bee")
+            
+            VStack {
                 Spacer()
                 
                 // buttons area TODO: camera roll / camera
@@ -60,21 +71,12 @@ struct AddBeeView: View {
                     .background(Color(UIColor.systemBlue))
                     .foregroundColor(Color.white)
                     .cornerRadius(10)
-                }.padding()
-                
-                if !newBee.detections.isEmpty {
-                    AnimationView(
-                        imageSize: CGSize(width: 200, height: 200),
-                        animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
-                    ).frame(width: 200, height: 200, alignment: .center)
                 }
+                .padding()
+                .shadow(radius: 7)
+            }.sheet(isPresented: $isShowPhotoLibrary, onDismiss: { }) {
+                ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
             }
-        }
-        .navigationBarTitle("Track a new bee")
-        .sheet(isPresented: $isShowPhotoLibrary, onDismiss: {
-//            print("dismissed")
-        }) {
-            ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
         }
     }
 }
