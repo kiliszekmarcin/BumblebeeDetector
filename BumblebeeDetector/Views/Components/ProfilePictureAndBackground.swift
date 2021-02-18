@@ -35,12 +35,14 @@ struct ProfilePictureAndBackground: View {
                 .frame(width: 200, height: 200)
                 .blur(radius: loading ? 5.0 : 0)
                 .clipShape(Circle())
-                .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                .padding(4)
+                .background(Color.white)
+                .clipShape(Circle())
                 .shadow(radius: 7)
                 .overlay(loading ? LoadingIndicator() : nil)
-                .offset(y: backgroundPicture == nil ? 0 : -130)
+                .offset(y: backgroundPicture == nil ? 0 : -135)
                 .padding()
-                .padding(.bottom, backgroundPicture == nil ? 0 : -130)
+                .padding(.bottom, backgroundPicture == nil ? 0 : -135)
         }
     }
 }
