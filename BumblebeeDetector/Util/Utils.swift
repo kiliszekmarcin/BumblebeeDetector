@@ -9,73 +9,6 @@ import Foundation
 import UIKit
 import AVFoundation
 
-func crop(image: UIImage, x: Double, y: Double, width: Double, height: Double) -> UIImage {
-    let cgImage = image.cgImage!
-    
-    let originalSize: CGSize = image.size
-    
-    let rect: CGRect = CGRect(x: (x - width/2) * Double(originalSize.width),
-                              y: (y - height/2) * Double(originalSize.height),
-                              width: width * Double(originalSize.width),
-                              height: height * Double(originalSize.height))
-    
-    let croppedCgImage: CGImage = cgImage.cropping(to: rect)!
-    
-    return UIImage(cgImage: croppedCgImage)
-}
-
-// adapted from https://stackoverflow.com/questions/44462087/how-to-convert-a-uiimage-to-a-cvpixelbuffer
-func buffer(from image: UIImage) -> CVPixelBuffer? {
-  let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
-  var pixelBuffer : CVPixelBuffer?
-  let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(image.size.width), Int(image.size.height), kCVPixelFormatType_32ARGB, attrs, &pixelBuffer)
-  guard (status == kCVReturnSuccess) else {
-    return nil
-  }
-
-  CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
-  let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
-
-  let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
-  let context = CGContext(data: pixelData, width: Int(image.size.width), height: Int(image.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
-
-  context?.translateBy(x: 0, y: image.size.height)
-  context?.scaleBy(x: 1.0, y: -1.0)
-
-  UIGraphicsPushContext(context!)
-  image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
-  UIGraphicsPopContext()
-  CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
-
-  return pixelBuffer
-}
-
-// adapted from https://stackoverflow.com/questions/38318387/swift-cgimage-to-cvpixelbuffer
-func pixelBufferFromCGImage(image: CGImage) -> CVPixelBuffer {
-    var pxbuffer: CVPixelBuffer? = nil
-    let options: NSDictionary = [:]
-
-    let width =  image.width
-    let height = image.height
-    let bytesPerRow = image.bytesPerRow
-    
-    let dataFromImageDataProvider = CFDataCreateMutableCopy(kCFAllocatorDefault, 0, image.dataProvider!.data)
-
-    CVPixelBufferCreateWithBytes(
-        kCFAllocatorDefault,
-        width,
-        height,
-        kCVPixelFormatType_32ARGB,
-        CFDataGetMutableBytePtr(dataFromImageDataProvider),
-        bytesPerRow,
-        nil,
-        nil,
-        options,
-        &pxbuffer
-    )
-    return pxbuffer!;
-}
-
 class Utils {
     static func getVideoFirstFrame(url: URL) -> UIImage? {
         let asset = AVAsset(url: url)
@@ -90,5 +23,4 @@ class Utils {
         
         return nil
     }
-
 }
