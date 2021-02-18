@@ -114,10 +114,13 @@ struct AddBeeView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            AddBeeView(newBee: placeholderBee)
-                .previewDisplayName("Placeholder")
-            AddBeeView(newBee: exampleBee)
-                .previewDisplayName("Example bee")
+            NavigationView {
+                AddBeeView(newBee: exampleBee)
+            }.previewDisplayName("Example bee")
+            
+            NavigationView {
+                AddBeeView(newBee: placeholderBee)
+            }.previewDisplayName("Placeholder")
         }
     }
 }
