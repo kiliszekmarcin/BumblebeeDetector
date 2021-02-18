@@ -51,24 +51,7 @@ struct AddBeeView: View {
                         title: "Detect",
                         disabled: self.isShowActivity || !self.newBee.detections.isEmpty
                     ) {
-                        if let url = newBee.videoURL {
-                            self.isShowActivity = true
-                            
-                            DispatchQueue(label: "beeDetection").async {
-                                let localiser = BeeLocaliser()
-                                
-                                newBee.detections = localiser.detectBee(onVideo: url, fps: 16)
-                                
-                                if let firstImage = newBee.detections.first {
-                                    newBee.profileImage = firstImage
-                                }
-                                
-                                // get the background image
-                                newBee.backgroundImage = localiser.getFirstFrame()
-                                
-                                self.isShowActivity = false
-                            }
-                        }
+                        detectPressed()
                     }
                 }
                 .padding()
@@ -79,6 +62,31 @@ struct AddBeeView: View {
         }
     }
 }
+
+
+extension AddBeeView {
+    func detectPressed() {
+        if let url = newBee.videoURL {
+            self.isShowActivity = true
+            
+            DispatchQueue(label: "beeDetection").async {
+                let localiser = BeeLocaliser()
+                
+                newBee.detections = localiser.detectBee(onVideo: url, fps: 16)
+                
+                if let firstImage = newBee.detections.first {
+                    newBee.profileImage = firstImage
+                }
+                
+                // get the background image
+                newBee.backgroundImage = localiser.getFirstFrame()
+                
+                self.isShowActivity = false
+            }
+        }
+    }
+}
+
 
 struct AddBeeView_Previews: PreviewProvider {
     static let placeholderBee = Bumblebee(
