@@ -18,6 +18,7 @@
 		D3D0B42B25A51A560011E322 /* AddBeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42A25A51A560011E322 /* AddBeeView.swift */; };
 		D3D0B42F25A523010011E322 /* BumblebeeModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42E25A523010011E322 /* BumblebeeModel.mlmodel */; };
 		D3D1918925D2E98300DD9161 /* Localisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D1918825D2E98300DD9161 /* Localisation.swift */; };
+		D3DB09F025DEE04C001E76AA /* ProfilePictureAndBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DB09EF25DEE04C001E76AA /* ProfilePictureAndBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		D3D0B42A25A51A560011E322 /* AddBeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBeeView.swift; sourceTree = "<group>"; };
 		D3D0B42E25A523010011E322 /* BumblebeeModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BumblebeeModel.mlmodel; sourceTree = "<group>"; };
 		D3D1918825D2E98300DD9161 /* Localisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localisation.swift; sourceTree = "<group>"; };
+		D3DB09EF25DEE04C001E76AA /* ProfilePictureAndBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureAndBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,7 @@
 			children = (
 				D30352EE25A4F0700049C77C /* BumblebeeDetectorApp.swift */,
 				D3FE202E25ACD87500E8B55B /* Util */,
-				D3D0B42625A51A370011E322 /* View */,
+				D3D0B42625A51A370011E322 /* Views */,
 				D3D0B42825A51A3F0011E322 /* Model */,
 				D30352F225A4F0710049C77C /* Assets.xcassets */,
 				D30352F725A4F0710049C77C /* Info.plist */,
@@ -85,13 +87,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		D3D0B42625A51A370011E322 /* View */ = {
+		D3D0B42625A51A370011E322 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D3DB09ED25DEDF96001E76AA /* Components */,
 				D30352F025A4F0700049C77C /* ContentView.swift */,
 				D3D0B42A25A51A560011E322 /* AddBeeView.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		D3D0B42825A51A3F0011E322 /* Model */ = {
@@ -101,6 +104,14 @@
 				D3D0B42E25A523010011E322 /* BumblebeeModel.mlmodel */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D3DB09ED25DEDF96001E76AA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D3DB09EF25DEE04C001E76AA /* ProfilePictureAndBackground.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		D3FE202E25ACD87500E8B55B /* Util */ = {
@@ -187,6 +198,7 @@
 				D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */,
 				D3D0B42B25A51A560011E322 /* AddBeeView.swift in Sources */,
 				D3D0B42325A511950011E322 /* Bumblebee.swift in Sources */,
+				D3DB09F025DEE04C001E76AA /* ProfilePictureAndBackground.swift in Sources */,
 				D3B23D7D25A6532700C67B68 /* Utils.swift in Sources */,
 				D30352F125A4F0700049C77C /* ContentView.swift in Sources */,
 				D3D0B42F25A523010011E322 /* BumblebeeModel.mlmodel in Sources */,

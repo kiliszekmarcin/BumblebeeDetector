@@ -20,35 +20,18 @@ struct AddBeeView: View {
     var body: some View {
         ZStack() {
             ScrollView {
-                VStack {
-                    // top background (could be a map later?)
-                    if newBee.backgroundImage != nil {
-                        Image(uiImage: newBee.backgroundImage!)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: UIScreen.main.bounds.width, height: 300)
-                    }
-                    
-                    // bee circle
-                    Image(uiImage: newBee.profileImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 250, height: 250)
-                        .blur(radius: self.isShowActivity ? 5.0 : 0)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                        .shadow(radius: 7)
-                        .offset(y: newBee.backgroundImage == nil ? 0 : -130)
-                        .padding(.bottom, newBee.backgroundImage == nil ? 0 : -130)
-                        .overlay(self.isShowActivity ? ProgressView("Loading") : nil)
-                    
-                    if !newBee.detections.isEmpty {
-                        AnimationView(
-                            imageSize: CGSize(width: 200, height: 200),
-                            animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
-                        ).frame(width: 200, height: 200, alignment: .center)
-                    }
-                }.frame(width: UIScreen.main.bounds.width)
+                ProfilePictureAndBackground(
+                    profilePicture: newBee.profileImage,
+                    backgroundPicture: newBee.backgroundImage,
+                    loading: self.isShowActivity
+                ).frame(width: UIScreen.main.bounds.width)
+                
+                if !newBee.detections.isEmpty {
+                    AnimationView(
+                        imageSize: CGSize(width: 200, height: 200),
+                        animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
+                    ).frame(width: 200, height: 200, alignment: .center)
+                }
             }
             .navigationBarTitle("Track a new bee")
             
