@@ -26,7 +26,7 @@ struct ContentView: View {
                 }
             }
                 
-            .navigationBarTitle("Detected bumblebees")
+            .navigationBarTitle("Detections")
             .navigationBarItems(trailing:
                 NavigationLink(destination: AddBeeView()) {
                     Image(systemName: "plus")

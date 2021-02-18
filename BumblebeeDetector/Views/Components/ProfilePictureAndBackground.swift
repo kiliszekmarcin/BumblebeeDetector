@@ -32,8 +32,7 @@ struct ProfilePictureAndBackground: View {
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: 4))
                 .shadow(radius: 7)
-                .brightness(loading ? 0.5 : 0.0)
-                .overlay(loading ? ProgressView("Loading") : nil)
+                .overlay(loading ? LoadingIndicator() : nil)
                 .offset(y: backgroundPicture == nil ? 0 : -130)
                 .padding(.bottom, backgroundPicture == nil ? 0 : -130)
         }
