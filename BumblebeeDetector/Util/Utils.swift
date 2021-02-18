@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 func crop(image: UIImage, x: Double, y: Double, width: Double, height: Double) -> UIImage {
     let cgImage = image.cgImage!
@@ -73,4 +74,21 @@ func pixelBufferFromCGImage(image: CGImage) -> CVPixelBuffer {
         &pxbuffer
     )
     return pxbuffer!;
+}
+
+class Utils {
+    static func getVideoFirstFrame(url: URL) -> UIImage? {
+        let asset = AVAsset(url: url)
+        let generator = AVAssetImageGenerator(asset: asset)
+        
+        do {
+            return UIImage(cgImage: try generator.copyCGImage(at: CMTime(seconds: 0.0, preferredTimescale: 600), actualTime: nil))
+        } catch let error {
+            print("Error when extracting first frame after video selection")
+            print(error.localizedDescription)
+        }
+        
+        return nil
+    }
+
 }

@@ -56,7 +56,7 @@ struct AddBeeView: View {
                 }
                 .padding()
                 .shadow(radius: 7)
-            }.sheet(isPresented: $isShowPhotoLibrary, onDismiss: { }) {
+            }.sheet(isPresented: $isShowPhotoLibrary, onDismiss: { videoPicked() }) {
                 ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
             }
         }
@@ -65,6 +65,12 @@ struct AddBeeView: View {
 
 
 extension AddBeeView {
+    func videoPicked() {
+        if let url = newBee.videoURL {
+            newBee.backgroundImage = Utils.getVideoFirstFrame(url: url)
+        }
+    }
+    
     func detectPressed() {
         if let url = newBee.videoURL {
             self.isShowActivity = true
