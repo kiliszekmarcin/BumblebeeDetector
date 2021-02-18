@@ -40,20 +40,17 @@ struct AddBeeView: View {
                 
                 // buttons area TODO: camera roll / camera
                 HStack(spacing: 10.0) {
-                    Button("Select a video") {
+                    FilledButton(
+                        title: "Select a video",
+                        disabled: self.isShowActivity || !self.newBee.detections.isEmpty
+                    ) {
                         self.isShowPhotoLibrary = true
                     }
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .padding()
-                    .background(
-                        !(self.isShowActivity || !self.newBee.detections.isEmpty)
-                            ? Color(UIColor.systemBlue) : Color(UIColor.systemGray)
-                    )
-                    .foregroundColor(Color.white)
-                    .cornerRadius(10)
-                    .disabled(self.isShowActivity || !self.newBee.detections.isEmpty)
                     
-                    Button("Detect") {
+                    FilledButton(
+                        title: "Detect",
+                        disabled: self.isShowActivity || !self.newBee.detections.isEmpty
+                    ) {
                         if let url = newBee.videoURL {
                             self.isShowActivity = true
                             
@@ -73,15 +70,6 @@ struct AddBeeView: View {
                             }
                         }
                     }
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .padding()
-                    .background(
-                        !(self.isShowActivity || !self.newBee.detections.isEmpty)
-                            ? Color(UIColor.systemBlue) : Color(UIColor.systemGray)
-                    )
-                    .foregroundColor(Color.white)
-                    .cornerRadius(10)
-                    .disabled(self.isShowActivity || !self.newBee.detections.isEmpty)
                 }
                 .padding()
                 .shadow(radius: 7)
