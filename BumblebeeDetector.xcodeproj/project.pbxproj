@@ -21,7 +21,7 @@
 		D3B1975D25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */; };
 		D3B23D7D25A6532700C67B68 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B23D7C25A6532700C67B68 /* Utils.swift */; };
 		D3D0B3F825A4FE860011E322 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B3F725A4FE860011E322 /* ImagePicker.swift */; };
-		D3D0B42325A511950011E322 /* Bumblebee.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42225A511950011E322 /* Bumblebee.swift */; };
+		D3D0B42325A511950011E322 /* BumblebeeEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42225A511950011E322 /* BumblebeeEdit.swift */; };
 		D3D0B42B25A51A560011E322 /* AddBeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42A25A51A560011E322 /* AddBeeView.swift */; };
 		D3D0B42F25A523010011E322 /* BumblebeeModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42E25A523010011E322 /* BumblebeeModel.mlmodel */; };
 		D3D1918925D2E98300DD9161 /* Localisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D1918825D2E98300DD9161 /* Localisation.swift */; };
@@ -45,7 +45,7 @@
 		D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BumblebeeModelNew.mlmodel; sourceTree = "<group>"; };
 		D3B23D7C25A6532700C67B68 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		D3D0B3F725A4FE860011E322 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		D3D0B42225A511950011E322 /* Bumblebee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bumblebee.swift; sourceTree = "<group>"; };
+		D3D0B42225A511950011E322 /* BumblebeeEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BumblebeeEdit.swift; sourceTree = "<group>"; };
 		D3D0B42A25A51A560011E322 /* AddBeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBeeView.swift; sourceTree = "<group>"; };
 		D3D0B42E25A523010011E322 /* BumblebeeModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BumblebeeModel.mlmodel; sourceTree = "<group>"; };
 		D3D1918825D2E98300DD9161 /* Localisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localisation.swift; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		D3D0B42825A51A3F0011E322 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D3D0B42225A511950011E322 /* Bumblebee.swift */,
+				D3D0B42225A511950011E322 /* BumblebeeEdit.swift */,
 				D350A90A25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift */,
 				D350A90B25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift */,
 				D350A8C425E6C01800CE31DF /* Detector.xcdatamodeld */,
@@ -220,7 +220,7 @@
 				D3B1975D25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel in Sources */,
 				D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */,
 				D3D0B42B25A51A560011E322 /* AddBeeView.swift in Sources */,
-				D3D0B42325A511950011E322 /* Bumblebee.swift in Sources */,
+				D3D0B42325A511950011E322 /* BumblebeeEdit.swift in Sources */,
 				D3DB09F025DEE04C001E76AA /* ProfilePictureAndBackground.swift in Sources */,
 				D3B23D7D25A6532700C67B68 /* Utils.swift in Sources */,
 				D30352F125A4F0700049C77C /* ContentView.swift in Sources */,

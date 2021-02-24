@@ -12,22 +12,20 @@ struct AddBeeView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment (\.presentationMode) var presentationMode
     
-    @State var newBee = BumblebeeOld(
-        date: Date(),
-        profileImage: UIImage(named: "placeholderBee.png")!
-//        ,uiImgFrames: [UIImage(named: "placeholderBee.png")!, UIImage(named: "placeholderBeeInverted.png")!]
-    )
+    @State var newBee = BumblebeeEdit()
 
     @State private var isShowImagePicker = false
     @State private var imagePickerMediaType = UIImagePickerController.SourceType.photoLibrary
     @State private var isShowActionSheet = false
     @State private var isShowActivity = false
     
+    @State var editedBee: Bumblebee?
+    
     var body: some View {
         ZStack() {
             ScrollView {
                 ProfilePictureAndBackground(
-                    profilePicture: newBee.profileImage,
+                    profilePicture: newBee.profileImage ?? UIImage(named: "placeholderBee.png")!,
                     backgroundPicture: newBee.backgroundImage,
                     loading: self.isShowActivity
                 ).frame(width: UIScreen.main.bounds.width)
@@ -82,13 +80,24 @@ struct AddBeeView: View {
                 ])
         })
         .toolbar {
-            Button("Add") {
-                let newBumblebee = Bumblebee(context: viewContext)
-                newBumblebee.id = UUID()
-                newBumblebee.date = Date()
-                newBumblebee.backgroundImage = newBee.backgroundImage
-                newBumblebee.profileImage = newBee.profileImage
-                newBumblebee.detections = newBee.detections
+            Button("Save") {
+                if let editedB = editedBee {
+                    // editing
+                    editedB.date = newBee.date
+                    editedB.videoURL = newBee.videoURL
+                    editedB.backgroundImage = newBee.backgroundImage
+                    editedB.profileImage = newBee.profileImage
+                    editedB.detections = newBee.detections
+                } else {
+                    // creating a new bee
+                    let newBumblebee = Bumblebee(context: viewContext)
+                    newBumblebee.id = UUID()
+                    newBumblebee.date = Date()
+                    newBumblebee.videoURL = newBee.videoURL
+                    newBumblebee.backgroundImage = newBee.backgroundImage
+                    newBumblebee.profileImage = newBee.profileImage
+                    newBumblebee.detections = newBee.detections
+                }
                 
                 do {
                     try viewContext.save()
@@ -98,7 +107,7 @@ struct AddBeeView: View {
                     print("Error while saving the bumblebee")
                     print(error.localizedDescription)
                 }
-            }.disabled(newBee.videoURL == nil)
+            }.disabled(self.newBee.videoURL == nil || self.isShowActivity)
         }
     }
 }
@@ -135,11 +144,11 @@ extension AddBeeView {
 
 
 struct AddBeeView_Previews: PreviewProvider {
-    static let placeholderBee = BumblebeeOld(
+    static let placeholderBee = BumblebeeEdit(
         date: Date(),
         profileImage: UIImage(named: "placeholderBee.png")!
     )
-    static let exampleBee = BumblebeeOld(
+    static let exampleBee = BumblebeeEdit(
         date: Date(),
         profileImage: UIImage(named: "frame1.png")!,
         backgroundImage: UIImage(named: "background.png"),

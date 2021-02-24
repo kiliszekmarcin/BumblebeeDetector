@@ -19,12 +19,19 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(bumblebees, id: \.id) { bee in
-                    HStack{
-                        Image(uiImage: bee.profileImage)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 50, height: 50)
-                        Text("Date: \(bee.date, formatter: itemFormatter)")
+                    NavigationLink(destination:
+                                    AddBeeView(
+                                        newBee: BumblebeeEdit(bumblebee: bee),
+                                        editedBee: bee
+                                    )
+                    ) {
+                        HStack{
+                            Image(uiImage: bee.profileImage ?? UIImage(named: "placeholderBee.png")!)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                            Text("Date: \(bee.date ?? Date(), formatter: itemFormatter)")
+                        }
                     }
                 }
             }

@@ -18,25 +18,30 @@ extension Bumblebee {
     }
 
     @NSManaged public var id: UUID?
-    @NSManaged public var date: Date
-    @NSManaged public var profileImageData: Data
+    @NSManaged public var date: Date?
+    @NSManaged public var profileImageData: Data?
     @NSManaged public var backgroundImageData: Data?
     @NSManaged public var videoURL: URL?
     @NSManaged public var detectionsData: Data?
     
-    var profileImage: UIImage {
+    var profileImage: UIImage? {
         set {
-            profileImageData = newValue.pngData()!
+            if let image = newValue {
+                profileImageData = image.pngData()
+            }
         }
         get {
-            UIImage(data: profileImageData)!
+            if let imageData = profileImageData {
+                return UIImage(data: imageData)
+            }
+            return nil
         }
     }
     
     var backgroundImage: UIImage? {
         set {
-            if let imageData = newValue {
-                backgroundImageData = imageData.pngData()
+            if let image = newValue {
+                backgroundImageData = image.pngData()
             }
         }
         get {

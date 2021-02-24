@@ -12,7 +12,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     
-    @Binding var selectedImage: UIImage
+    @Binding var selectedImage: UIImage?
     @Binding var selectedVideoUrl: URL?
     @Environment(\.presentationMode) private var presentationMode
 
