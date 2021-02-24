@@ -26,17 +26,27 @@ class BeeLocaliser {
         do {
             let modelInput = try BumblebeeModelInput.init(imageWith: image, iouThreshold: nil, confidenceThreshold: nil)
             let prediction = try model.prediction(input: modelInput)
-            let coordinates = prediction.coordinates
+            let coordinates = prediction.coordinates //[0] - x centre of detection, [1] - y centre of detection, [2] - width, [3] - height
+            
+//            let imageScale = Double(image.width) / Double(image.height)
             
             if coordinates.count != 0 {
-                let croppedImage = image.cropping(to: CGRect(x: Double(image.width) * (coordinates[0].doubleValue - coordinates[2].doubleValue / 2),
-                                                             y: Double(image.height) * (coordinates[1].doubleValue - coordinates[3].doubleValue / 2),
-                                                             width: coordinates[2].doubleValue * Double(image.width),
-                                                             height: coordinates[3].doubleValue * Double(image.height)))
+                // calculate CGRect from coordinates. x, y are top left corner of detection
+//                let beeRect = CGRect(x: Double(image.width) * (coordinates[0].doubleValue - (coordinates[2].doubleValue / imageScale) / 2),
+//                                        y: Double(image.height) * (coordinates[1].doubleValue - coordinates[3].doubleValue / 2),
+//                                        width: coordinates[2].doubleValue * Double(image.width) / imageScale,
+//                                        height: coordinates[3].doubleValue * Double(image.height))
+                
+                let beeRect = CGRect(x: Double(image.width) * (coordinates[0].doubleValue - coordinates[2].doubleValue / 2),
+                                  y: Double(image.height) * (coordinates[1].doubleValue - coordinates[3].doubleValue / 2),
+                                  width: coordinates[2].doubleValue * Double(image.width),
+                                  height: coordinates[3].doubleValue * Double(image.height))
+                
+                let croppedImage = image.cropping(to: beeRect)
                 
                 // scale the uiimage down
                 let uiimage = UIImage(cgImage: croppedImage!)
-                let imageSize = CGSize(width: coordinates[2].doubleValue * Double(image.width), height: coordinates[3].doubleValue * Double(image.height))
+                let imageSize = CGSize(width: beeRect.width, height: beeRect.height)
                 let renderer = UIGraphicsImageRenderer(size: imageSize)
                 let scaledImage = renderer.image { _ in
                     uiimage.draw(in: CGRect(origin: .zero, size: imageSize))
