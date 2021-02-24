@@ -17,6 +17,7 @@ extension Bumblebee {
         return NSFetchRequest<Bumblebee>(entityName: "Bumblebee")
     }
 
+    @NSManaged public var id: UUID?
     @NSManaged public var date: Date
     @NSManaged public var profileImageData: Data
     @NSManaged public var backgroundImageData: Data?

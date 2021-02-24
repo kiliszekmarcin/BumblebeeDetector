@@ -4,10 +4,11 @@
         <attribute name="backgroundImageData" optional="YES" attributeType="Binary"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="detectionsData" optional="YES" attributeType="Binary"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="profileImageData" optional="YES" attributeType="Binary"/>
         <attribute name="videoURL" optional="YES" attributeType="URI"/>
     </entity>
     <elements>
-        <element name="Bumblebee" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="Bumblebee" positionX="-63" positionY="-18" width="128" height="119"/>
     </elements>
 </model>

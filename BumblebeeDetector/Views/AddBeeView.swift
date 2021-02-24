@@ -84,6 +84,7 @@ struct AddBeeView: View {
         .toolbar {
             Button("Add") {
                 let newBumblebee = Bumblebee(context: viewContext)
+                newBumblebee.id = UUID()
                 newBumblebee.date = Date()
                 newBumblebee.backgroundImage = newBee.backgroundImage
                 newBumblebee.profileImage = newBee.profileImage
@@ -97,7 +98,7 @@ struct AddBeeView: View {
                     print("Error while saving the bumblebee")
                     print(error.localizedDescription)
                 }
-            }
+            }.disabled(newBee.videoURL == nil)
         }
     }
 }

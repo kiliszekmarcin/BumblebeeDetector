@@ -18,7 +18,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(bumblebees, id: \.date) { bee in
+                ForEach(bumblebees, id: \.id) { bee in
                     HStack{
                         Image(uiImage: bee.profileImage)
                             .resizable()
