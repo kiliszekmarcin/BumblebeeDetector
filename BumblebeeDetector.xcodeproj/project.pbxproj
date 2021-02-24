@@ -11,6 +11,10 @@
 		D30352F125A4F0700049C77C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30352F025A4F0700049C77C /* ContentView.swift */; };
 		D30352F325A4F0710049C77C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30352F225A4F0710049C77C /* Assets.xcassets */; };
 		D30352F625A4F0710049C77C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30352F525A4F0710049C77C /* Preview Assets.xcassets */; };
+		D350A8C625E6C01800CE31DF /* Detector.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D350A8C425E6C01800CE31DF /* Detector.xcdatamodeld */; };
+		D350A8C925E6C16D00CE31DF /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350A8C825E6C16D00CE31DF /* PersistenceController.swift */; };
+		D350A90C25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350A90A25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift */; };
+		D350A90D25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350A90B25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift */; };
 		D366246A25DF03B300241EF7 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D366246925DF03B300241EF7 /* LoadingIndicator.swift */; };
 		D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3875A0925B0A097002C1B80 /* AnimationView.swift */; };
 		D3A441E525DEF961003EFAEC /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A441E425DEF961003EFAEC /* FilledButton.swift */; };
@@ -31,6 +35,10 @@
 		D30352F225A4F0710049C77C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D30352F525A4F0710049C77C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D30352F725A4F0710049C77C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D350A8C525E6C01800CE31DF /* Bumblebee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bumblebee.xcdatamodel; sourceTree = "<group>"; };
+		D350A8C825E6C16D00CE31DF /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		D350A90A25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bumblebee+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D350A90B25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bumblebee+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D366246925DF03B300241EF7 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		D3875A0925B0A097002C1B80 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		D3A441E425DEF961003EFAEC /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
@@ -107,6 +115,10 @@
 			isa = PBXGroup;
 			children = (
 				D3D0B42225A511950011E322 /* Bumblebee.swift */,
+				D350A90A25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift */,
+				D350A90B25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift */,
+				D350A8C425E6C01800CE31DF /* Detector.xcdatamodeld */,
+				D350A8C825E6C16D00CE31DF /* PersistenceController.swift */,
 				D3D0B42E25A523010011E322 /* BumblebeeModel.mlmodel */,
 				D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */,
 			);
@@ -212,10 +224,14 @@
 				D3DB09F025DEE04C001E76AA /* ProfilePictureAndBackground.swift in Sources */,
 				D3B23D7D25A6532700C67B68 /* Utils.swift in Sources */,
 				D30352F125A4F0700049C77C /* ContentView.swift in Sources */,
+				D350A8C925E6C16D00CE31DF /* PersistenceController.swift in Sources */,
 				D3A441E525DEF961003EFAEC /* FilledButton.swift in Sources */,
 				D3D0B42F25A523010011E322 /* BumblebeeModel.mlmodel in Sources */,
 				D30352EF25A4F0700049C77C /* BumblebeeDetectorApp.swift in Sources */,
 				D3D1918925D2E98300DD9161 /* Localisation.swift in Sources */,
+				D350A90D25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift in Sources */,
+				D350A8C625E6C01800CE31DF /* Detector.xcdatamodeld in Sources */,
+				D350A90C25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +420,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D350A8C425E6C01800CE31DF /* Detector.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D350A8C525E6C01800CE31DF /* Bumblebee.xcdatamodel */,
+			);
+			currentVersion = D350A8C525E6C01800CE31DF /* Bumblebee.xcdatamodel */;
+			path = Detector.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D30352E325A4F0700049C77C /* Project object */;
 }

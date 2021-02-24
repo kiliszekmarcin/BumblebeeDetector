@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AddBeeView: View {
-    @State var newBee = Bumblebee(
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment (\.presentationMode) var presentationMode
+    
+    @State var newBee = BumblebeeOld(
         date: Date(),
         profileImage: UIImage(named: "placeholderBee.png")!
 //        ,uiImgFrames: [UIImage(named: "placeholderBee.png")!, UIImage(named: "placeholderBeeInverted.png")!]
@@ -77,6 +81,24 @@ struct AddBeeView: View {
                     ActionSheet.Button.cancel()
                 ])
         })
+        .toolbar {
+            Button("Add") {
+                let newBumblebee = Bumblebee(context: viewContext)
+                newBumblebee.date = Date()
+                newBumblebee.backgroundImage = newBee.backgroundImage
+                newBumblebee.profileImage = newBee.profileImage
+                newBumblebee.detections = newBee.detections
+                
+                do {
+                    try viewContext.save()
+                    print("Bumblebee saved")
+                    presentationMode.wrappedValue.dismiss()
+                } catch {
+                    print("Error while saving the bumblebee")
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }
 
@@ -112,11 +134,11 @@ extension AddBeeView {
 
 
 struct AddBeeView_Previews: PreviewProvider {
-    static let placeholderBee = Bumblebee(
+    static let placeholderBee = BumblebeeOld(
         date: Date(),
         profileImage: UIImage(named: "placeholderBee.png")!
     )
-    static let exampleBee = Bumblebee(
+    static let exampleBee = BumblebeeOld(
         date: Date(),
         profileImage: UIImage(named: "frame1.png")!,
         backgroundImage: UIImage(named: "background.png"),

@@ -6,22 +6,25 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     
-    @State private var bees: [Bumblebee] = []
+    @FetchRequest(entity: Bumblebee.entity(), sortDescriptors: [])
+    
+    private var bumblebees: FetchedResults<Bumblebee>
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(bees, id: \.date) { bee in
+                ForEach(bumblebees, id: \.date) { bee in
                     HStack{
                         Image(uiImage: bee.profileImage)
                             .resizable()
                             .scaledToFill()
                             .frame(width: 50, height: 50)
-                        Text("Date:")
-                        Text(bee.date.description(with: nil))
+                        Text("Date: \(bee.date, formatter: itemFormatter)")
                     }
                 }
             }
@@ -36,9 +39,17 @@ struct ContentView: View {
     }
 }
 
+private let itemFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    formatter.timeStyle = .short
+    return formatter
+}()
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .previewDevice("iPhone 12")
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct Bumblebee {
+struct BumblebeeOld {
     var date: Date
     var profileImage: UIImage // bee's first detection
     var backgroundImage: UIImage? // first whole frame to display in the background
