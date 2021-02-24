@@ -14,6 +14,7 @@
 		D366246A25DF03B300241EF7 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D366246925DF03B300241EF7 /* LoadingIndicator.swift */; };
 		D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3875A0925B0A097002C1B80 /* AnimationView.swift */; };
 		D3A441E525DEF961003EFAEC /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A441E425DEF961003EFAEC /* FilledButton.swift */; };
+		D3B1975D25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */; };
 		D3B23D7D25A6532700C67B68 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B23D7C25A6532700C67B68 /* Utils.swift */; };
 		D3D0B3F825A4FE860011E322 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B3F725A4FE860011E322 /* ImagePicker.swift */; };
 		D3D0B42325A511950011E322 /* Bumblebee.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42225A511950011E322 /* Bumblebee.swift */; };
@@ -33,6 +34,7 @@
 		D366246925DF03B300241EF7 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		D3875A0925B0A097002C1B80 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		D3A441E425DEF961003EFAEC /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
+		D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BumblebeeModelNew.mlmodel; sourceTree = "<group>"; };
 		D3B23D7C25A6532700C67B68 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		D3D0B3F725A4FE860011E322 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D3D0B42225A511950011E322 /* Bumblebee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bumblebee.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			children = (
 				D3D0B42225A511950011E322 /* Bumblebee.swift */,
 				D3D0B42E25A523010011E322 /* BumblebeeModel.mlmodel */,
+				D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			files = (
 				D366246A25DF03B300241EF7 /* LoadingIndicator.swift in Sources */,
 				D3D0B3F825A4FE860011E322 /* ImagePicker.swift in Sources */,
+				D3B1975D25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel in Sources */,
 				D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */,
 				D3D0B42B25A51A560011E322 /* AddBeeView.swift in Sources */,
 				D3D0B42325A511950011E322 /* Bumblebee.swift in Sources */,
