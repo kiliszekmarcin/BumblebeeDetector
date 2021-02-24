@@ -29,7 +29,17 @@ struct ContentView: View {
                             Text("Date: \(bee.date ?? Date(), formatter: itemFormatter)")
                         }
                     }
-                }
+                }.onDelete(perform: { indexSet in
+                    for index in indexSet {
+                        viewContext.delete(bumblebees[index])
+                    }
+                    do {
+                        try viewContext.save()
+                    } catch {
+                        print("Error when deleting an item")
+                        print(error.localizedDescription)
+                    }
+                })
             }
                 
             .navigationBarTitle("Detections")
