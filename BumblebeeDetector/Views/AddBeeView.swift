@@ -14,7 +14,9 @@ struct AddBeeView: View {
 //        ,uiImgFrames: [UIImage(named: "placeholderBee.png")!, UIImage(named: "placeholderBeeInverted.png")!]
     )
 
-    @State private var isShowPhotoLibrary = false
+    @State private var isShowImagePicker = false
+    @State private var imagePickerMediaType = UIImagePickerController.SourceType.photoLibrary
+    @State private var isShowActionSheet = false
     @State private var isShowActivity = false
     
     var body: some View {
@@ -44,7 +46,7 @@ struct AddBeeView: View {
                         title: "Select a video",
                         disabled: self.isShowActivity || !self.newBee.detections.isEmpty
                     ) {
-                        self.isShowPhotoLibrary = true
+                        self.isShowActionSheet = true
                     }
                     
                     FilledButton(
@@ -56,10 +58,25 @@ struct AddBeeView: View {
                 }
                 .padding()
                 .shadow(radius: 7)
-            }.sheet(isPresented: $isShowPhotoLibrary, onDismiss: { videoPicked() }) {
-                ImagePicker(sourceType: .photoLibrary, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
+            }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
+                ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
             }
-        }
+        }.actionSheet(isPresented: $isShowActionSheet, content: {
+            ActionSheet(
+                title: Text("Select image source"),
+                message: nil,
+                buttons: [
+                    ActionSheet.Button.default(Text("Photo Library"), action: {
+                        self.imagePickerMediaType = UIImagePickerController.SourceType.photoLibrary
+                        self.isShowImagePicker = true
+                    }),
+                    ActionSheet.Button.default(Text("Camera"), action: {
+                        self.imagePickerMediaType = UIImagePickerController.SourceType.camera
+                        self.isShowImagePicker = true
+                    }),
+                    ActionSheet.Button.cancel()
+                ])
+        })
     }
 }
 

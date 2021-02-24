@@ -27,6 +27,12 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access to the Photo Library is needed to select videos for localisation.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Access to the Camera is needed to record videos for localisation.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Access to the Microphone is needed to record videos for localisation.</string>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UIRequiredDeviceCapabilities</key>
