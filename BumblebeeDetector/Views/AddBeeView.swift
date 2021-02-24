@@ -114,6 +114,11 @@ struct AddBeeView: View {
 
 
 extension AddBeeView {
+    init(editedBee: Bumblebee) {
+        self.editedBee = editedBee
+        self.newBee = BumblebeeEdit(bumblebee: editedBee)
+    }
+    
     func videoPicked() {
         if let url = newBee.videoURL {
             newBee.backgroundImage = Utils.getVideoFirstFrame(url: url)

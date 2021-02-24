@@ -19,11 +19,7 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(bumblebees, id: \.id) { bee in
-                    NavigationLink(destination:
-                                    AddBeeView(
-                                        newBee: BumblebeeEdit(bumblebee: bee),
-                                        editedBee: bee
-                                    )
+                    NavigationLink(destination: AddBeeView(editedBee: bee)
                     ) {
                         HStack{
                             Image(uiImage: bee.profileImage ?? UIImage(named: "placeholderBee.png")!)
