@@ -83,11 +83,16 @@ struct AddBeeView: View {
             Button("Save") {
                 if let editedB = editedBee {
                     // editing
-                    editedB.date = newBee.date
-                    editedB.videoURL = newBee.videoURL
-                    editedB.backgroundImage = newBee.backgroundImage
-                    editedB.profileImage = newBee.profileImage
-                    editedB.detections = newBee.detections
+                    viewContext.performAndWait {
+                        editedB.date = newBee.date
+                        editedB.videoURL = newBee.videoURL
+                        editedB.backgroundImage = newBee.backgroundImage
+                        editedB.profileImage = newBee.profileImage
+                        editedB.detections = newBee.detections
+                        
+                        try? viewContext.save()
+                        presentationMode.wrappedValue.dismiss()
+                    }
                 } else {
                     // creating a new bee
                     let newBumblebee = Bumblebee(context: viewContext)
@@ -97,15 +102,15 @@ struct AddBeeView: View {
                     newBumblebee.backgroundImage = newBee.backgroundImage
                     newBumblebee.profileImage = newBee.profileImage
                     newBumblebee.detections = newBee.detections
-                }
-                
-                do {
-                    try viewContext.save()
-                    print("Bumblebee saved")
-                    presentationMode.wrappedValue.dismiss()
-                } catch {
-                    print("Error while saving the bumblebee")
-                    print(error.localizedDescription)
+                    
+                    do {
+                        try viewContext.save()
+                        print("Bumblebee saved")
+                        presentationMode.wrappedValue.dismiss()
+                    } catch {
+                        print("Error while saving the bumblebee")
+                        print(error.localizedDescription)
+                    }
                 }
             }.disabled(self.newBee.videoURL == nil || self.isShowActivity)
         }
@@ -113,12 +118,7 @@ struct AddBeeView: View {
 }
 
 
-extension AddBeeView {
-    init(editedBee: Bumblebee) {
-        self.editedBee = editedBee
-        self.newBee = BumblebeeEdit(bumblebee: editedBee)
-    }
-    
+extension AddBeeView {    
     func videoPicked() {
         if let url = newBee.videoURL {
             newBee.backgroundImage = Utils.getVideoFirstFrame(url: url)
