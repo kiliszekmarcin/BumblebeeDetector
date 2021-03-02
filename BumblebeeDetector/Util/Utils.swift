@@ -11,6 +11,13 @@ import AVFoundation
 import CoreLocation
 
 class Utils {
+    static let itemFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter
+    }()
+    
     static func getVideoMetadata(url: URL) -> (firstFrame: UIImage?, location: CLLocation?, date: Date?) {
         var firstFrame: UIImage? = nil
         var location: CLLocation? = nil

@@ -30,6 +30,17 @@ struct AddBeeView: View {
                     loading: self.isShowActivity
                 ).frame(width: UIScreen.main.bounds.width)
                 
+                if let beeDate = newBee.date {
+                    HStack {
+                        Text("Date spotted:")
+                            .font(.headline)
+                        
+                        Text("\(beeDate, formatter: Utils.itemFormatter)")
+                        
+                        Spacer()
+                    }.padding()
+                }
+                
                 if !newBee.detections.isEmpty {
                     AnimationView(
                         imageSize: CGSize(width: 200, height: 200),
@@ -97,7 +108,7 @@ struct AddBeeView: View {
                     // creating a new bee
                     let newBumblebee = Bumblebee(context: viewContext)
                     newBumblebee.id = UUID()
-                    newBumblebee.date = Date()
+                    newBumblebee.date = newBee.date
                     newBumblebee.videoURL = newBee.videoURL
                     newBumblebee.backgroundImage = newBee.backgroundImage
                     newBumblebee.profileImage = newBee.profileImage
@@ -121,7 +132,11 @@ struct AddBeeView: View {
 extension AddBeeView {    
     func videoPicked() {
         if let url = newBee.videoURL {
-            newBee.backgroundImage = Utils.getVideoFirstFrame(url: url)
+            let newBeeMetadata = Utils.getVideoMetadata(url: url)
+            
+            newBee.backgroundImage = newBeeMetadata.firstFrame
+            newBee.date = newBeeMetadata.date
+            
         }
     }
     
@@ -150,7 +165,6 @@ extension AddBeeView {
 
 struct AddBeeView_Previews: PreviewProvider {
     static let placeholderBee = BumblebeeEdit(
-        date: Date(),
         profileImage: UIImage(named: "placeholderBee.png")!
     )
     static let exampleBee = BumblebeeEdit(

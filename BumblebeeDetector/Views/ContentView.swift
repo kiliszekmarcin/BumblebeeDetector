@@ -26,7 +26,11 @@ struct ContentView: View {
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 50, height: 50)
-                            Text("Date: \(bee.date ?? Date(), formatter: itemFormatter)")
+                            if let beeDate = bee.date {
+                                Text("Date: \(beeDate, formatter: Utils.itemFormatter)")
+                            } else {
+                                Text("No date info")
+                            }
                         }
                     }
                 }.onDelete(perform: { indexSet in
@@ -51,13 +55,6 @@ struct ContentView: View {
         }
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .short
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
