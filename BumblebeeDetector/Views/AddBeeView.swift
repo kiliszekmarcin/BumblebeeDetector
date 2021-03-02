@@ -41,6 +41,10 @@ struct AddBeeView: View {
                     }.padding()
                 }
                 
+                if let beeLocation = newBee.location {
+                    MapView(coordinate: beeLocation)
+                }
+                
                 if !newBee.detections.isEmpty {
                     AnimationView(
                         imageSize: CGSize(width: 200, height: 200),
