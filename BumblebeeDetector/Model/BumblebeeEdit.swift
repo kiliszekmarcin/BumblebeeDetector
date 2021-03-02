@@ -13,7 +13,7 @@ struct BumblebeeEdit {
     var date: Date?
     var profileImage: UIImage? // bee's first detection
     var backgroundImage: UIImage? // first whole frame to display in the background
-    var location: CLLocation?
+    var location: CLLocationCoordinate2D?
     
     var videoURL: URL?
     

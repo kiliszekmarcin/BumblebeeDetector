@@ -68,16 +68,16 @@ extension Bumblebee {
         }
     }
     
-    var location: CLLocation? {
+    var location: CLLocationCoordinate2D? {
         set {
             if let newLocation = newValue {
-                latitude = NSNumber(value: newLocation.coordinate.latitude)
-                longitude = NSNumber(value: newLocation.coordinate.longitude)
+                latitude = NSNumber(value: newLocation.latitude)
+                longitude = NSNumber(value: newLocation.longitude)
             }
         }
         get {
             if let lat = latitude, let lon = longitude {
-                return CLLocation(latitude: lat.doubleValue, longitude: lon.doubleValue)
+                return CLLocationCoordinate2D(latitude: lat.doubleValue, longitude: lon.doubleValue)
             }
             
             return nil

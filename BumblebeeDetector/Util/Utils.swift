@@ -18,9 +18,9 @@ class Utils {
         return formatter
     }()
     
-    static func getVideoMetadata(url: URL) -> (firstFrame: UIImage?, location: CLLocation?, date: Date?) {
+    static func getVideoMetadata(url: URL) -> (firstFrame: UIImage?, location: CLLocationCoordinate2D?, date: Date?) {
         var firstFrame: UIImage? = nil
-        var location: CLLocation? = nil
+        var location: CLLocationCoordinate2D? = nil
         var date: Date? = nil
         
         let asset = AVAsset(url: url)
@@ -32,7 +32,7 @@ class Utils {
         let metadata = asset.commonMetadata
         let locationIdentifier = AVMetadataIdentifier.commonIdentifierLocation
         if let locationString = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: locationIdentifier).first?.stringValue {
-            location = iso6709ToCLLocation(locationString: locationString)
+            location = iso6709ToCLLocationCoordinate2D(locationString: locationString)
         }
         
         // get first frame
@@ -63,7 +63,7 @@ class Utils {
         return nil
     }
     
-    static func iso6709ToCLLocation(locationString: String) -> CLLocation? {
+    static func iso6709ToCLLocationCoordinate2D(locationString: String) -> CLLocationCoordinate2D? {
         let indexLat = locationString.index(locationString.startIndex, offsetBy: 8)
         let indexLong = locationString.index(indexLat, offsetBy: 9)
 
@@ -71,7 +71,7 @@ class Utils {
         let long = String(locationString[indexLat..<indexLong])
 
         if let lattitude = Double(lat), let longitude = Double(long) {
-            return CLLocation(latitude: lattitude, longitude: longitude)
+            return CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
         }
         
         return nil
