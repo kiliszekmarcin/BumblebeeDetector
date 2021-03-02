@@ -23,6 +23,8 @@ extension Bumblebee {
     @NSManaged public var backgroundImageData: Data?
     @NSManaged public var videoURL: URL?
     @NSManaged public var detectionsData: Data?
+    @NSManaged public var latitude: NSNumber?
+    @NSManaged public var longitude: NSNumber?
     
     var profileImage: UIImage? {
         set {
@@ -63,6 +65,22 @@ extension Bumblebee {
             }
             
             return []
+        }
+    }
+    
+    var location: CLLocation? {
+        set {
+            if let newLocation = newValue {
+                latitude = NSNumber(value: newLocation.coordinate.latitude)
+                longitude = NSNumber(value: newLocation.coordinate.longitude)
+            }
+        }
+        get {
+            if let lat = latitude, let lon = longitude {
+                return CLLocation(latitude: lat.doubleValue, longitude: lon.doubleValue)
+            }
+            
+            return nil
         }
     }
 }

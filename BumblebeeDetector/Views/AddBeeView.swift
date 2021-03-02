@@ -100,6 +100,7 @@ struct AddBeeView: View {
                         editedB.backgroundImage = newBee.backgroundImage
                         editedB.profileImage = newBee.profileImage
                         editedB.detections = newBee.detections
+                        editedB.location = newBee.location
                         
                         try? viewContext.save()
                         presentationMode.wrappedValue.dismiss()
@@ -113,6 +114,7 @@ struct AddBeeView: View {
                     newBumblebee.backgroundImage = newBee.backgroundImage
                     newBumblebee.profileImage = newBee.profileImage
                     newBumblebee.detections = newBee.detections
+                    newBumblebee.location = newBee.location
                     
                     do {
                         try viewContext.save()
@@ -136,7 +138,7 @@ extension AddBeeView {
             
             newBee.backgroundImage = newBeeMetadata.firstFrame
             newBee.date = newBeeMetadata.date
-            
+            newBee.location = newBeeMetadata.location
         }
     }
     

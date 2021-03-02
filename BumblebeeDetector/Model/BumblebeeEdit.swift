@@ -7,11 +7,13 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 struct BumblebeeEdit {
     var date: Date?
     var profileImage: UIImage? // bee's first detection
     var backgroundImage: UIImage? // first whole frame to display in the background
+    var location: CLLocation?
     
     var videoURL: URL?
     
@@ -25,5 +27,6 @@ extension BumblebeeEdit {
         self.backgroundImage = bumblebee.backgroundImage
         self.videoURL = bumblebee.videoURL
         self.detections = bumblebee.detections
+        self.location = bumblebee.location
     }
 }
