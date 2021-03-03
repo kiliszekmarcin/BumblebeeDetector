@@ -26,6 +26,7 @@ struct ContentView: View {
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 50, height: 50)
+                                .clipShape(Circle())
                             if let beeDate = bee.date {
                                 Text("Date: \(beeDate, formatter: Utils.itemFormatter)")
                             } else {
