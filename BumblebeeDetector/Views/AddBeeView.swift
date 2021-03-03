@@ -31,23 +31,33 @@ struct AddBeeView: View {
                     loading: self.isShowActivity
                 ).frame(width: UIScreen.main.bounds.width)
                 
-                if let beeDate = newBee.date {
-                    HStack {
-                        Text("Date spotted:")
-                            .font(.headline)
-                        
-                        Text("\(beeDate, formatter: Utils.itemFormatter)")
-                        
-                        Spacer()
-                    }.padding()
-                }
+                VStack(spacing: 10.0) {
+                    if let beeDate = newBee.date {
+                        HStack {
+                            Text("Date spotted:")
+                                .font(.headline)
+                            
+                            Text("\(beeDate, formatter: Utils.itemFormatter)")
+                            
+                            Spacer()
+                        }
+                    }
+                    
+                    if !newBee.detections.isEmpty {
+                        HStack {
+                            Text("Detected bee:")
+                                .font(.headline)
+                            
+                            Spacer()
+                            
+                            AnimationView(
+                                imageSize: CGSize(width: 200, height: 200),
+                                animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
+                            ).frame(width: 200, height: 200, alignment: .center)
+                        }
+                    }
+                }.padding()
                 
-                if !newBee.detections.isEmpty {
-                    AnimationView(
-                        imageSize: CGSize(width: 200, height: 200),
-                        animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
-                    ).frame(width: 200, height: 200, alignment: .center)
-                }
             }
             .navigationBarTitle("Track a new bee")
             
@@ -164,6 +174,7 @@ struct AddBeeView_Previews: PreviewProvider {
         date: Date(),
         profileImage: UIImage(named: "frame1.png")!,
         backgroundImage: UIImage(named: "background.png"),
+        location: CLLocationCoordinate2D(latitude: 51.519581, longitude: -0.127002),
         detections: [
             UIImage(named: "frame1.png")!,
             UIImage(named: "frame2.png")!,
