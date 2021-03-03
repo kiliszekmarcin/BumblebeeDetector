@@ -15,16 +15,41 @@ struct ProfilePictureAndBackground: View {
     
     let loading : Bool
     
+    @State var index = 0
+    
     var body: some View {
         VStack {
-            if let bgLocation = location {
-                MapView(coordinate: bgLocation)
+            ZStack {
+                if let loc = location, let bgImg = backgroundPicture {
+                    PagingView(index: $index, maxIndex: 1) {
+                        MapView(coordinate: loc)
+                            .disabled(true)
+                        
+                        
+                            Image(uiImage: bgImg)
+                                .resizable()
+                                .scaledToFill()
+                    }
                     .frame(width: UIScreen.main.bounds.width - 30, height: 275)
                     .cornerRadius(15)
                     .padding(4)
                     .background(Color.white)
                     .cornerRadius(15)
                     .shadow(radius: 7)
+                    .onTapGesture {
+                        index = index == 0 ? 1 : 0
+                    }
+                } else if let bgImg = backgroundPicture {
+                    Image(uiImage: bgImg)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: UIScreen.main.bounds.width - 30, height: 275)
+                        .cornerRadius(15)
+                        .padding(4)
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .shadow(radius: 7)
+                }
             }
             
             // bee circle

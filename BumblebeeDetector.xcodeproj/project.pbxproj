@@ -18,6 +18,7 @@
 		D350A90D25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350A90B25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift */; };
 		D366246A25DF03B300241EF7 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D366246925DF03B300241EF7 /* LoadingIndicator.swift */; };
 		D37A622A25EF12EC00163207 /* PhotoSelectActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */; };
+		D37A624725EF334E00163207 /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A624625EF334E00163207 /* PagingView.swift */; };
 		D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3875A0925B0A097002C1B80 /* AnimationView.swift */; };
 		D3A441E525DEF961003EFAEC /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A441E425DEF961003EFAEC /* FilledButton.swift */; };
 		D3B1975D25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */; };
@@ -44,6 +45,7 @@
 		D350A90B25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bumblebee+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D366246925DF03B300241EF7 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectActionSheet.swift; sourceTree = "<group>"; };
+		D37A624625EF334E00163207 /* PagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingView.swift; sourceTree = "<group>"; };
 		D3875A0925B0A097002C1B80 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		D3A441E425DEF961003EFAEC /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
 		D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BumblebeeModelNew.mlmodel; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				D3A441E425DEF961003EFAEC /* FilledButton.swift */,
 				D34FAF8C25EEDD0600AB3725 /* MapView.swift */,
 				D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */,
+				D37A624625EF334E00163207 /* PagingView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				D37A622A25EF12EC00163207 /* PhotoSelectActionSheet.swift in Sources */,
 				D3D0B42325A511950011E322 /* BumblebeeEdit.swift in Sources */,
 				D3DB09F025DEE04C001E76AA /* ProfilePictureAndBackground.swift in Sources */,
+				D37A624725EF334E00163207 /* PagingView.swift in Sources */,
 				D34FAF8D25EEDD0600AB3725 /* MapView.swift in Sources */,
 				D3B23D7D25A6532700C67B68 /* Utils.swift in Sources */,
 				D30352F125A4F0700049C77C /* ContentView.swift in Sources */,
