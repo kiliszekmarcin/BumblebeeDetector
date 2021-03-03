@@ -25,7 +25,6 @@ struct MapView: View {
         ) { item in
             MapPin(coordinate: item.coordinate)
         }
-        .frame(height: 400.0)
         .onAppear {
             setRegion(coordinate)
         }

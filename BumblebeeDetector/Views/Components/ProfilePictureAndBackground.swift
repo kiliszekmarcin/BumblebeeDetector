@@ -6,20 +6,19 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ProfilePictureAndBackground: View {
     let profilePicture : UIImage
     let backgroundPicture : UIImage?
+    let location : CLLocationCoordinate2D?
     
     let loading : Bool
     
     var body: some View {
         VStack {
-            // top background (could be a map later?)
-            if backgroundPicture != nil {
-                Image(uiImage: backgroundPicture!)
-                    .resizable()
-                    .scaledToFill()
+            if let bgLocation = location {
+                MapView(coordinate: bgLocation)
                     .frame(width: UIScreen.main.bounds.width - 30, height: 275)
                     .cornerRadius(15)
                     .padding(4)
@@ -50,29 +49,34 @@ struct ProfilePictureAndBackground_Previews: PreviewProvider {
         let placeholderImg = UIImage(named: "placeholderBee.png")!
         let beeImage = UIImage(named: "frame1.png")!
         let beeBackground = UIImage(named: "background.png")!
+        let britishMuseum = CLLocationCoordinate2D(latitude: 51.519581, longitude: -0.127002)
         
         Group {
             ProfilePictureAndBackground(
                 profilePicture: beeImage,
                 backgroundPicture: beeBackground,
+                location: britishMuseum,
                 loading: false
             )
             
             ProfilePictureAndBackground(
                 profilePicture: beeImage,
                 backgroundPicture: beeBackground,
+                location: nil,
                 loading: true
             )
             
             ProfilePictureAndBackground(
                 profilePicture: placeholderImg,
                 backgroundPicture: nil,
+                location: nil,
                 loading: false
             )
             
             ProfilePictureAndBackground(
                 profilePicture: placeholderImg,
                 backgroundPicture: nil,
+                location: nil,
                 loading: true
             )
         }

@@ -27,6 +27,7 @@ struct AddBeeView: View {
                 ProfilePictureAndBackground(
                     profilePicture: newBee.profileImage ?? UIImage(named: "placeholderBee.png")!,
                     backgroundPicture: newBee.backgroundImage,
+                    location: newBee.location,
                     loading: self.isShowActivity
                 ).frame(width: UIScreen.main.bounds.width)
                 
@@ -39,10 +40,6 @@ struct AddBeeView: View {
                         
                         Spacer()
                     }.padding()
-                }
-                
-                if let beeLocation = newBee.location {
-                    MapView(coordinate: beeLocation)
                 }
                 
                 if !newBee.detections.isEmpty {
