@@ -35,12 +35,7 @@ struct ProfilePictureAndBackground: View {
                             .resizable()
                             .scaledToFill()
                     }
-                    .frame(width: UIScreen.main.bounds.width - 30, height: 275)
-                    .cornerRadius(15)
-                    .padding(4)
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(radius: 7)
+                    .modifier(BackgroundBox())
                     .onTapGesture {
                         index = index == 0 ? 1 : 0
                     }
@@ -48,12 +43,7 @@ struct ProfilePictureAndBackground: View {
                     Image(uiImage: bgImg)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: UIScreen.main.bounds.width - 30, height: 275)
-                        .cornerRadius(15)
-                        .padding(4)
-                        .background(Color.white)
-                        .cornerRadius(15)
-                        .shadow(radius: 7)
+                        .modifier(BackgroundBox())
                 }
             }
             
@@ -70,6 +60,20 @@ struct ProfilePictureAndBackground: View {
                 .offset(y: backgroundPicture == nil ? 0 : -130)
                 .padding()
                 .padding(.bottom, backgroundPicture == nil ? 0 : -130)
+        }
+    }
+}
+
+extension ProfilePictureAndBackground {
+    struct BackgroundBox: ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .frame(width: UIScreen.main.bounds.width - 30, height: 275)
+                .cornerRadius(15)
+                .padding(4)
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(radius: 7)
         }
     }
 }
