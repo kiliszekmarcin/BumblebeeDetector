@@ -22,13 +22,18 @@ struct ProfilePictureAndBackground: View {
             ZStack {
                 if let loc = location, let bgImg = backgroundPicture {
                     PagingView(index: $index, maxIndex: 1) {
-                        MapView(coordinate: loc)
-                            .disabled(true)
-                        
-                        
+                        ZStack {
+                            // add image to make it easier to scroll (when map is disabled you can't 'grab' it to swipe)
                             Image(uiImage: bgImg)
                                 .resizable()
-                                .scaledToFill()
+                            
+                            MapView(coordinate: loc)
+                                .disabled(true)
+                        }
+                        
+                        Image(uiImage: bgImg)
+                            .resizable()
+                            .scaledToFill()
                     }
                     .frame(width: UIScreen.main.bounds.width - 30, height: 275)
                     .cornerRadius(15)
