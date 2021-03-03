@@ -73,6 +73,9 @@ extension Bumblebee {
             if let newLocation = newValue {
                 latitude = NSNumber(value: newLocation.latitude)
                 longitude = NSNumber(value: newLocation.longitude)
+            } else {
+                latitude = nil
+                longitude = nil
             }
         }
         get {
