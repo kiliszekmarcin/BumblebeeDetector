@@ -78,58 +78,13 @@ struct AddBeeView: View {
             }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
                 ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
             }
-        }.actionSheet(isPresented: $isShowActionSheet, content: {
-            ActionSheet(
-                title: Text("Select image source"),
-                message: nil,
-                buttons: [
-                    ActionSheet.Button.default(Text("Photo Library"), action: {
-                        self.imagePickerMediaType = UIImagePickerController.SourceType.photoLibrary
-                        self.isShowImagePicker = true
-                    }),
-                    ActionSheet.Button.default(Text("Camera"), action: {
-                        self.imagePickerMediaType = UIImagePickerController.SourceType.camera
-                        self.isShowImagePicker = true
-                    }),
-                    ActionSheet.Button.cancel()
-                ])
-        })
+        }.modifier(PhotoSelectActionSheet(
+                    presented: $isShowActionSheet,
+                    imagePickerMediaType: $imagePickerMediaType,
+                    isShowImagePicker: $isShowImagePicker
+        ))
         .toolbar {
-            Button("Save") {
-                if let editedB = editedBee {
-                    // editing
-                    viewContext.performAndWait {
-                        editedB.date = newBee.date
-                        editedB.videoURL = newBee.videoURL
-                        editedB.backgroundImage = newBee.backgroundImage
-                        editedB.profileImage = newBee.profileImage
-                        editedB.detections = newBee.detections
-                        editedB.location = newBee.location
-                        
-                        try? viewContext.save()
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                } else {
-                    // creating a new bee
-                    let newBumblebee = Bumblebee(context: viewContext)
-                    newBumblebee.id = UUID()
-                    newBumblebee.date = newBee.date
-                    newBumblebee.videoURL = newBee.videoURL
-                    newBumblebee.backgroundImage = newBee.backgroundImage
-                    newBumblebee.profileImage = newBee.profileImage
-                    newBumblebee.detections = newBee.detections
-                    newBumblebee.location = newBee.location
-                    
-                    do {
-                        try viewContext.save()
-                        print("Bumblebee saved")
-                        presentationMode.wrappedValue.dismiss()
-                    } catch {
-                        print("Error while saving the bumblebee")
-                        print(error.localizedDescription)
-                    }
-                }
-            }.disabled(self.newBee.videoURL == nil || self.isShowActivity)
+            Button("Save") { savePressed() }.disabled(self.newBee.videoURL == nil || self.isShowActivity)
         }
     }
 }
