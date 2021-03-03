@@ -25,7 +25,7 @@ struct AddBeeView: View {
         ZStack() {
             ScrollView {
                 ProfilePictureAndBackground(
-                    profilePicture: newBee.profileImage ?? UIImage(named: "placeholderBee.png")!,
+                    profilePicture: newBee.profileImage ?? newBee.backgroundImage ?? UIImage(named: "placeholderBee.png")!,
                     backgroundPicture: newBee.backgroundImage,
                     location: newBee.location,
                     loading: self.isShowActivity

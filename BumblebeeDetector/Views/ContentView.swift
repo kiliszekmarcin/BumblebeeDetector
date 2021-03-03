@@ -22,7 +22,7 @@ struct ContentView: View {
                     NavigationLink(destination: AddBeeView(newBee: BumblebeeEdit(bumblebee: bee), editedBee: bee)
                     ) {
                         HStack{
-                            Image(uiImage: bee.profileImage ?? UIImage(named: "placeholderBee.png")!)
+                            Image(uiImage: bee.profileImage ?? bee.backgroundImage ?? UIImage(named: "placeholderBee.png")!)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 50, height: 50)
