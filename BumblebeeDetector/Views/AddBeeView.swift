@@ -57,7 +57,6 @@ struct AddBeeView: View {
             VStack {
                 Spacer()
                 
-                // buttons area TODO: camera roll / camera
                 HStack(spacing: 10.0) {
                     FilledButton(
                         title: "Select a video",
