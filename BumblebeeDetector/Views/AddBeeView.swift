@@ -20,6 +20,7 @@ struct AddBeeView: View {
     @State private var isShowActivity = false
     
     @State var editedBee: Bumblebee?
+    @State var changesToDetections = false
     
     var body: some View {
         ZStack() {
@@ -119,6 +120,7 @@ extension AddBeeView {
     func detectPressed() {
         if let url = newBee.videoURL {
             self.isShowActivity = true
+            self.changesToDetections = true
             
             DispatchQueue(label: "beeDetection").async {
                 let localiser = BeeLocaliser()
@@ -146,8 +148,11 @@ extension AddBeeView {
                 editedB.videoURL = newBee.videoURL
                 editedB.backgroundImage = newBee.backgroundImage
                 editedB.profileImage = newBee.profileImage
-                editedB.detections = newBee.detections
                 editedB.location = newBee.location
+                
+                if changesToDetections {
+                    editedB.detections = newBee.detections
+                }
                 
                 try? viewContext.save()
                 presentationMode.wrappedValue.dismiss()
