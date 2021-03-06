@@ -67,26 +67,28 @@ struct AddBeeView: View {
                     }
                 }.padding()
                 
-                VStack {
-                    HStack(spacing: 10.0) {
-                        FilledButton(
-                            title: "Select a video",
-                            disabled: self.isShowActivity || !self.newBee.detections.isEmpty
-                        ) {
-                            self.isShowActionSheet = true
+                if self.newBee.detections.isEmpty {
+                    VStack {
+                        HStack(spacing: 10.0) {
+                            FilledButton(
+                                title: "Select a video",
+                                disabled: self.isShowActivity
+                            ) {
+                                self.isShowActionSheet = true
+                            }
+                            
+                            FilledButton(
+                                title: "Detect",
+                                disabled: self.isShowActivity
+                            ) {
+                                detectPressed()
+                            }
                         }
-                        
-                        FilledButton(
-                            title: "Detect",
-                            disabled: self.isShowActivity || !self.newBee.detections.isEmpty
-                        ) {
-                            detectPressed()
-                        }
+                        .padding()
+                        .shadow(radius: 7)
+                    }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
+                        ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
                     }
-                    .padding()
-                    .shadow(radius: 7)
-                }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
-                    ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
                 }
             }
             .navigationBarTitle("Track a new bee")
