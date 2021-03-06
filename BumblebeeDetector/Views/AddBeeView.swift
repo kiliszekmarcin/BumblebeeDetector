@@ -65,6 +65,22 @@ struct AddBeeView: View {
                                 animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
                             ).frame(width: 200, height: 200, alignment: .center)
                         }
+                        
+                        VStack {
+                            Text("Image similarities:")
+                                .font(.headline)
+                            
+                            let similarities = ImageSimilarity.imageArrayDistances(array: newBee.detections)
+                            
+                            ForEach(0..<newBee.detections.count) { i in
+                                VStack {
+                                    Image(uiImage: newBee.detections[i])
+                                        .resizable()
+                                    
+                                    Text("\(similarities[i])")
+                                }
+                            }
+                        }
                     }
                 }.padding()
                 
