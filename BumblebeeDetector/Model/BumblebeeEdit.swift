@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 
 struct BumblebeeEdit {
+    var name: String = ""
     var date: Date?
     var profileImage: UIImage? // bee's first detection
     var backgroundImage: UIImage? // first whole frame to display in the background
@@ -22,6 +23,7 @@ struct BumblebeeEdit {
 
 extension BumblebeeEdit {
     init(bumblebee: Bumblebee) {
+        self.name = bumblebee.name
         self.date = bumblebee.date
         self.profileImage = bumblebee.profileImage
         self.backgroundImage = bumblebee.backgroundImage

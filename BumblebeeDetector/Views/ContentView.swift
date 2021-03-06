@@ -27,10 +27,13 @@ struct ContentView: View {
                                 .scaledToFill()
                                 .frame(width: 50, height: 50)
                                 .clipShape(Circle())
-                            if let beeDate = bee.date {
+                            if bee.name != "" {
+                                Text(bee.name)
+                            }
+                            else if let beeDate = bee.date {
                                 Text("Date: \(beeDate, formatter: Utils.itemFormatter)")
                             } else {
-                                Text("No date info")
+                                Text("No name or date")
                             }
                         }
                     }

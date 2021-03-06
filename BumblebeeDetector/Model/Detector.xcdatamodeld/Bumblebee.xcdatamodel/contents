@@ -7,10 +7,11 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="profileImageData" optional="YES" attributeType="Binary"/>
         <attribute name="videoURL" optional="YES" attributeType="URI"/>
     </entity>
     <elements>
-        <element name="Bumblebee" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="Bumblebee" positionX="-63" positionY="-18" width="128" height="164"/>
     </elements>
 </model>

@@ -32,6 +32,15 @@ struct AddBeeView: View {
                 ).frame(width: UIScreen.main.bounds.width)
                 
                 VStack(spacing: 10.0) {
+                    HStack {
+                        Text("Name:")
+                            .font(.headline)
+                        
+                        TextField("Enter a nickname", text: $newBee.name)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .id("nameTextField")
+                    }
+                    
                     if let beeDate = newBee.date {
                         HStack {
                             Text("Date spotted:")
@@ -58,32 +67,30 @@ struct AddBeeView: View {
                     }
                 }.padding()
                 
+                VStack {
+                    HStack(spacing: 10.0) {
+                        FilledButton(
+                            title: "Select a video",
+                            disabled: self.isShowActivity || !self.newBee.detections.isEmpty
+                        ) {
+                            self.isShowActionSheet = true
+                        }
+                        
+                        FilledButton(
+                            title: "Detect",
+                            disabled: self.isShowActivity || !self.newBee.detections.isEmpty
+                        ) {
+                            detectPressed()
+                        }
+                    }
+                    .padding()
+                    .shadow(radius: 7)
+                }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
+                    ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
+                }
             }
             .navigationBarTitle("Track a new bee")
             
-            VStack {
-                Spacer()
-                
-                HStack(spacing: 10.0) {
-                    FilledButton(
-                        title: "Select a video",
-                        disabled: self.isShowActivity || !self.newBee.detections.isEmpty
-                    ) {
-                        self.isShowActionSheet = true
-                    }
-                    
-                    FilledButton(
-                        title: "Detect",
-                        disabled: self.isShowActivity || !self.newBee.detections.isEmpty
-                    ) {
-                        detectPressed()
-                    }
-                }
-                .padding()
-                .shadow(radius: 7)
-            }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
-                ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
-            }
         }.modifier(PhotoSelectActionSheet(
                     presented: $isShowActionSheet,
                     imagePickerMediaType: $imagePickerMediaType,
@@ -133,6 +140,7 @@ extension AddBeeView {
             // editing
             viewContext.performAndWait {
                 editedB.date = newBee.date
+                editedB.name = newBee.name
                 editedB.videoURL = newBee.videoURL
                 editedB.backgroundImage = newBee.backgroundImage
                 editedB.profileImage = newBee.profileImage
@@ -146,6 +154,7 @@ extension AddBeeView {
             // creating a new bee
             let newBumblebee = Bumblebee(context: viewContext)
             newBumblebee.id = UUID()
+            newBumblebee.name = newBee.name
             newBumblebee.date = newBee.date
             newBumblebee.videoURL = newBee.videoURL
             newBumblebee.backgroundImage = newBee.backgroundImage
@@ -171,6 +180,7 @@ struct AddBeeView_Previews: PreviewProvider {
         profileImage: UIImage(named: "placeholderBee.png")!
     )
     static let exampleBee = BumblebeeEdit(
+        name: "Theresa",
         date: Date(),
         profileImage: UIImage(named: "frame1.png")!,
         backgroundImage: UIImage(named: "background.png"),
