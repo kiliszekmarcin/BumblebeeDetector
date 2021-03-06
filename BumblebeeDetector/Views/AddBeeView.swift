@@ -140,9 +140,9 @@ extension AddBeeView {
     }
     
     func savePressed() {
-        if let editedB = editedBee {
-            // editing
-            viewContext.performAndWait {
+        viewContext.performAndWait {
+            if let editedB = editedBee {
+                // editing
                 editedB.date = newBee.date
                 editedB.name = newBee.name
                 editedB.videoURL = newBee.videoURL
@@ -153,30 +153,21 @@ extension AddBeeView {
                 if changesToDetections {
                     editedB.detections = newBee.detections
                 }
-                
-                try? viewContext.save()
-                presentationMode.wrappedValue.dismiss()
+            } else {
+                // creating a new bee
+                let newBumblebee = Bumblebee(context: viewContext)
+                newBumblebee.id = UUID()
+                newBumblebee.name = newBee.name
+                newBumblebee.date = newBee.date
+                newBumblebee.videoURL = newBee.videoURL
+                newBumblebee.backgroundImage = newBee.backgroundImage
+                newBumblebee.profileImage = newBee.profileImage
+                newBumblebee.detections = newBee.detections
+                newBumblebee.location = newBee.location
             }
-        } else {
-            // creating a new bee
-            let newBumblebee = Bumblebee(context: viewContext)
-            newBumblebee.id = UUID()
-            newBumblebee.name = newBee.name
-            newBumblebee.date = newBee.date
-            newBumblebee.videoURL = newBee.videoURL
-            newBumblebee.backgroundImage = newBee.backgroundImage
-            newBumblebee.profileImage = newBee.profileImage
-            newBumblebee.detections = newBee.detections
-            newBumblebee.location = newBee.location
             
-            do {
-                try viewContext.save()
-                print("Bumblebee saved")
-                presentationMode.wrappedValue.dismiss()
-            } catch {
-                print("Error while saving the bumblebee")
-                print(error.localizedDescription)
-            }
+            try? viewContext.save()
+            presentationMode.wrappedValue.dismiss()
         }
     }
 }
