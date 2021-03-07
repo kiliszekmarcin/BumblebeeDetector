@@ -84,6 +84,13 @@ struct AddBeeView: View {
                             ) {
                                 detectPressed()
                             }
+                            
+                            FilledButton(
+                                title: "Inter",
+                                disabled: self.isShowActivity
+                            ) {
+                                interpolatePressed()
+                            }
                         }
                         .padding()
                         .shadow(radius: 7)
@@ -133,6 +140,28 @@ extension AddBeeView {
                 
                 // get the background image
                 newBee.backgroundImage = localiser.getFirstFrame()
+                
+                self.isShowActivity = false
+            }
+        }
+    }
+    
+    func interpolatePressed() {
+        if let url = newBee.videoURL {
+            self.isShowActivity = true
+            self.changesToDetections = true
+            
+            DispatchQueue(label: "beeInterpolation").async {
+                let interpolator = Interpolation(videoUrl: url)
+                
+                newBee.detections = interpolator.detectByInterpolation(fps: 16, threshold: 0.01)
+                
+                if let firstImage = newBee.detections.first {
+                    newBee.profileImage = firstImage
+                }
+
+                // get the background image
+//                newBee.backgroundImage = localiser.getFirstFrame()
                 
                 self.isShowActivity = false
             }
