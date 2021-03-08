@@ -25,6 +25,8 @@ struct AddBeeView: View {
     
     @State var gifUrl: URL?
     
+    @State var interpolThreshold: CGFloat = 0.01
+    
     var body: some View {
         ZStack() {
             ScrollView {
@@ -81,8 +83,13 @@ struct AddBeeView: View {
                     }
                 }.padding()
                 
-                if self.newBee.detections.isEmpty {
+//                if self.newBee.detections.isEmpty {
                     VStack {
+                        VStack {
+                            Text("\(self.interpolThreshold)")
+                            Slider(value: $interpolThreshold, in: 0...0.05)
+                        }
+                        
                         HStack(spacing: 10.0) {
                             FilledButton(
                                 title: "Select a video",
@@ -110,7 +117,7 @@ struct AddBeeView: View {
                     }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
                         ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
                     }
-                }
+//                }
             }
             .navigationBarTitle("Track a new bee")
             
@@ -167,7 +174,7 @@ extension AddBeeView {
             DispatchQueue(label: "beeInterpolation").async {
                 let interpolator = Interpolation(videoUrl: url)
                 
-                newBee.detections = interpolator.detectByInterpolation(fps: 16, threshold: 0.01)
+                newBee.detections = interpolator.detectByInterpolation(fps: 16, threshold: interpolThreshold)
                 
                 if let firstImage = newBee.detections.first {
                     newBee.profileImage = firstImage
