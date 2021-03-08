@@ -38,8 +38,29 @@ class Interpolation {
         var coordinates: [CGRect?] = Array(repeating: nil, count: times.count)
         var detections: [UIImage] = []
         
-        coordinates = interpolate(coordinates: coordinates, times: times, threshold: threshold)
+        // interpolate at every half second range
+        var frameCount = 0
+        while frameCount < times.count {
+            if frameCount + Int(fps/2) >= times.count {
+                let interRange = frameCount...
+                
+                coordinates[interRange] = ArraySlice(interpolate(coordinates: Array(coordinates[interRange]),
+                                                        times: Array(times[interRange]),
+                                                        threshold: threshold))
+                
+                frameCount = times.count
+            } else {
+                let interRange = frameCount...frameCount + Int(fps/2)
+                
+                coordinates[interRange] = ArraySlice(interpolate(coordinates: Array(coordinates[interRange]),
+                                                        times: Array(times[interRange]),
+                                                        threshold: threshold))
+                
+                frameCount += Int(fps/2)
+            }
+        }
         
+        // crop out images
         for i in 0..<times.count {
             do {
                 // get image at time

@@ -88,6 +88,7 @@ struct AddBeeView: View {
                         VStack {
                             Text("\(self.interpolThreshold)")
                             Slider(value: $interpolThreshold, in: 0...0.05)
+                                .padding(.horizontal)
                         }
                         
                         HStack(spacing: 10.0) {
