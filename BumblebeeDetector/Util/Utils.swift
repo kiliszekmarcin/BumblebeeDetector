@@ -104,4 +104,97 @@ class Utils {
         
         return retVal
     }
+    
+    static func detectionCGRectToCropping(detX: Double, detY: Double, detW: Double, detH: Double, orgW: Double, orgH: Double) -> CGRect {
+//        var xScale = orgW / orgH
+//        var yScale = orgH / orgW
+        
+//        if xScale > yScale {
+//            yScale = 1
+//        } else {
+//            xScale = 1
+//        }
+        
+        let xScale = 1.0
+        let yScale = 1.0
+        
+        let detectionRectangle = CGRect(x: orgW * (detX - (detW / xScale) / 2),
+                                        y: orgH * (detY - (detH / yScale) / 2),
+                                        width: orgW * detW / xScale,
+                                        height: orgH * detH / yScale)
+        
+        let detectionSquare = Utils.squarify(rect: detectionRectangle, maxWidth: CGFloat(orgW), maxHeight: CGFloat(orgH))
+        
+        return detectionSquare
+    }
+    
+    static private func squarify(rect: CGRect, maxWidth: CGFloat, maxHeight: CGFloat) -> CGRect {
+        // x, y are top left corned of the rect
+        
+        // try expanding the rectangle to a square, and then if it doens't fit in bounds, shift it so it does
+        if rect.width > rect.height {
+            // wider than taller -> need to add to height
+            
+            let difference = rect.width - rect.height
+            
+            var newY = rect.origin.y - difference/2
+            var newHeight = rect.height + difference
+            
+            // if y got out of bounds try shifting to height if it can fit it too
+            if newY < 0 {
+                if newHeight + abs(newY) <= maxHeight {
+                    newY = 0
+                    newHeight += abs(newY)
+                } else {
+                    newY = 0
+                    newHeight = maxHeight
+                }
+            }
+            
+            // if height got out of bounds try shifting it up
+            if newHeight > maxHeight {
+                if newY - (newHeight - maxHeight) >= 0 {
+                    newY -= newHeight - maxHeight
+                } else {
+                    newY = 0
+                    newHeight = maxHeight
+                }
+            }
+            
+            return CGRect(x: rect.origin.x, y: newY, width: rect.width, height: newHeight)
+        } else if rect.height > rect.width {
+            // taller than wide -> need to add to width
+            
+            let difference = rect.height - rect.width
+            
+            var newX = rect.origin.x - difference/2
+            var newWidth = rect.width + difference
+            
+            // if y got out of bounds try shifting to height if it can fit it too
+            if newX < 0 {
+                if newWidth + abs(newX) <= maxWidth {
+                    newX = 0
+                    newWidth += abs(newX)
+                } else {
+                    newX = 0
+                    newWidth = maxWidth
+                }
+            }
+            
+            // if height got out of bounds try shifting it up
+            if newWidth > maxWidth {
+                if newX - (newWidth - maxWidth) >= 0 {
+                    newX -= newWidth - maxWidth
+                } else {
+                    newX = 0
+                    newWidth = maxWidth
+                }
+            }
+            
+            return CGRect(x: newX, y: rect.origin.y, width: newWidth, height: rect.height)
+        } else {
+            // square already
+            return rect
+        }
+    }
 }
