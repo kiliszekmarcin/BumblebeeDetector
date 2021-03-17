@@ -37,10 +37,13 @@ class BeeLocaliser {
 //                                        width: coordinates[2].doubleValue * Double(image.width) / imageScale,
 //                                        height: coordinates[3].doubleValue * Double(image.height))
                 
-                let beeRect = CGRect(x: Double(image.width) * (coordinates[0].doubleValue - coordinates[2].doubleValue / 2),
-                                  y: Double(image.height) * (coordinates[1].doubleValue - coordinates[3].doubleValue / 2),
-                                  width: coordinates[2].doubleValue * Double(image.width),
-                                  height: coordinates[3].doubleValue * Double(image.height))
+                let beeRect = Utils.detectionCGRectToCropping(
+                    detX: coordinates[0].doubleValue,
+                    detY: coordinates[1].doubleValue,
+                    detW: coordinates[2].doubleValue,
+                    detH: coordinates[3].doubleValue,
+                    orgW: Double(image.width),
+                    orgH: Double(image.height))
                 
                 let croppedImage = image.cropping(to: beeRect)
                 
