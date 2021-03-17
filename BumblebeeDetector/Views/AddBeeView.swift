@@ -76,6 +76,9 @@ struct AddBeeView: View {
                                 VStack {
                                     Image(uiImage: newBee.detections[i])
                                         .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 100.0)
+                                        
                                     
                                     Text("\(similarities[i])")
                                 }
