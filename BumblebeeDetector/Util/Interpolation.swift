@@ -17,7 +17,6 @@ class Interpolation {
     
     var detections: Int = 0
     var interpolations: Int = 0
-    var time: Double = 0
     
     init(videoUrl url: URL) {
         do {
@@ -42,7 +41,6 @@ class Interpolation {
         var coordinates: [CGRect?] = Array(repeating: nil, count: times.count)
         var detections: [UIImage] = []
         
-        let startTime = Date()
         // interpolate at every half second range
         var frameCount = 0
         while frameCount < times.count {
@@ -64,7 +62,6 @@ class Interpolation {
                 frameCount += Int(fps/2)
             }
         }
-        time = -startTime.timeIntervalSinceNow
         
         // crop out images
         for i in 0..<times.count {

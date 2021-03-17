@@ -78,7 +78,7 @@ struct AddBeeView: View {
                         
                         DetailRow(
                             title: "Time it took",
-                            caption: "\(self.time) s")
+                            caption: String(format: "%.2f", self.time) + " s")
                         
                         HStack {
                             Text("Detected bee:")
@@ -179,7 +179,12 @@ extension AddBeeView {
             self.isShowActivity = true
             self.changesToDetections = true
             
+            self.newBee.detections = []
+            
             DispatchQueue(label: "beeDetection").async {
+                self.time = 0.0
+                let detectionStart = Date()
+                
                 let localiser = BeeLocaliser()
                 
                 newBee.detections = localiser.detectBee(onVideo: url, fps: 16)
@@ -190,6 +195,10 @@ extension AddBeeView {
                 
                 // get the background image
                 newBee.backgroundImage = localiser.getFirstFrame()
+                
+                self.detections = localiser.frames
+                self.interpolations = 0
+                self.time = -detectionStart.timeIntervalSinceNow
                 
                 self.isShowActivity = false
             }
@@ -204,6 +213,9 @@ extension AddBeeView {
             self.newBee.detections = []
             
             DispatchQueue(label: "beeInterpolation").async {
+                self.time = 0.0
+                let interpolationStart = Date()
+                
                 let interpolator = Interpolation(videoUrl: url)
                 
                 newBee.detections = interpolator.detectByInterpolation(fps: 16, threshold: interpolThreshold)
@@ -217,7 +229,7 @@ extension AddBeeView {
                 
                 self.detections = interpolator.detections
                 self.interpolations = interpolator.interpolations
-                self.time = interpolator.time
+                self.time = -interpolationStart.timeIntervalSinceNow
                 
                 self.isShowActivity = false
             }

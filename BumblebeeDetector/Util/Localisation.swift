@@ -12,6 +12,7 @@ import AVFoundation
 class BeeLocaliser {
     let model: BumblebeeModel
     var firstFrame: UIImage?
+    var frames: Int = 0
     
     init() {
         do {
@@ -28,15 +29,7 @@ class BeeLocaliser {
             let prediction = try model.prediction(input: modelInput)
             let coordinates = prediction.coordinates //[0] - x centre of detection, [1] - y centre of detection, [2] - width, [3] - height
             
-//            let imageScale = Double(image.width) / Double(image.height)
-            
             if coordinates.count != 0 {
-                // calculate CGRect from coordinates. x, y are top left corner of detection
-//                let beeRect = CGRect(x: Double(image.width) * (coordinates[0].doubleValue - (coordinates[2].doubleValue / imageScale) / 2),
-//                                        y: Double(image.height) * (coordinates[1].doubleValue - coordinates[3].doubleValue / 2),
-//                                        width: coordinates[2].doubleValue * Double(image.width) / imageScale,
-//                                        height: coordinates[3].doubleValue * Double(image.height))
-                
                 let beeRect = Utils.detectionCGRectToCropping(
                     detX: coordinates[0].doubleValue,
                     detY: coordinates[1].doubleValue,
@@ -76,6 +69,8 @@ class BeeLocaliser {
         generator.requestedTimeToleranceAfter = .zero
         generator.requestedTimeToleranceBefore = .zero
         generator.appliesPreferredTrackTransform = true
+        
+        self.frames = stride(from: 0.0, through: duration, by: 1.0/Double(fps)).underestimatedCount
         
         do {
             self.firstFrame = UIImage(cgImage: try generator.copyCGImage(at: CMTime(seconds: 0.0, preferredTimescale: 600), actualTime: nil))
