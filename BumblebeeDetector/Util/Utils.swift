@@ -105,6 +105,16 @@ class Utils {
         return retVal
     }
     
+    static func detectionCGRectToCropping(cgrect: CGRect, orgW: Double, orgH: Double) -> CGRect {
+        detectionCGRectToCropping(
+            detX: Double(cgrect.origin.x),
+            detY: Double(cgrect.origin.y),
+            detW: Double(cgrect.width),
+            detH: Double(cgrect.height),
+            orgW: orgW,
+            orgH: orgH)
+    }
+    
     static func detectionCGRectToCropping(detX: Double, detY: Double, detW: Double, detH: Double, orgW: Double, orgH: Double) -> CGRect {
 //        var xScale = orgW / orgH
 //        var yScale = orgH / orgW

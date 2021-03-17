@@ -75,10 +75,7 @@ class Interpolation {
                 
                 // convert coordinates to be able to crop
                 if let coords = coordinates[i] {
-                    let beeRect = CGRect(x: CGFloat(cgimg.width) * (coords.origin.x - coords.width / 2),
-                                         y: CGFloat(cgimg.height) * (coords.origin.y - coords.height / 2),
-                                         width: CGFloat(cgimg.width) * coords.width,
-                                         height: CGFloat(cgimg.height) * coords.height)
+                    let beeRect = Utils.detectionCGRectToCropping(cgrect: coords, orgW: Double(cgimg.width), orgH: Double(cgimg.height))
                     
                     let croppedImage = cgimg.cropping(to: beeRect)
                     
