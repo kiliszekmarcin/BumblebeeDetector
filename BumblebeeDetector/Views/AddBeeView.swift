@@ -201,6 +201,8 @@ extension AddBeeView {
             self.isShowActivity = true
             self.changesToDetections = true
             
+            self.newBee.detections = []
+            
             DispatchQueue(label: "beeInterpolation").async {
                 let interpolator = Interpolation(videoUrl: url)
                 
