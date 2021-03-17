@@ -16,6 +16,7 @@
 		D350A8C925E6C16D00CE31DF /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350A8C825E6C16D00CE31DF /* PersistenceController.swift */; };
 		D350A90C25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350A90A25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift */; };
 		D350A90D25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350A90B25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift */; };
+		D35E25CC260238820025EBEB /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E25CB260238820025EBEB /* DetailRow.swift */; };
 		D366246A25DF03B300241EF7 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D366246925DF03B300241EF7 /* LoadingIndicator.swift */; };
 		D37A622A25EF12EC00163207 /* PhotoSelectActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */; };
 		D37A624725EF334E00163207 /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A624625EF334E00163207 /* PagingView.swift */; };
@@ -46,6 +47,7 @@
 		D350A8C825E6C16D00CE31DF /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		D350A90A25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bumblebee+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D350A90B25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bumblebee+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D35E25CB260238820025EBEB /* DetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRow.swift; sourceTree = "<group>"; };
 		D366246925DF03B300241EF7 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectActionSheet.swift; sourceTree = "<group>"; };
 		D37A624625EF334E00163207 /* PagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingView.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */,
 				D37A624625EF334E00163207 /* PagingView.swift */,
 				D3E1799325F6C66300102C30 /* ShareSheet.swift */,
+				D35E25CB260238820025EBEB /* DetailRow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				D3B1975D25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel in Sources */,
 				D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */,
 				D3D0B42B25A51A560011E322 /* AddBeeView.swift in Sources */,
+				D35E25CC260238820025EBEB /* DetailRow.swift in Sources */,
 				D37A622A25EF12EC00163207 /* PhotoSelectActionSheet.swift in Sources */,
 				D3D0B42325A511950011E322 /* BumblebeeEdit.swift in Sources */,
 				D3DB09F025DEE04C001E76AA /* ProfilePictureAndBackground.swift in Sources */,

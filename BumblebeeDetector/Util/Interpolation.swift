@@ -15,6 +15,10 @@ class Interpolation {
     let duration: Double
     let generator: AVAssetImageGenerator
     
+    var detections: Int = 0
+    var interpolations: Int = 0
+    var time: Double = 0
+    
     init(videoUrl url: URL) {
         do {
             self.model = try BumblebeeModel.init()
@@ -38,6 +42,7 @@ class Interpolation {
         var coordinates: [CGRect?] = Array(repeating: nil, count: times.count)
         var detections: [UIImage] = []
         
+        let startTime = Date()
         // interpolate at every half second range
         var frameCount = 0
         while frameCount < times.count {
@@ -59,6 +64,7 @@ class Interpolation {
                 frameCount += Int(fps/2)
             }
         }
+        time = -startTime.timeIntervalSinceNow
         
         // crop out images
         for i in 0..<times.count {
@@ -144,6 +150,7 @@ class Interpolation {
 
         // find first frame
         while coords[firstIdx] == nil {
+            detections += 1
             if let firstDetection = detectBeeAtTime(time: times[firstIdx]) {
                 coords[firstIdx] = firstDetection
             } else {
@@ -165,6 +172,7 @@ class Interpolation {
         
         // find last frame
         while coords[lastIdx] == nil {
+            detections += 1
             if let lastDetection = detectBeeAtTime(time: times[lastIdx]) {
                 coords[lastIdx] = lastDetection
                 last = lastDetection
@@ -195,6 +203,8 @@ class Interpolation {
         }
         
         while coords[middleIdx] == nil {
+            detections += 1
+            
             if let middleDetection = detectBeeAtTime(time: times[middleIdx]) {
                 coords[middleIdx] = middleDetection
             } else {
@@ -227,6 +237,8 @@ class Interpolation {
             let stepSizeH = (last.height - first.height) / numberOfSteps
             
             for i in firstIdx+1..<lastIdx {
+                interpolations += 1
+                
                 coords[i] = CGRect(x: first.origin.x + stepSizeX,
                                    y: first.origin.y + stepSizeY,
                                    width: first.width + stepSizeW,

@@ -27,6 +27,10 @@ struct AddBeeView: View {
     
     @State var interpolThreshold: CGFloat = 0.01
     
+    @State var detections: Int = 0
+    @State var interpolations: Int = 0
+    @State var time: Double = 0.0
+    
     var body: some View {
         ZStack() {
             ScrollView {
@@ -38,13 +42,13 @@ struct AddBeeView: View {
                 ).frame(width: UIScreen.main.bounds.width)
                 
                 Button(action: {
-                    self.gifUrl = UIImage.animatedGif(from: newBee.detections)
+//                    self.gifUrl = UIImage.animatedGif(from: newBee.detections)
                     self.isShowShareSheet = true
                 }) {
                     Image(systemName: "square.and.arrow.up")
                 }.disabled(newBee.detections.isEmpty)
                 .sheet(isPresented: $isShowShareSheet, content: {
-                    ShareSheet(activityItems: [gifUrl ?? "error"])
+                    ShareSheet(activityItems: shareSheetContent())
                 })
                 
                 VStack(spacing: 10.0) {
@@ -58,17 +62,24 @@ struct AddBeeView: View {
                     }
                     
                     if let beeDate = newBee.date {
-                        HStack {
-                            Text("Date spotted:")
-                                .font(.headline)
-                            
-                            Text("\(beeDate, formatter: Utils.itemFormatter)")
-                            
-                            Spacer()
-                        }
+                        DetailRow(
+                            title: "Date spotted",
+                            caption: Utils.itemFormatter.string(from: beeDate))
                     }
                     
                     if !newBee.detections.isEmpty {
+                        DetailRow(
+                            title: "Detections",
+                            caption: "\(self.detections)")
+                        
+                        DetailRow(
+                            title: "Interpolations",
+                            caption: "\(self.interpolations)")
+                        
+                        DetailRow(
+                            title: "Time it took",
+                            caption: "\(self.time) s")
+                        
                         HStack {
                             Text("Detected bee:")
                                 .font(.headline)
@@ -134,7 +145,25 @@ struct AddBeeView: View {
 }
 
 
-extension AddBeeView {    
+extension AddBeeView {
+    func shareSheetContent() -> [Any] {
+        var shareItems: [Any] = []
+        
+//        for image in newBee.detections {
+//            if let jpegData = image.jpegData(compressionQuality: 0.7) {
+//                shareItems.append(jpegData)
+//            }
+//        }
+        
+        shareItems.append(UIImage.animatedGif(from: newBee.detections) ?? "no gif :(")
+        
+        shareItems.append("detections: \(detections)")
+        shareItems.append("interpolations: \(interpolations)")
+        shareItems.append("time: \(time)")
+        
+        return shareItems
+    }
+    
     func videoPicked() {
         if let url = newBee.videoURL {
             let newBeeMetadata = Utils.getVideoMetadata(url: url)
@@ -183,6 +212,10 @@ extension AddBeeView {
 
                 // get the background image
 //                newBee.backgroundImage = localiser.getFirstFrame()
+                
+                self.detections = interpolator.detections
+                self.interpolations = interpolator.interpolations
+                self.time = interpolator.time
                 
                 self.isShowActivity = false
             }

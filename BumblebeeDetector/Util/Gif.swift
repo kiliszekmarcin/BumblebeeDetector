@@ -29,7 +29,7 @@ extension UIImage {
                 if !CGImageDestinationFinalize(destination) {
                     print("Failed to finalize the image destination")
                 }
-                print("Url = \(fileURL)")
+//                print("Url = \(fileURL)")
                 return fileURL
             }
         }
