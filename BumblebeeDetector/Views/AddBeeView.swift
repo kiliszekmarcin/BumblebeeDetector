@@ -18,7 +18,6 @@ struct AddBeeView: View {
     @State private var imagePickerMediaType = UIImagePickerController.SourceType.photoLibrary
     @State private var isShowActionSheet = false
     @State private var isShowActivity = false
-    @State private var isShowShareSheet = false
     
     @State var editedBee: Bumblebee?
     @State var changesToDetections = false
@@ -41,16 +40,6 @@ struct AddBeeView: View {
                     location: newBee.location,
                     loading: self.isShowActivity
                 ).frame(width: UIScreen.main.bounds.width)
-                
-                Button(action: {
-//                    self.gifUrl = UIImage.animatedGif(from: newBee.detections)
-                    self.isShowShareSheet = true
-                }) {
-                    Image(systemName: "square.and.arrow.up")
-                }.disabled(newBee.detections.isEmpty)
-                .sheet(isPresented: $isShowShareSheet, content: {
-                    ShareSheet(activityItems: shareSheetContent())
-                })
                 
                 VStack(spacing: 10.0) {
                     HStack {
@@ -149,24 +138,6 @@ struct AddBeeView: View {
 
 
 extension AddBeeView {
-    func shareSheetContent() -> [Any] {
-        var shareItems: [Any] = []
-        
-//        for image in newBee.detections {
-//            if let jpegData = image.jpegData(compressionQuality: 0.7) {
-//                shareItems.append(jpegData)
-//            }
-//        }
-        
-        shareItems.append(UIImage.animatedGif(from: newBee.detections) ?? "no gif :(")
-        
-        shareItems.append("detections: \(detections)")
-        shareItems.append("interpolations: \(interpolations)")
-        shareItems.append("time: \(time)")
-        
-        return shareItems
-    }
-    
     func videoPicked() {
         if let url = newBee.videoURL {
             let newBeeMetadata = Utils.getVideoMetadata(url: url)

@@ -32,7 +32,6 @@
 		D3D1918925D2E98300DD9161 /* Localisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D1918825D2E98300DD9161 /* Localisation.swift */; };
 		D3DB09F025DEE04C001E76AA /* ProfilePictureAndBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DB09EF25DEE04C001E76AA /* ProfilePictureAndBackground.swift */; };
 		D3E1799425F6C66300102C30 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E1799325F6C66300102C30 /* ShareSheet.swift */; };
-		D3E1799725F6C76000102C30 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E1799625F6C76000102C30 /* Gif.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,7 +62,6 @@
 		D3D1918825D2E98300DD9161 /* Localisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localisation.swift; sourceTree = "<group>"; };
 		D3DB09EF25DEE04C001E76AA /* ProfilePictureAndBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureAndBackground.swift; sourceTree = "<group>"; };
 		D3E1799325F6C66300102C30 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
-		D3E1799625F6C76000102C30 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +160,6 @@
 				D3B4D65B25F53880009F68AC /* Interpolation.swift */,
 				D3D0B3F725A4FE860011E322 /* ImagePicker.swift */,
 				D3875A0925B0A097002C1B80 /* AnimationView.swift */,
-				D3E1799625F6C76000102C30 /* Gif.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -254,7 +251,6 @@
 				D3D0B42F25A523010011E322 /* BumblebeeModel.mlmodel in Sources */,
 				D30352EF25A4F0700049C77C /* BumblebeeDetectorApp.swift in Sources */,
 				D3D1918925D2E98300DD9161 /* Localisation.swift in Sources */,
-				D3E1799725F6C76000102C30 /* Gif.swift in Sources */,
 				D350A90D25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift in Sources */,
 				D350A8C625E6C01800CE31DF /* Detector.xcdatamodeld in Sources */,
 				D350A90C25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift in Sources */,
