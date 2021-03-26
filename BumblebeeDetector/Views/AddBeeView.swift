@@ -25,6 +25,7 @@ struct AddBeeView: View {
     
     @State var gifUrl: URL?
     
+    @State var interpolOn: Bool = false
     @State var interpolThreshold: CGFloat = 0.01
     
     @State var detections: Int = 0
@@ -94,42 +95,44 @@ struct AddBeeView: View {
                     }
                 }.padding()
                 
-//                if self.newBee.detections.isEmpty {
-                    VStack {
+                VStack {
+                    Toggle(isOn: $interpolOn) {
+                        Text("Interpolation:")
+                            .font(.headline)
+                    }.padding()
+                    
+                    if self.interpolOn {
                         VStack {
                             Text("\(self.interpolThreshold)")
                             Slider(value: $interpolThreshold, in: 0...0.05)
                                 .padding(.horizontal)
                         }
+                    }
+                    
+                    HStack(spacing: 10.0) {
+                        FilledButton(
+                            title: "Select a video",
+                            disabled: self.isShowActivity
+                        ) {
+                            self.isShowActionSheet = true
+                        }
                         
-                        HStack(spacing: 10.0) {
-                            FilledButton(
-                                title: "Select a video",
-                                disabled: self.isShowActivity
-                            ) {
-                                self.isShowActionSheet = true
-                            }
-                            
-                            FilledButton(
-                                title: "Detect",
-                                disabled: self.isShowActivity
-                            ) {
+                        FilledButton(
+                            title: "Detect",
+                            disabled: self.isShowActivity
+                        ) {
+                            if self.interpolOn {
+                                interpolatePressed()
+                            } else {
                                 detectPressed()
                             }
-                            
-                            FilledButton(
-                                title: "Inter",
-                                disabled: self.isShowActivity
-                            ) {
-                                interpolatePressed()
-                            }
                         }
-                        .padding()
-                        .shadow(radius: 7)
-                    }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
-                        ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
                     }
-//                }
+                    .padding()
+                    .shadow(radius: 7)
+                }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
+                    ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
+                }
             }
             .navigationBarTitle("Track a new bee")
             
@@ -293,11 +296,11 @@ struct AddBeeView_Previews: PreviewProvider {
         Group {
             NavigationView {
                 AddBeeView(newBee: exampleBee)
-            }.previewDisplayName("Example bee")
+            }.previewDevice("iPhone 12").previewDisplayName("Example bee")
             
             NavigationView {
                 AddBeeView(newBee: placeholderBee)
-            }.previewDisplayName("Placeholder")
+            }.previewDevice("iPhone 12").previewDisplayName("Placeholder")
         }
     }
 }
