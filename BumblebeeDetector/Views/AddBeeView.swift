@@ -174,6 +174,8 @@ extension AddBeeView {
                 self.interpolations = 0
                 self.time = -detectionStart.timeIntervalSinceNow
                 
+                sendImagesToAPI()
+                
                 self.isShowActivity = false
             }
         }
@@ -208,6 +210,10 @@ extension AddBeeView {
                 self.isShowActivity = false
             }
         }
+    }
+    
+    func sendImagesToAPI() {
+        Requests.sendImages(images: newBee.detections)
     }
     
     func savePressed() {

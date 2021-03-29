@@ -11,6 +11,7 @@
 		D30352F125A4F0700049C77C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30352F025A4F0700049C77C /* ContentView.swift */; };
 		D30352F325A4F0710049C77C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30352F225A4F0710049C77C /* Assets.xcassets */; };
 		D30352F625A4F0710049C77C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30352F525A4F0710049C77C /* Preview Assets.xcassets */; };
+		D342E4E62611DF8D006AA53F /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D342E4E52611DF8D006AA53F /* Requests.swift */; };
 		D34FAF8D25EEDD0600AB3725 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34FAF8C25EEDD0600AB3725 /* MapView.swift */; };
 		D350A8C625E6C01800CE31DF /* Detector.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D350A8C425E6C01800CE31DF /* Detector.xcdatamodeld */; };
 		D350A8C925E6C16D00CE31DF /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350A8C825E6C16D00CE31DF /* PersistenceController.swift */; };
@@ -41,6 +42,7 @@
 		D30352F225A4F0710049C77C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D30352F525A4F0710049C77C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D30352F725A4F0710049C77C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D342E4E52611DF8D006AA53F /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		D34FAF8C25EEDD0600AB3725 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		D350A8C525E6C01800CE31DF /* Bumblebee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bumblebee.xcdatamodel; sourceTree = "<group>"; };
 		D350A8C825E6C16D00CE31DF /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				D3B23D7C25A6532700C67B68 /* Utils.swift */,
+				D342E4E52611DF8D006AA53F /* Requests.swift */,
 				D3D1918825D2E98300DD9161 /* Localisation.swift */,
 				D3B4D65B25F53880009F68AC /* Interpolation.swift */,
 				D3D0B3F725A4FE860011E322 /* ImagePicker.swift */,
@@ -254,6 +257,7 @@
 				D350A90D25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift in Sources */,
 				D350A8C625E6C01800CE31DF /* Detector.xcdatamodeld in Sources */,
 				D350A90C25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift in Sources */,
+				D342E4E62611DF8D006AA53F /* Requests.swift in Sources */,
 				D3B4D65C25F53880009F68AC /* Interpolation.swift in Sources */,
 				D3E1799425F6C66300102C30 /* ShareSheet.swift in Sources */,
 			);
