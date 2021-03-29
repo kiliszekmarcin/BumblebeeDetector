@@ -216,6 +216,7 @@ extension AddBeeView {
     
     func sendImagesToAPI() {
         Requests.sendImages(images: newBee.detections) { json, error in
+            // parse json into the classifications arry
             if let jsonDict = json as? [String: Any] {
                 if let jsonDeeper = jsonDict["pred"] as? [Any] {
                     for item in jsonDeeper {
