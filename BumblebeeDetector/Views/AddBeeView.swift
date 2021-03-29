@@ -31,6 +31,8 @@ struct AddBeeView: View {
     @State var interpolations: Int = 0
     @State var time: Double = 0.0
     
+    @State var classifications: [(String, Double)] = []
+    
     var body: some View {
         ZStack() {
             ScrollView {
@@ -214,7 +216,18 @@ extension AddBeeView {
     
     func sendImagesToAPI() {
         Requests.sendImages(images: newBee.detections) { json, error in
-            print(json)
+            if let jsonDict = json as? [String: Any] {
+                if let jsonDeeper = jsonDict["pred"] as? [Any] {
+                    for item in jsonDeeper {
+                        if let item = item as? [Any] {
+                            let species = item[0] as! String
+                            let confidence = item[1] as! Double
+                            
+                            classifications.append((species, confidence))
+                        }
+                    }
+                }
+            }
         }
     }
     
