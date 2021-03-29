@@ -213,7 +213,9 @@ extension AddBeeView {
     }
     
     func sendImagesToAPI() {
-        Requests.sendImages(images: newBee.detections)
+        Requests.sendImages(images: newBee.detections) { json, error in
+            print(json)
+        }
     }
     
     func savePressed() {
