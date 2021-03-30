@@ -31,8 +31,6 @@ struct AddBeeView: View {
     @State var interpolations: Int = 0
     @State var time: Double = 0.0
     
-    @State var classifications: [(String, Double)] = []
-    
     var body: some View {
         ZStack() {
             ScrollView {
@@ -82,6 +80,16 @@ struct AddBeeView: View {
                                 imageSize: CGSize(width: 200, height: 200),
                                 animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
                             ).frame(width: 200, height: 200, alignment: .center)
+                        }
+                        
+                        Text("Predictions:")
+                            .font(.headline)
+                        ForEach(newBee.predictions.filter { $0.confidence >= 0.1 }, id: \.self) { prediction in
+                            HStack {
+                                Text(prediction.species + ":")
+                                Text(String(format: "%.2f", prediction.confidence*100) + "%")
+                                Spacer()
+                            }
                         }
                     }
                 }.padding()
@@ -156,6 +164,7 @@ extension AddBeeView {
             self.changesToDetections = true
             
             self.newBee.detections = []
+            self.newBee.predictions = []
             
             DispatchQueue(label: "beeDetection").async {
                 self.time = 0.0
@@ -178,7 +187,7 @@ extension AddBeeView {
                 
                 sendImagesToAPI()
                 
-                self.isShowActivity = false
+//                self.isShowActivity = false // handled in sendImagesToAPI
             }
         }
     }
@@ -215,6 +224,8 @@ extension AddBeeView {
     }
     
     func sendImagesToAPI() {
+//        self.isShowActivity = true
+        
         Requests.sendImages(images: newBee.detections) { json, error in
             // parse json into the classifications arry
             if let jsonDict = json as? [String: Any] {
@@ -224,12 +235,14 @@ extension AddBeeView {
                             let species = item[0] as! String
                             let confidence = item[1] as! Double
                             
-                            classifications.append((species, confidence))
+                            newBee.predictions.append(Prediction(species: species, confidence: confidence))
                         }
                     }
                 }
             }
         }
+        
+        self.isShowActivity = false
     }
     
     func savePressed() {
@@ -242,6 +255,7 @@ extension AddBeeView {
                 editedB.backgroundImage = newBee.backgroundImage
                 editedB.profileImage = newBee.profileImage
                 editedB.location = newBee.location
+                editedB.predictions = newBee.predictions
                 
                 if changesToDetections {
                     editedB.detections = newBee.detections
@@ -257,6 +271,7 @@ extension AddBeeView {
                 newBumblebee.profileImage = newBee.profileImage
                 newBumblebee.detections = newBee.detections
                 newBumblebee.location = newBee.location
+                newBumblebee.predictions = newBee.predictions
             }
             
             try? viewContext.save()
@@ -282,6 +297,13 @@ struct AddBeeView_Previews: PreviewProvider {
             UIImage(named: "frame3.png")!,
             UIImage(named: "frame4.png")!,
             UIImage(named: "frame5.png")!
+        ],
+        predictions: [
+            Prediction(species: "Bombus sylvestris", confidence: 0.3546587824821472),
+            Prediction(species: "Bombus hortorum", confidence: 0.27430015802383423),
+            Prediction(species: "Bombus campestris", confidence: 0.2058732956647873),
+            Prediction(species: "Bombus vestalis", confidence: 0.08856615424156189),
+            Prediction(species: "Bombus lucorum", confidence: 0.06423360109329224)
         ]
     )
     
