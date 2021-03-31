@@ -225,9 +225,8 @@ extension AddBeeView {
     
     func sendImagesToAPI() {
 //        self.isShowActivity = true
-        
-        Requests.sendImages(images: newBee.detections) { json, error in
-            // parse json into the classifications arry
+        Requests.sendImages(images: newBee.detections) { json in
+            // parse json into the classifications array
             if let jsonDict = json as? [String: Any] {
                 if let jsonDeeper = jsonDict["pred"] as? [Any] {
                     for item in jsonDeeper {
