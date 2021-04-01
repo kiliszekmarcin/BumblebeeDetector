@@ -11,7 +11,7 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
-    @FetchRequest(entity: Bumblebee.entity(), sortDescriptors: [])
+    @FetchRequest(entity: Bumblebee.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)])
     
     private var bumblebees: FetchedResults<Bumblebee>
     
