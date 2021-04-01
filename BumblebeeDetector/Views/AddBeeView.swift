@@ -82,13 +82,15 @@ struct AddBeeView: View {
                             ).frame(width: 200, height: 200, alignment: .center)
                         }
                         
-                        Text("Predictions:")
-                            .font(.headline)
-                        ForEach(newBee.predictions.filter { $0.confidence >= 0.1 }, id: \.self) { prediction in
-                            HStack {
-                                Text(prediction.species + ":")
-                                Text(String(format: "%.2f", prediction.confidence*100) + "%")
-                                Spacer()
+                        if !newBee.predictions.isEmpty {
+                            Text("Predictions:")
+                                .font(.headline)
+                            ForEach(newBee.predictions.filter { $0.confidence >= 0.1 }, id: \.self) { prediction in
+                                HStack {
+                                    Text(prediction.species + ":")
+                                    Text(String(format: "%.2f", prediction.confidence*100) + "%")
+                                    Spacer()
+                                }
                             }
                         }
                     }
