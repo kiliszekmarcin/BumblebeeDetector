@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,11 +11,14 @@
 		D30352F125A4F0700049C77C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30352F025A4F0700049C77C /* ContentView.swift */; };
 		D30352F325A4F0710049C77C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30352F225A4F0710049C77C /* Assets.xcassets */; };
 		D30352F625A4F0710049C77C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30352F525A4F0710049C77C /* Preview Assets.xcassets */; };
+		D325D9532614EED800119C5B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D325D9522614EED800119C5B /* Alamofire */; };
+		D342E4E62611DF8D006AA53F /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D342E4E52611DF8D006AA53F /* Requests.swift */; };
 		D34FAF8D25EEDD0600AB3725 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34FAF8C25EEDD0600AB3725 /* MapView.swift */; };
 		D350A8C625E6C01800CE31DF /* Detector.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D350A8C425E6C01800CE31DF /* Detector.xcdatamodeld */; };
 		D350A8C925E6C16D00CE31DF /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350A8C825E6C16D00CE31DF /* PersistenceController.swift */; };
 		D350A90C25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350A90A25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift */; };
 		D350A90D25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350A90B25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift */; };
+		D359AC232615DC5F007C95C6 /* BeeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D359AC222615DC5F007C95C6 /* BeeRow.swift */; };
 		D35E25CC260238820025EBEB /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E25CB260238820025EBEB /* DetailRow.swift */; };
 		D366246A25DF03B300241EF7 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D366246925DF03B300241EF7 /* LoadingIndicator.swift */; };
 		D37A622A25EF12EC00163207 /* PhotoSelectActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */; };
@@ -43,11 +46,13 @@
 		D30352F225A4F0710049C77C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D30352F525A4F0710049C77C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D30352F725A4F0710049C77C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D342E4E52611DF8D006AA53F /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		D34FAF8C25EEDD0600AB3725 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		D350A8C525E6C01800CE31DF /* Bumblebee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bumblebee.xcdatamodel; sourceTree = "<group>"; };
 		D350A8C825E6C16D00CE31DF /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		D350A90A25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bumblebee+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D350A90B25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bumblebee+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D359AC222615DC5F007C95C6 /* BeeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeeRow.swift; sourceTree = "<group>"; };
 		D35E25CB260238820025EBEB /* DetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRow.swift; sourceTree = "<group>"; };
 		D366246925DF03B300241EF7 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectActionSheet.swift; sourceTree = "<group>"; };
@@ -73,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D325D9532614EED800119C5B /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +159,7 @@
 				D37A624625EF334E00163207 /* PagingView.swift */,
 				D3E1799325F6C66300102C30 /* ShareSheet.swift */,
 				D35E25CB260238820025EBEB /* DetailRow.swift */,
+				D359AC222615DC5F007C95C6 /* BeeRow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -161,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				D3B23D7C25A6532700C67B68 /* Utils.swift */,
+				D342E4E52611DF8D006AA53F /* Requests.swift */,
 				D3D1918825D2E98300DD9161 /* Localisation.swift */,
 				D3A2F646260E06D5006237B0 /* ImageQuality.swift */,
 				D3B4D65B25F53880009F68AC /* Interpolation.swift */,
@@ -186,6 +194,9 @@
 			dependencies = (
 			);
 			name = BumblebeeDetector;
+			packageProductDependencies = (
+				D325D9522614EED800119C5B /* Alamofire */,
+			);
 			productName = BumblebeeDetector;
 			productReference = D30352EB25A4F0700049C77C /* BumblebeeDetector.app */;
 			productType = "com.apple.product-type.application";
@@ -213,6 +224,9 @@
 				Base,
 			);
 			mainGroup = D30352E225A4F0700049C77C;
+			packageReferences = (
+				D325D9512614EED800119C5B /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = D30352EC25A4F0700049C77C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -260,8 +274,10 @@
 				D3A2F647260E06D5006237B0 /* ImageQuality.swift in Sources */,
 				D3D1918925D2E98300DD9161 /* Localisation.swift in Sources */,
 				D350A90D25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift in Sources */,
+				D359AC232615DC5F007C95C6 /* BeeRow.swift in Sources */,
 				D350A8C625E6C01800CE31DF /* Detector.xcdatamodeld in Sources */,
 				D350A90C25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift in Sources */,
+				D342E4E62611DF8D006AA53F /* Requests.swift in Sources */,
 				D3B4D65C25F53880009F68AC /* Interpolation.swift in Sources */,
 				D3E1799425F6C66300102C30 /* ShareSheet.swift in Sources */,
 			);
@@ -452,6 +468,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D325D9512614EED800119C5B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D325D9522614EED800119C5B /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D325D9512614EED800119C5B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		D350A8C425E6C01800CE31DF /* Detector.xcdatamodeld */ = {

@@ -26,6 +26,8 @@ extension Bumblebee {
     @NSManaged public var detectionsData: Data?
     @NSManaged public var latitude: NSNumber?
     @NSManaged public var longitude: NSNumber?
+    @NSManaged public var predictedSpecies: [String]
+    @NSManaged public var predictedConfidences: [Double]
     
     var profileImage: UIImage? {
         set {
@@ -85,6 +87,27 @@ extension Bumblebee {
             }
             
             return nil
+        }
+    }
+    
+    var predictions: [Prediction] {
+        set {
+            predictedSpecies = []
+            predictedConfidences = []
+
+            for prediction in newValue {
+                predictedSpecies.append(prediction.species)
+                predictedConfidences.append(prediction.confidence)
+            }
+        }
+        get {
+            var newPredictions: [Prediction] = []
+
+            for (species, confidence) in zip(predictedSpecies, predictedConfidences) {
+                newPredictions.append(Prediction(species: species, confidence: confidence))
+            }
+
+            return newPredictions
         }
     }
 }

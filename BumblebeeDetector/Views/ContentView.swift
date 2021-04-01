@@ -21,21 +21,7 @@ struct ContentView: View {
                 ForEach(bumblebees, id: \.id) { bee in
                     NavigationLink(destination: AddBeeView(newBee: BumblebeeEdit(bumblebee: bee), editedBee: bee)
                     ) {
-                        HStack{
-                            Image(uiImage: bee.profileImage ?? bee.backgroundImage ?? UIImage(named: "placeholderBee.png")!)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 50, height: 50)
-                                .clipShape(Circle())
-                            if bee.name != "" {
-                                Text(bee.name)
-                            }
-                            else if let beeDate = bee.date {
-                                Text("Date: \(beeDate, formatter: Utils.itemFormatter)")
-                            } else {
-                                Text("No name or date")
-                            }
-                        }
+                        BeeRow(bee: bee)
                     }
                 }.onDelete(perform: { indexSet in
                     for index in indexSet {

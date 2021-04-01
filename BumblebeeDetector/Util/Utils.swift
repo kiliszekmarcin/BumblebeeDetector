@@ -11,10 +11,17 @@ import AVFoundation
 import CoreLocation
 
 class Utils {
-    static let itemFormatter: DateFormatter = {
+    static let dateTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .short
+        return formatter
+    }()
+    
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
         return formatter
     }()
     
@@ -116,17 +123,17 @@ class Utils {
     }
     
     static func detectionCGRectToCropping(detX: Double, detY: Double, detW: Double, detH: Double, orgW: Double, orgH: Double) -> CGRect {
-//        var xScale = orgW / orgH
-//        var yScale = orgH / orgW
+        var xScale = orgW / orgH
+        var yScale = orgH / orgW
         
-//        if xScale > yScale {
-//            yScale = 1
-//        } else {
-//            xScale = 1
-//        }
+        if xScale > yScale {
+            yScale = 1
+        } else {
+            xScale = 1
+        }
         
-        let xScale = 1.0
-        let yScale = 1.0
+//        let xScale = 1.0
+//        let yScale = 1.0
         
         let detectionRectangle = CGRect(x: orgW * (detX - (detW / xScale) / 2),
                                         y: orgH * (detY - (detH / yScale) / 2),

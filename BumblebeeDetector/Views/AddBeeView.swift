@@ -54,21 +54,23 @@ struct AddBeeView: View {
                     if let beeDate = newBee.date {
                         DetailRow(
                             title: "Date spotted",
-                            caption: Utils.itemFormatter.string(from: beeDate))
+                            caption: Utils.dateTimeFormatter.string(from: beeDate))
                     }
                     
                     if !newBee.detections.isEmpty {
-                        DetailRow(
-                            title: "Detections",
-                            caption: "\(self.detections)")
-                        
-                        DetailRow(
-                            title: "Interpolations",
-                            caption: "\(self.interpolations)")
-                        
-                        DetailRow(
-                            title: "Time it took",
-                            caption: String(format: "%.2f", self.time) + " s")
+                        if self.detections != 0 || self.interpolations != 0 || self.time != 0.0 {
+                            DetailRow(
+                                title: "Detections",
+                                caption: "\(self.detections)")
+                            
+                            DetailRow(
+                                title: "Interpolations",
+                                caption: "\(self.interpolations)")
+                            
+                            DetailRow(
+                                title: "Time it took",
+                                caption: String(format: "%.2f", self.time) + " s")
+                        }
                         
                         HStack {
                             Text("Detected bee:")
@@ -81,46 +83,61 @@ struct AddBeeView: View {
                                 animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
                             ).frame(width: 200, height: 200, alignment: .center)
                         }
-                    }
-                }.padding()
-                
-                VStack {
-                    Toggle(isOn: $interpolOn) {
-                        Text("Interpolation:")
-                            .font(.headline)
-                    }.padding()
-                    
-                    if self.interpolOn {
-                        VStack {
-                            Text("\(self.interpolThreshold)")
-                            Slider(value: $interpolThreshold, in: 0...0.05)
-                                .padding(.horizontal)
-                        }
-                    }
-                    
-                    HStack(spacing: 10.0) {
-                        FilledButton(
-                            title: "Select a video",
-                            disabled: self.isShowActivity
-                        ) {
-                            self.isShowActionSheet = true
-                        }
                         
-                        FilledButton(
-                            title: "Detect",
-                            disabled: self.isShowActivity
-                        ) {
-                            if self.interpolOn {
-                                interpolatePressed()
-                            } else {
-                                detectPressed()
+                        if !newBee.predictions.isEmpty {
+                            Text("Predictions:")
+                                .font(.headline)
+                            ForEach(newBee.predictions.filter { $0.confidence >= 0.1 }, id: \.self) { prediction in
+                                HStack {
+                                    Text(prediction.species + ":")
+                                    Text(String(format: "%.2f", prediction.confidence*100) + "%")
+                                    Spacer()
+                                }
                             }
                         }
                     }
-                    .padding()
-                    .shadow(radius: 7)
-                }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
-                    ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
+                }.padding()
+                
+                if editedBee == nil {
+                    // detection controlls
+                    VStack {
+                        Toggle(isOn: $interpolOn) {
+                            Text("Interpolation:")
+                                .font(.headline)
+                        }.padding()
+                        
+                        if self.interpolOn {
+                            VStack {
+                                Text("\(self.interpolThreshold)")
+                                Slider(value: $interpolThreshold, in: 0...0.05)
+                                    .padding(.horizontal)
+                            }
+                        }
+                        
+                        HStack(spacing: 10.0) {
+                            FilledButton(
+                                title: "Select a video",
+                                disabled: self.isShowActivity
+                            ) {
+                                self.isShowActionSheet = true
+                            }
+                            
+                            FilledButton(
+                                title: "Detect",
+                                disabled: self.isShowActivity || newBee.videoURL == nil
+                            ) {
+                                if self.interpolOn {
+                                    interpolatePressed()
+                                } else {
+                                    detectPressed()
+                                }
+                            }
+                        }
+                        .padding()
+                        .shadow(radius: 7)
+                    }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
+                        ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
+                    }
                 }
             }
             .navigationBarTitle("Track a new bee")
@@ -154,6 +171,7 @@ extension AddBeeView {
             self.changesToDetections = true
             
             self.newBee.detections = []
+            self.newBee.predictions = []
             
             DispatchQueue(label: "beeDetection").async {
                 self.time = 0.0
@@ -174,7 +192,9 @@ extension AddBeeView {
                 self.interpolations = 0
                 self.time = -detectionStart.timeIntervalSinceNow
                 
-                self.isShowActivity = false
+                sendImagesToAPI()
+                
+//                self.isShowActivity = false // handled in sendImagesToAPI
             }
         }
     }
@@ -210,6 +230,27 @@ extension AddBeeView {
         }
     }
     
+    func sendImagesToAPI() {
+//        self.isShowActivity = true
+        Requests.sendImages(images: newBee.detections) { json in
+            // parse json into the classifications array
+            if let jsonDict = json as? [String: Any] {
+                if let jsonDeeper = jsonDict["pred"] as? [Any] {
+                    for item in jsonDeeper {
+                        if let item = item as? [Any] {
+                            let species = item[0] as! String
+                            let confidence = item[1] as! Double
+                            
+                            newBee.predictions.append(Prediction(species: species, confidence: confidence))
+                        }
+                    }
+                }
+            }
+        }
+        
+        self.isShowActivity = false
+    }
+    
     func savePressed() {
         viewContext.performAndWait {
             if let editedB = editedBee {
@@ -220,6 +261,7 @@ extension AddBeeView {
                 editedB.backgroundImage = newBee.backgroundImage
                 editedB.profileImage = newBee.profileImage
                 editedB.location = newBee.location
+                editedB.predictions = newBee.predictions
                 
                 if changesToDetections {
                     editedB.detections = newBee.detections
@@ -235,6 +277,7 @@ extension AddBeeView {
                 newBumblebee.profileImage = newBee.profileImage
                 newBumblebee.detections = newBee.detections
                 newBumblebee.location = newBee.location
+                newBumblebee.predictions = newBee.predictions
             }
             
             try? viewContext.save()
@@ -260,6 +303,13 @@ struct AddBeeView_Previews: PreviewProvider {
             UIImage(named: "frame3.png")!,
             UIImage(named: "frame4.png")!,
             UIImage(named: "frame5.png")!
+        ],
+        predictions: [
+            Prediction(species: "Bombus sylvestris", confidence: 0.3546587824821472),
+            Prediction(species: "Bombus hortorum", confidence: 0.27430015802383423),
+            Prediction(species: "Bombus campestris", confidence: 0.2058732956647873),
+            Prediction(species: "Bombus vestalis", confidence: 0.08856615424156189),
+            Prediction(species: "Bombus lucorum", confidence: 0.06423360109329224)
         ]
     )
     

@@ -8,10 +8,12 @@
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="predictedConfidences" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Double]"/>
+        <attribute name="predictedSpecies" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="profileImageData" optional="YES" attributeType="Binary"/>
         <attribute name="videoURL" optional="YES" attributeType="URI"/>
     </entity>
     <elements>
-        <element name="Bumblebee" positionX="-63" positionY="-18" width="128" height="164"/>
+        <element name="Bumblebee" positionX="-63" positionY="-18" width="128" height="194"/>
     </elements>
 </model>

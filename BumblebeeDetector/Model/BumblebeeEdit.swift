@@ -19,6 +19,7 @@ struct BumblebeeEdit {
     var videoURL: URL?
     
     var detections: [UIImage] = []
+    var predictions: [Prediction] = []
 }
 
 extension BumblebeeEdit {
@@ -30,5 +31,13 @@ extension BumblebeeEdit {
         self.videoURL = bumblebee.videoURL
         self.detections = bumblebee.detections
         self.location = bumblebee.location
+        self.predictions = bumblebee.predictions
     }
+}
+
+struct Prediction: Identifiable, Hashable {
+    var id = UUID().uuidString
+
+    var species: String
+    var confidence: Double
 }

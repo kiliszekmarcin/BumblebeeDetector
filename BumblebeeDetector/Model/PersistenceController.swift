@@ -16,6 +16,7 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
             let newItem = Bumblebee(context: viewContext)
+            newItem.name = "Helen"
             newItem.profileImageData = (UIImage(named: "frame1")?.jpegData(compressionQuality: 1))!
             newItem.backgroundImageData = UIImage(named: "background")?.jpegData(compressionQuality: 1)
             newItem.date = Date()
@@ -26,6 +27,10 @@ struct PersistenceController {
                 UIImage(named: "frame4.png")!,
                 UIImage(named: "frame5.png")!
             ])
+            newItem.predictions = [
+                Prediction(species: "Bombus hortorum", confidence: 0.568412),
+                Prediction(species: "Bombus sylvestris", confidence: 0.18754341)
+            ]
         }
         do {
             try viewContext.save()
