@@ -58,17 +58,19 @@ struct AddBeeView: View {
                     }
                     
                     if !newBee.detections.isEmpty {
-                        DetailRow(
-                            title: "Detections",
-                            caption: "\(self.detections)")
-                        
-                        DetailRow(
-                            title: "Interpolations",
-                            caption: "\(self.interpolations)")
-                        
-                        DetailRow(
-                            title: "Time it took",
-                            caption: String(format: "%.2f", self.time) + " s")
+                        if self.detections != 0 || self.interpolations != 0 || self.time != 0.0 {
+                            DetailRow(
+                                title: "Detections",
+                                caption: "\(self.detections)")
+                            
+                            DetailRow(
+                                title: "Interpolations",
+                                caption: "\(self.interpolations)")
+                            
+                            DetailRow(
+                                title: "Time it took",
+                                caption: String(format: "%.2f", self.time) + " s")
+                        }
                         
                         HStack {
                             Text("Detected bee:")
