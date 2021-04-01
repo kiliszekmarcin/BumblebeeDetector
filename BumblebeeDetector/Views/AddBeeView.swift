@@ -98,43 +98,46 @@ struct AddBeeView: View {
                     }
                 }.padding()
                 
-                VStack {
-                    Toggle(isOn: $interpolOn) {
-                        Text("Interpolation:")
-                            .font(.headline)
-                    }.padding()
-                    
-                    if self.interpolOn {
-                        VStack {
-                            Text("\(self.interpolThreshold)")
-                            Slider(value: $interpolThreshold, in: 0...0.05)
-                                .padding(.horizontal)
-                        }
-                    }
-                    
-                    HStack(spacing: 10.0) {
-                        FilledButton(
-                            title: "Select a video",
-                            disabled: self.isShowActivity
-                        ) {
-                            self.isShowActionSheet = true
-                        }
+                if editedBee == nil {
+                    // detection controlls
+                    VStack {
+                        Toggle(isOn: $interpolOn) {
+                            Text("Interpolation:")
+                                .font(.headline)
+                        }.padding()
                         
-                        FilledButton(
-                            title: "Detect",
-                            disabled: self.isShowActivity
-                        ) {
-                            if self.interpolOn {
-                                interpolatePressed()
-                            } else {
-                                detectPressed()
+                        if self.interpolOn {
+                            VStack {
+                                Text("\(self.interpolThreshold)")
+                                Slider(value: $interpolThreshold, in: 0...0.05)
+                                    .padding(.horizontal)
                             }
                         }
+                        
+                        HStack(spacing: 10.0) {
+                            FilledButton(
+                                title: "Select a video",
+                                disabled: self.isShowActivity
+                            ) {
+                                self.isShowActionSheet = true
+                            }
+                            
+                            FilledButton(
+                                title: "Detect",
+                                disabled: self.isShowActivity || newBee.videoURL == nil
+                            ) {
+                                if self.interpolOn {
+                                    interpolatePressed()
+                                } else {
+                                    detectPressed()
+                                }
+                            }
+                        }
+                        .padding()
+                        .shadow(radius: 7)
+                    }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
+                        ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
                     }
-                    .padding()
-                    .shadow(radius: 7)
-                }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
-                    ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
                 }
             }
             .navigationBarTitle("Track a new bee")
