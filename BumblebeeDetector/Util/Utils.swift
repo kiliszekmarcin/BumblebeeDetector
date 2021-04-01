@@ -11,10 +11,17 @@ import AVFoundation
 import CoreLocation
 
 class Utils {
-    static let itemFormatter: DateFormatter = {
+    static let dateTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .short
+        return formatter
+    }()
+    
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
         return formatter
     }()
     

@@ -54,7 +54,7 @@ struct AddBeeView: View {
                     if let beeDate = newBee.date {
                         DetailRow(
                             title: "Date spotted",
-                            caption: Utils.itemFormatter.string(from: beeDate))
+                            caption: Utils.dateTimeFormatter.string(from: beeDate))
                     }
                     
                     if !newBee.detections.isEmpty {
