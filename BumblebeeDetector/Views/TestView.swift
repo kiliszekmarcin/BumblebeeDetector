@@ -10,6 +10,8 @@ import SwiftUI
 struct TestView: View {
     @State private var pickedImage: UIImage?
     @State private var convolvedImage: UIImage?
+    @State private var mean: Double = 0.0
+    @State private var stdev: Double = 0.0
     @State private var videoUrl: URL?
     @State private var isShowImagePicker = false
     
@@ -31,6 +33,8 @@ struct TestView: View {
                 Image(uiImage: convolvedImage!)
                     .resizable()
                     .scaledToFit()
+                Text("mean \(mean)")
+                Text("stdev \(stdev)")
             }
         }.sheet(isPresented: $isShowImagePicker, onDismiss: { imagePicked() }) {
             ImagePicker(sourceType: UIImagePickerController.SourceType.photoLibrary, selectedImage: $pickedImage, selectedVideoUrl: $videoUrl)
@@ -44,7 +48,7 @@ extension TestView {
         let quality = ImageQuality()
         
         if pickedImage != nil {
-            convolvedImage = quality.imageSharpness(image: pickedImage!)
+            (convolvedImage, stdev, mean) = quality.imageSharpness(image: pickedImage!)
         }
     }
 }

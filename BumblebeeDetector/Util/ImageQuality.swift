@@ -13,17 +13,19 @@ class ImageQuality {
                               -1,  8, -1,
                               -1, -1, -1]
     
-    func imageSharpness(image: UIImage) -> UIImage {
-//        guard let pixelBuffer = buffer(from: image) else {
-//            fatalError("Error acquiring pixelbuffer.")
-//        }
+    let laplacian_float: [Float] = [-1, -1, -1,
+                                    -1,  8, -1,
+                                    -1, -1, -1]
+    
+    func imageSharpness(image: UIImage) -> (UIImage, Double, Double) {
+        let compressedData = image.jpegData(compressionQuality: 1.0)
+        let compressedUIImage = UIImage(data: compressedData!)
         
-        let convolved = convolutionFilterToImage(image: image, kernel: laplacian, divisor: 1)
-        
-        return convolved
+        return convolutionFilterToStDev(image: compressedUIImage!, kernel: laplacian, divisor: 1)
     }
     
-    func convolutionFilterToImage(image: UIImage, kernel: [Int16], divisor: Int) -> UIImage {
+    /// applies a convolution filter to an image and returns the convolved image, standard derivation and mean
+    func convolutionFilterToStDev(image: UIImage, kernel: [Int16], divisor: Int) -> (UIImage, Double, Double) {
         precondition(kernel.count == 9 || kernel.count == 25 || kernel.count == 49, "Kernel size must be 3x3, 5x5 or 7x7.")
         
         let kernelSide = UInt32(sqrt(Float(kernel.count)))
@@ -45,11 +47,75 @@ class ImageQuality {
         
         let outImage = try? outBuffer.createCGImage(format: vImage_CGImageFormat(cgImage: image.cgImage!)!)
         
+        let stDev: Double
+        let mean: Double
+        
+        (stDev, mean) = processImage(data: outBuffer.data,
+                     rowBytes: Int(outBuffer.rowBytes),
+                     width: Int(outBuffer.width),
+                     height: Int(outBuffer.height),
+                     orientation: UInt32(image.imageOrientation.rawValue))
+        
         free(pixelBuffer)
         
-        return UIImage(cgImage: outImage!)
+        return (UIImage(cgImage: outImage!), stDev, mean)
     }
     
+    func processImage(data: UnsafeMutableRawPointer,
+                      rowBytes: Int,
+                      width: Int, height: Int,
+                      orientation: UInt32? ) -> (Double, Double) {
+        
+        var sourceBuffer = vImage_Buffer(data: data,
+                                         height: vImagePixelCount(height),
+                                         width: vImagePixelCount(width),
+                                         rowBytes: rowBytes)
+        
+        var floatPixels: [Float]
+        let count = width * height
+        
+        if sourceBuffer.rowBytes == width * MemoryLayout<Pixel_8>.stride {
+            let start = sourceBuffer.data.assumingMemoryBound(to: Pixel_8.self)
+            floatPixels = vDSP.integerToFloatingPoint(
+                UnsafeMutableBufferPointer(start: start,
+                                           count: count),
+                floatingPointType: Float.self)
+        } else {
+            floatPixels = [Float](unsafeUninitializedCapacity: count) {
+                buffer, initializedCount in
+                
+                var floatBuffer = vImage_Buffer(data: buffer.baseAddress,
+                                                height: sourceBuffer.height,
+                                                width: sourceBuffer.width,
+                                                rowBytes: width * MemoryLayout<Float>.size)
+                
+                vImageConvert_Planar8toPlanarF(&sourceBuffer,
+                                               &floatBuffer,
+                                               0, 255,
+                                               vImage_Flags(kvImageNoFlags))
+                
+                initializedCount = count
+            }
+        }
+        
+        // Convolve with Laplacian.
+        vDSP.convolve(floatPixels,
+                      rowCount: height,
+                      columnCount: width,
+                      with3x3Kernel: laplacian_float,
+                      result: &floatPixels)
+        
+        // Calculate standard deviation.
+        var mean = Float.nan
+        var stdDev = Float.nan
+        
+        vDSP_normalize(floatPixels, 1,
+                       nil, 1,
+                       &mean, &stdDev,
+                       vDSP_Length(count))
+        
+        return (Double(stdDev), Double(mean))
+    }
     
     
     func buffer(from image: UIImage) -> CVPixelBuffer? {
