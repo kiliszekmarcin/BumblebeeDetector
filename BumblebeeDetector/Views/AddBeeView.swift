@@ -144,7 +144,7 @@ struct AddBeeView: View {
                     }
                 }
             }
-            .navigationBarTitle("Track a new bee")
+            .navigationBarTitle(newBee.name == "" ? "Track a new bee" : newBee.name)
             
         }.modifier(PhotoSelectActionSheet(
                     presented: $isShowActionSheet,
