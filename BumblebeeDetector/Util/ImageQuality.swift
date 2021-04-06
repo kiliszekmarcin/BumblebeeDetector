@@ -124,6 +124,8 @@ class ImageQuality {
         var mean = Float.nan
         var stdDev = Float.nan
         
+        floatPixels = floatPixels.map(abs)
+        
         vDSP_normalize(floatPixels, 1,
                        nil, 1,
                        &mean, &stdDev,
