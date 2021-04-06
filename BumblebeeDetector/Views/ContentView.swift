@@ -38,11 +38,6 @@ struct ContentView: View {
                 
             .navigationBarTitle("Detections")
             .navigationBarItems(
-                leading: NavigationLink(
-                    destination: TestView(),
-                    label: {
-                        Text("Test")
-                    }),
                 trailing:
                 NavigationLink(destination: AddBeeView()) {
                     Image(systemName: "plus")
