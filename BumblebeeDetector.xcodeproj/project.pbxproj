@@ -24,6 +24,7 @@
 		D37A622A25EF12EC00163207 /* PhotoSelectActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */; };
 		D37A624725EF334E00163207 /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A624625EF334E00163207 /* PagingView.swift */; };
 		D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3875A0925B0A097002C1B80 /* AnimationView.swift */; };
+		D3A2F647260E06D5006237B0 /* ImageQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2F646260E06D5006237B0 /* ImageQuality.swift */; };
 		D3A441E525DEF961003EFAEC /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A441E425DEF961003EFAEC /* FilledButton.swift */; };
 		D3B1975D25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */; };
 		D3B23D7D25A6532700C67B68 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B23D7C25A6532700C67B68 /* Utils.swift */; };
@@ -56,6 +57,7 @@
 		D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectActionSheet.swift; sourceTree = "<group>"; };
 		D37A624625EF334E00163207 /* PagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingView.swift; sourceTree = "<group>"; };
 		D3875A0925B0A097002C1B80 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		D3A2F646260E06D5006237B0 /* ImageQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageQuality.swift; sourceTree = "<group>"; };
 		D3A441E425DEF961003EFAEC /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
 		D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BumblebeeModelNew.mlmodel; sourceTree = "<group>"; };
 		D3B23D7C25A6532700C67B68 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				D3B23D7C25A6532700C67B68 /* Utils.swift */,
 				D342E4E52611DF8D006AA53F /* Requests.swift */,
 				D3D1918825D2E98300DD9161 /* Localisation.swift */,
+				D3A2F646260E06D5006237B0 /* ImageQuality.swift */,
 				D3B4D65B25F53880009F68AC /* Interpolation.swift */,
 				D3D0B3F725A4FE860011E322 /* ImagePicker.swift */,
 				D3875A0925B0A097002C1B80 /* AnimationView.swift */,
@@ -264,6 +267,7 @@
 				D3A441E525DEF961003EFAEC /* FilledButton.swift in Sources */,
 				D3D0B42F25A523010011E322 /* BumblebeeModel.mlmodel in Sources */,
 				D30352EF25A4F0700049C77C /* BumblebeeDetectorApp.swift in Sources */,
+				D3A2F647260E06D5006237B0 /* ImageQuality.swift in Sources */,
 				D3D1918925D2E98300DD9161 /* Localisation.swift in Sources */,
 				D350A90D25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift in Sources */,
 				D359AC232615DC5F007C95C6 /* BeeRow.swift in Sources */,

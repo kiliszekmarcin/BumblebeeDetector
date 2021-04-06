@@ -37,7 +37,8 @@ struct ContentView: View {
             }
                 
             .navigationBarTitle("Detections")
-            .navigationBarItems(trailing:
+            .navigationBarItems(
+                trailing:
                 NavigationLink(destination: AddBeeView()) {
                     Image(systemName: "plus")
                 }
