@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BeeRow: View {
-    let bee: Bumblebee
+    @ObservedObject var bee: Bumblebee
     
     var body: some View {
         HStack{
