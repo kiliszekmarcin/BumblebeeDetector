@@ -17,6 +17,21 @@ class ImageQuality {
                                     -1,  8, -1,
                                     -1, -1, -1]
     
+    /// returns the standard derivation of the concoluvions of the images passed as an argument
+    func sequenceSharpnessStDev(images: [UIImage]) -> [Double] {
+        var stDevs: [Double] = []
+        
+        for image in images {
+            let stDev: Double
+            (_, stDev, _) = imageSharpness(image: image)
+            
+            stDevs.append(stDev)
+        }
+        
+        return stDevs
+    }
+    
+    /// applies a convolution filter to an image and returns the convolved image, standard derivation and mean
     func imageSharpness(image: UIImage) -> (UIImage, Double, Double) {
         let compressedData = image.jpegData(compressionQuality: 1.0)
         let compressedUIImage = UIImage(data: compressedData!)

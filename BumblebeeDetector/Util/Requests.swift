@@ -27,6 +27,13 @@ class Requests {
     
     /// Selects which images will be sent to the API
     static func selectionMethod(images: [UIImage]) -> [UIImage] {
+//        // calculate standard derivations of edges in the detections
+//        let stDevs = ImageQuality().sequenceSharpnessStDev(images: images)
+//        
+//        // reorder the detections based on the st devs
+//        let sorted = zip(stDevs, images).sorted { $0.0 > $1.0 }
+//        let sharpestImages = sorted.map { $0.1 }
+        
         // temporarily just send one
         return Array(images.prefix(1))
     }
