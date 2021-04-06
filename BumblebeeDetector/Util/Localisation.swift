@@ -42,7 +42,7 @@ class BeeLocaliser {
                 
                 // scale the uiimage down
                 let uiimage = UIImage(cgImage: croppedImage!)
-                let imageSize = CGSize(width: 256, height: 256)
+                let imageSize = CGSize(width: 255, height: 255)
                 let renderer = UIGraphicsImageRenderer(size: imageSize)
                 let scaledImage = renderer.image { _ in
                     uiimage.draw(in: CGRect(origin: .zero, size: imageSize))
