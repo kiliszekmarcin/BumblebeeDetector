@@ -22,8 +22,6 @@ struct AddBeeView: View {
     @State var editedBee: Bumblebee?
     @State var changesToDetections = false
     
-    @State var gifUrl: URL?
-    
     @State var imagesToSend: Double = 1
     
     var body: some View {

@@ -39,17 +39,37 @@ class Requests {
     
     /// Selects which images will be sent to the API
     static func selectionMethod(images: [UIImage], howMany: Int) -> [UIImage] {
-//        // calculate standard derivations of edges in the detections
-//        let stDevs = ImageQuality().sequenceSharpnessStDev(images: images)
-//        
-//        // reorder the detections based on the st devs
+        // calculate standard derivations of edges in the detections
+        let stDevs = ImageQuality().sequenceSharpnessStDev(images: images)
+        
+//        // idea 1: reorder the detections based on the st devs and pick first n
 //        let sorted = zip(stDevs, images).sorted { $0.0 > $1.0 }
 //        let sharpestImages = sorted.map { $0.1 }
+//
+//        return Array(sharpestImages.prefix(howMany))
+        
+        
+//        // idea 2: divide into n section and pick the sharpest image from each (more diverse data?)
+//        var selectedImages: [UIImage] = []
+//
+//        for i in 0...howMany {
+//            let indexRange = i*(images.count/howMany)...(i+1)*(images.count/howMany)
+//            let subStDevs = stDevs[indexRange]
+//            let subImages = images[indexRange]
+//
+//            if let maxValue = subStDevs.max() {
+//                let maxIndex = subStDevs.firstIndex(of: maxValue)!
+//                selectedImages.append(subImages[maxIndex])
+//            }
+//        }
+//
+//        return selectedImages
+        
         
         // baseline: evenly spaced items
         let indices = Array(stride(from: 0, to: images.count-1, by: images.count/howMany))
         let selectedImages = indices.map { images[$0] }
-        
+
         return selectedImages
     }
 }
