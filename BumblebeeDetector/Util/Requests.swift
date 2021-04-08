@@ -34,7 +34,10 @@ class Requests {
 //        let sorted = zip(stDevs, images).sorted { $0.0 > $1.0 }
 //        let sharpestImages = sorted.map { $0.1 }
         
-        // temporarily just send one
-        return Array(images.prefix(howMany))
+        // baseline: evenly spaced items
+        let indices = Array(stride(from: 0, to: images.count-1, by: images.count/howMany))
+        let selectedImages = indices.map { images[$0] }
+        
+        return selectedImages
     }
 }
