@@ -181,6 +181,10 @@ extension AddBeeView {
                             newBee.predictions.append(Prediction(species: species, confidence: confidence))
                         }
                     }
+                } else if let errorMessage = jsonDict["error"] {
+                    newBee.predictions.append(Prediction(species: errorMessage as! String, confidence: 1.0))
+                } else {
+                    newBee.predictions.append(Prediction(species: "Error", confidence: 1.0))
                 }
             }
             

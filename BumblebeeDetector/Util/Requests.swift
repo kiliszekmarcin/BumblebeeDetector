@@ -21,7 +21,19 @@ class Requests {
                 }
             }
         }, to: url).responseJSON { response in
-            completion(response.value)
+            switch (response.result) {
+            case .success:
+                completion(response.value)
+                break
+            case .failure(let error):
+                if error._code == NSURLErrorTimedOut {
+                    //timeout here
+                }
+                print("\n\nRequest failed with error:\n \(error)")
+                
+                completion(["error" : error.localizedDescription])
+                break
+            }
         }
     }
     
