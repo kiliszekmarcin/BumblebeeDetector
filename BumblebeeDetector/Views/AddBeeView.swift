@@ -24,8 +24,7 @@ struct AddBeeView: View {
     
     @State var gifUrl: URL?
     
-    @State var interpolOn: Bool = false
-    @State var interpolThreshold: CGFloat = 0.01
+    @State var imagesToSend: Double = 1
     
     var body: some View {
         ZStack() {
@@ -65,6 +64,12 @@ struct AddBeeView: View {
                                 animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
                             ).frame(width: 200, height: 200, alignment: .center)
                         }
+                        
+                        Button("Detect using \(Int(self.imagesToSend)) frames") {
+                            sendImagesToAPI()
+                        }
+                        Slider(value: $imagesToSend, in: 1...20, step: 1)
+                            .padding(.horizontal)
                         
                         if !newBee.predictions.isEmpty {
                             HStack {
@@ -153,17 +158,18 @@ extension AddBeeView {
                 
                 // get the background image
                 newBee.backgroundImage = localiser.getFirstFrame()
-                
-                sendImagesToAPI()
-                
-//                self.isShowActivity = false // handled in sendImagesToAPI
+                                
+                self.isShowActivity = false
             }
         }
     }
     
     func sendImagesToAPI() {
-//        self.isShowActivity = true
-        Requests.sendImages(images: newBee.detections) { json in
+        self.isShowActivity = true
+        
+        self.newBee.predictions = []
+        
+        Requests.sendImages(images: newBee.detections, imagesToSend: Int(self.imagesToSend)) { json in
             // parse json into the classifications array
             if let jsonDict = json as? [String: Any] {
                 if let jsonDeeper = jsonDict["pred"] as? [Any] {
@@ -177,9 +183,9 @@ extension AddBeeView {
                     }
                 }
             }
+            
+            self.isShowActivity = false
         }
-        
-        self.isShowActivity = false
     }
     
     func savePressed() {

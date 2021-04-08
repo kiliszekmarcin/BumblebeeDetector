@@ -9,9 +9,9 @@ import UIKit
 import Alamofire
 
 class Requests {
-    static func sendImages(images: [UIImage], completion: @escaping (_ json: Any?)->()) {
+    static func sendImages(images: [UIImage], imagesToSend: Int, completion: @escaping (_ json: Any?)->()) {
         let url = URL(string: "http://3.249.81.168/api/image")!
-        let selectedImages = selectionMethod(images: images)
+        let selectedImages = selectionMethod(images: images, howMany: imagesToSend)
         
         // upload the images
         AF.upload(multipartFormData: { (multipartFormData) in
@@ -26,7 +26,7 @@ class Requests {
     }
     
     /// Selects which images will be sent to the API
-    static func selectionMethod(images: [UIImage]) -> [UIImage] {
+    static func selectionMethod(images: [UIImage], howMany: Int) -> [UIImage] {
 //        // calculate standard derivations of edges in the detections
 //        let stDevs = ImageQuality().sequenceSharpnessStDev(images: images)
 //        
@@ -35,6 +35,6 @@ class Requests {
 //        let sharpestImages = sorted.map { $0.1 }
         
         // temporarily just send one
-        return Array(images.prefix(1))
+        return Array(images.prefix(howMany))
     }
 }
