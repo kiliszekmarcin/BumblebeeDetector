@@ -24,6 +24,9 @@ struct AddBeeView: View {
     
     @State var imagesToSend: Double = 1
     
+    @State var selectionMethod: Method = .evenlySpaced
+    @State var selectedImages: [UIImage] = []
+    
     var body: some View {
         ZStack() {
             ScrollView {
@@ -63,11 +66,26 @@ struct AddBeeView: View {
                             ).frame(width: 200, height: 200, alignment: .center)
                         }
                         
+                        if !self.selectedImages.isEmpty {
+                            AnimationView(
+                                imageSize: CGSize(width: 200, height: 200),
+                                animatedImage: UIImage.animatedImage(with: self.selectedImages, duration: TimeInterval(2))
+                            ).frame(width: 200, height: 200, alignment: .center)
+                        }
+                        
                         Button("Detect using \(Int(self.imagesToSend)) frames") {
+                            self.selectedImages = []
                             sendImagesToAPI()
                         }
                         Slider(value: $imagesToSend, in: 1...20, step: 1)
                             .padding(.horizontal)
+                        
+                        Picker("Selection method", selection: $selectionMethod) {
+                            ForEach(Method.allCases, id: \.id) { method in
+                                Text(method.rawValue)
+                                    .tag(method)
+                            }
+                        }.pickerStyle(SegmentedPickerStyle())
                         
                         if !newBee.predictions.isEmpty {
                             HStack {
@@ -167,7 +185,7 @@ extension AddBeeView {
         
         self.newBee.predictions = []
         
-        Requests.sendImages(images: newBee.detections, imagesToSend: Int(self.imagesToSend)) { json in
+        self.selectedImages = Requests.sendImages(images: newBee.detections, imagesToSend: Int(self.imagesToSend), method: selectionMethod) { json in
             // parse json into the classifications array
             if let jsonDict = json as? [String: Any] {
                 if let jsonDeeper = jsonDict["pred"] as? [Any] {
