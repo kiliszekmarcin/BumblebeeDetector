@@ -41,9 +41,6 @@ class Requests {
     
     /// Selects which images will be sent to the API
     static func selectionMethod(images: [UIImage], howMany: Int, method: Method) -> [UIImage] {
-        // calculate standard derivations of edges in the detections
-        let stDevs = ImageQuality().sequenceSharpnessStDev(images: images)
-        
         switch method {
         case .evenlySpaced:
             // baseline: evenly spaced items
@@ -53,6 +50,9 @@ class Requests {
             return selectedImages
         case .highestStDev:
             // idea 1: reorder the detections based on the st devs and pick first n
+            // calculate standard derivations of edges in the detections
+            let stDevs = ImageQuality().sequenceSharpnessStDev(images: images)
+            
             let sorted = zip(stDevs, images).sorted { $0.0 > $1.0 }
             let sharpestImages = sorted.map { $0.1 }
     
@@ -61,7 +61,9 @@ class Requests {
         case .sections:
             // idea 2: divide into n section and pick the sharpest image from each (more diverse data?)
             var selectedImages: [UIImage] = []
-
+            // calculate standard derivations of edges in the detections
+            let stDevs = ImageQuality().sequenceSharpnessStDev(images: images)
+            
             for i in 0...howMany {
                 var indexRange = i*(images.count/howMany)...(i+1)*(images.count/howMany)
                 if indexRange.upperBound >= images.count {
@@ -78,7 +80,50 @@ class Requests {
             }
 
             return selectedImages
+        
+        case .test:
+            var selectedImages: [UIImage] = images
+            
+            while selectedImages.count > 10 {
+                // calculate standard derivations of edges in the detections
+                let stDevs = ImageQuality().sequenceSharpnessStDev(images: selectedImages)
+                
+                // remove the below average half of st devs
+                let avgStDev = stDevs.reduce(0.0) {
+                    return $0 + $1/Double(stDevs.count)
+                }
+                
+                var filtered = filterOrReturnMin(toFilter: zip(stDevs, selectedImages), value: avgStDev, min: howMany)
+                selectedImages = filtered.map { $0.1 }
+                
+                if selectedImages.count <= 10 { return selectedImages }
+                
+                // calculate image similarities
+                let similarities = ImageSimilarity.imageArrayDistances(array: selectedImages).map { Double($0) }
+                let avgSimilarity = similarities.reduce(0.0) {
+                    return $0 + $1/Double(similarities.count)
+                }
+                
+                // remove the below average similarities
+                filtered = filterOrReturnMin(toFilter: zip(similarities, selectedImages), value: Double(avgSimilarity), min: howMany)
+                selectedImages = filtered.map { $0.1 }
+            }
+            
+            return selectedImages
         }
+    }
+    
+    static func filterOrReturnMin(toFilter: Zip2Sequence<[Double], [UIImage]>, value: Double, min: Int) -> [(Double, UIImage)] {
+        // filter acording to the filter value
+        let filtered = toFilter.filter { $0.0 > value }
+        
+        // if there's less filtered elements than the minimum, sort and return the minimum
+        if filtered.count < min {
+            let sorted = toFilter.sorted { $0.0 > $1.0 }
+            return Array(sorted.prefix(min))
+        }
+        
+        return filtered
     }
 }
 
@@ -86,6 +131,7 @@ enum Method: String, CaseIterable, Identifiable {
     case evenlySpaced
     case highestStDev
     case sections
+    case test
 
     var id: String { self.rawValue }
 }
