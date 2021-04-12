@@ -11,6 +11,7 @@ import AVFoundation
 import CoreLocation
 
 class Utils {
+    /// date formatter - short date, short time
     static let dateTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -18,6 +19,7 @@ class Utils {
         return formatter
     }()
     
+    /// date formatter - short date, short time
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -25,6 +27,7 @@ class Utils {
         return formatter
     }()
     
+    /// get the first frame, location and date from the video (if present)
     static func getVideoMetadata(url: URL) -> (firstFrame: UIImage?, location: CLLocationCoordinate2D?, date: Date?) {
         var firstFrame: UIImage? = nil
         var location: CLLocationCoordinate2D? = nil
@@ -57,20 +60,7 @@ class Utils {
         return (firstFrame, location, date)
     }
     
-    static func getVideoFirstFrame(url: URL) -> UIImage? {
-        let asset = AVAsset(url: url)
-        let generator = AVAssetImageGenerator(asset: asset)
-        
-        do {
-            return UIImage(cgImage: try generator.copyCGImage(at: CMTime(seconds: 0.0, preferredTimescale: 600), actualTime: nil))
-        } catch let error {
-            print("Error when extracting first frame after video selection")
-            print(error.localizedDescription)
-        }
-        
-        return nil
-    }
-    
+    /// convert iso6709 string to CLLocationCoordinate2D format
     static func iso6709ToCLLocationCoordinate2D(locationString: String) -> CLLocationCoordinate2D? {
         let indexLat = locationString.index(locationString.startIndex, offsetBy: 8)
         let indexLong = locationString.index(indexLat, offsetBy: 9)
@@ -85,33 +75,7 @@ class Utils {
         return nil
     }
     
-    static func coreDataObjectFromImages(images: [UIImage]) -> Data? {
-        let dataArray = NSMutableArray()
-        
-        for img in images {
-            if let data = img.pngData() {
-                dataArray.add(data)
-            }
-        }
-        
-        return try? NSKeyedArchiver.archivedData(withRootObject: dataArray, requiringSecureCoding: true)
-    }
-
-    static func imagesFromCoreData(object: Data?) -> [UIImage]? {
-        var retVal = [UIImage]()
-
-        guard let object = object else { return nil }
-        if let dataArray = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: object) {
-            for data in dataArray {
-                if let data = data as? Data, let image = UIImage(data: data) {
-                    retVal.append(image)
-                }
-            }
-        }
-        
-        return retVal
-    }
-    
+    /// convert coreML detection coordinates wrapped in CGRect to CGRect with a stanard coordinate system
     static func detectionCGRectToCropping(cgrect: CGRect, orgW: Double, orgH: Double) -> CGRect {
         detectionCGRectToCropping(
             detX: Double(cgrect.origin.x),
@@ -122,6 +86,7 @@ class Utils {
             orgH: orgH)
     }
     
+    /// convert coreML detection coordinates to CGRect with a standard coordinate system
     static func detectionCGRectToCropping(detX: Double, detY: Double, detW: Double, detH: Double, orgW: Double, orgH: Double) -> CGRect {
         var xScale = orgW / orgH
         var yScale = orgH / orgW
@@ -131,9 +96,6 @@ class Utils {
         } else {
             xScale = 1
         }
-        
-//        let xScale = 1.0
-//        let yScale = 1.0
         
         let detectionRectangle = CGRect(x: orgW * (detX - (detW / xScale) / 2),
                                         y: orgH * (detY - (detH / yScale) / 2),
@@ -145,6 +107,7 @@ class Utils {
         return detectionSquare
     }
     
+    /// turn a CGRect into a square keeping the bee inside and possibly in the middle
     static private func squarify(rect: CGRect, maxWidth: CGFloat, maxHeight: CGFloat) -> CGRect {
         // x, y are top left corned of the rect
         
