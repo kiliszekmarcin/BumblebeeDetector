@@ -43,6 +43,7 @@
 		D3A02C7A2624B99400D3BB9A /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D342E4E52611DF8D006AA53F /* Requests.swift */; };
 		D3A02C832624BAFE00D3BB9A /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A02C822624BAFE00D3BB9A /* Prediction.swift */; };
 		D3A02C862624BB0400D3BB9A /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A02C822624BAFE00D3BB9A /* Prediction.swift */; };
+		D3A02C9B2624BD2E00D3BB9A /* BumblebeeDetectorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A02C9A2624BD2E00D3BB9A /* BumblebeeDetectorUITests.swift */; };
 		D3A2F647260E06D5006237B0 /* ImageQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2F646260E06D5006237B0 /* ImageQuality.swift */; };
 		D3A441E525DEF961003EFAEC /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A441E425DEF961003EFAEC /* FilledButton.swift */; };
 		D3B1975D25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */; };
@@ -59,6 +60,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		D31ECC91262471F9009EC1DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D30352E325A4F0700049C77C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D30352EA25A4F0700049C77C;
+			remoteInfo = BumblebeeDetector;
+		};
+		D3A02C922624BCFD00D3BB9A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D30352E325A4F0700049C77C /* Project object */;
 			proxyType = 1;
@@ -97,6 +105,9 @@
 		D3875A0925B0A097002C1B80 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		D3A02C6C2624B4B900D3BB9A /* test_video.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test_video.MOV; sourceTree = "<group>"; };
 		D3A02C822624BAFE00D3BB9A /* Prediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
+		D3A02C8D2624BCFD00D3BB9A /* BumblebeeDetectorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BumblebeeDetectorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3A02C912624BCFD00D3BB9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3A02C9A2624BD2E00D3BB9A /* BumblebeeDetectorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BumblebeeDetectorUITests.swift; sourceTree = "<group>"; };
 		D3A2F646260E06D5006237B0 /* ImageQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageQuality.swift; sourceTree = "<group>"; };
 		D3A441E425DEF961003EFAEC /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
 		D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BumblebeeModelNew.mlmodel; sourceTree = "<group>"; };
@@ -127,6 +138,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D3A02C8A2624BCFD00D3BB9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -135,6 +153,7 @@
 			children = (
 				D30352ED25A4F0700049C77C /* BumblebeeDetector */,
 				D31ECC8D262471F9009EC1DE /* BumblebeeDetectorTests */,
+				D3A02C8E2624BCFD00D3BB9A /* BumblebeeDetectorUITests */,
 				D30352EC25A4F0700049C77C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -144,6 +163,7 @@
 			children = (
 				D30352EB25A4F0700049C77C /* BumblebeeDetector.app */,
 				D31ECC8C262471F9009EC1DE /* BumblebeeDetectorTests.xctest */,
+				D3A02C8D2624BCFD00D3BB9A /* BumblebeeDetectorUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,6 +212,15 @@
 				D3A02C6C2624B4B900D3BB9A /* test_video.MOV */,
 			);
 			path = Test_files;
+			sourceTree = "<group>";
+		};
+		D3A02C8E2624BCFD00D3BB9A /* BumblebeeDetectorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D3A02C9A2624BD2E00D3BB9A /* BumblebeeDetectorUITests.swift */,
+				D3A02C912624BCFD00D3BB9A /* Info.plist */,
+			);
+			path = BumblebeeDetectorUITests;
 			sourceTree = "<group>";
 		};
 		D3D0B42625A51A370011E322 /* Views */ = {
@@ -290,6 +319,24 @@
 			productReference = D31ECC8C262471F9009EC1DE /* BumblebeeDetectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D3A02C8C2624BCFD00D3BB9A /* BumblebeeDetectorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D3A02C942624BCFD00D3BB9A /* Build configuration list for PBXNativeTarget "BumblebeeDetectorUITests" */;
+			buildPhases = (
+				D3A02C892624BCFD00D3BB9A /* Sources */,
+				D3A02C8A2624BCFD00D3BB9A /* Frameworks */,
+				D3A02C8B2624BCFD00D3BB9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D3A02C932624BCFD00D3BB9A /* PBXTargetDependency */,
+			);
+			name = BumblebeeDetectorUITests;
+			productName = BumblebeeDetectorUITests;
+			productReference = D3A02C8D2624BCFD00D3BB9A /* BumblebeeDetectorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -303,6 +350,10 @@
 						CreatedOnToolsVersion = 12.3;
 					};
 					D31ECC8B262471F9009EC1DE = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = D30352EA25A4F0700049C77C;
+					};
+					D3A02C8C2624BCFD00D3BB9A = {
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = D30352EA25A4F0700049C77C;
 					};
@@ -326,6 +377,7 @@
 			targets = (
 				D30352EA25A4F0700049C77C /* BumblebeeDetector */,
 				D31ECC8B262471F9009EC1DE /* BumblebeeDetectorTests */,
+				D3A02C8C2624BCFD00D3BB9A /* BumblebeeDetectorUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -350,6 +402,13 @@
 				D31ECCAF26247549009EC1DE /* bee.png in Resources */,
 				D31ECCAC26247546009EC1DE /* bee_square.png in Resources */,
 				D3A02C742624B4DD00D3BB9A /* test_video.MOV in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3A02C8B2624BCFD00D3BB9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +468,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D3A02C892624BCFD00D3BB9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3A02C9B2624BD2E00D3BB9A /* BumblebeeDetectorUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -416,6 +483,11 @@
 			isa = PBXTargetDependency;
 			target = D30352EA25A4F0700049C77C /* BumblebeeDetector */;
 			targetProxy = D31ECC91262471F9009EC1DE /* PBXContainerItemProxy */;
+		};
+		D3A02C932624BCFD00D3BB9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D30352EA25A4F0700049C77C /* BumblebeeDetector */;
+			targetProxy = D3A02C922624BCFD00D3BB9A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -622,6 +694,46 @@
 			};
 			name = Release;
 		};
+		D3A02C952624BCFD00D3BB9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C6HZNQKNS3;
+				INFOPLIST_FILE = BumblebeeDetectorUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = test.BumblebeeDetectorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BumblebeeDetector;
+			};
+			name = Debug;
+		};
+		D3A02C962624BCFD00D3BB9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C6HZNQKNS3;
+				INFOPLIST_FILE = BumblebeeDetectorUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = test.BumblebeeDetectorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BumblebeeDetector;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -648,6 +760,15 @@
 			buildConfigurations = (
 				D31ECC93262471F9009EC1DE /* Debug */,
 				D31ECC94262471F9009EC1DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D3A02C942624BCFD00D3BB9A /* Build configuration list for PBXNativeTarget "BumblebeeDetectorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3A02C952624BCFD00D3BB9A /* Debug */,
+				D3A02C962624BCFD00D3BB9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
