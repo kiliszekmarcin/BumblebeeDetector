@@ -34,10 +34,3 @@ extension BumblebeeEdit {
         self.predictions = bumblebee.predictions
     }
 }
-
-struct Prediction: Identifiable, Hashable {
-    var id = UUID().uuidString
-
-    var species: String
-    var confidence: Double
-}

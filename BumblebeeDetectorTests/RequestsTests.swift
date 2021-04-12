@@ -9,23 +9,35 @@ import XCTest
 
 class RequestsTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testSendImages_oneImage() throws {
+        if let beeImage = UIImage(named: "bee_square", in: Bundle(for: type(of: self)), compatibleWith: nil) {
+            // Create an expectation
+            let expectation = self.expectation(description: "Sending a request")
+            var predictions: [Prediction] = []
+            
+            Requests.sendImages(images: [beeImage]) { json in
+                // parse json into the classifications array
+                if let jsonDict = json as? [String: Any] {
+                    if let jsonDeeper = jsonDict["pred"] as? [Any] {
+                        for item in jsonDeeper {
+                            if let item = item as? [Any] {
+                                let species = item[0] as! String
+                                let confidence = item[1] as! Double
+                                
+                                predictions.append(Prediction(species: species, confidence: confidence))
+                            }
+                        }
+                    }
+                }
+                
+                expectation.fulfill()
+            }
+            
+            waitForExpectations(timeout: 65, handler: nil)
+            
+            XCTAssertFalse(predictions.isEmpty)
+        } else {
+            XCTFail("Failed to load the test image")
         }
     }
 

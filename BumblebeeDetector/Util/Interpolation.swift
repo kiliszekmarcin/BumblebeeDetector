@@ -96,7 +96,7 @@ class Interpolation {
     }
     
     /// detect a bee in the specified time
-    func detectBeeAtTime(time: Double) -> CGRect? {
+    private func detectBeeAtTime(time: Double) -> CGRect? {
         do {
             let time = CMTimeMakeWithSeconds(Float64(time), preferredTimescale: 600)
             let img = try generator.copyCGImage(at: time, actualTime: nil)
@@ -111,7 +111,7 @@ class Interpolation {
     }
     
     /// detect a bee on an image
-    func detectBeeOnImage(cgimage: CGImage) -> CGRect? {
+    private func detectBeeOnImage(cgimage: CGImage) -> CGRect? {
         do {
             let modelInput = try BumblebeeModelInput.init(imageWith: cgimage, iouThreshold: nil, confidenceThreshold: nil)
             let prediction = try model.prediction(input: modelInput)
@@ -131,7 +131,7 @@ class Interpolation {
     }
     
     /// interpolate values in the array
-    func interpolate(coordinates: [CGRect?], times: [Double], threshold: CGFloat) -> [CGRect?] {
+    private func interpolate(coordinates: [CGRect?], times: [Double], threshold: CGFloat) -> [CGRect?] {
         if coordinates.isEmpty {
             return []
         }

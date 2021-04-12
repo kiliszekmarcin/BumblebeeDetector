@@ -9,32 +9,24 @@ import XCTest
 import CoreLocation
 
 class UtilsTests: XCTestCase {
+    
+    func testGetVideoMetadata() throws {
+        if let videoUrlString = Bundle(for: type(of: self)).path(forResource: "test_video", ofType: "MOV") {
+            let videoUrl = URL(fileURLWithPath: videoUrlString)
+            
+            var firstFrame: UIImage? = nil
+            var location: CLLocationCoordinate2D? = nil
+            var date: Date? = nil
+            
+            (firstFrame, location, date) = Utils.getVideoMetadata(url: videoUrl)
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+            XCTAssertNotNil(firstFrame)
+            XCTAssertNotNil(location)
+            XCTAssertNotNil(date)
+        } else {
+            XCTFail("Failed to load the test video")
+        }
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-//    func testGetVideoMetadata() throws {
-//        if let videoUrlString = Bundle(for: type(of: self)).path(forResource: "test_video", ofType: "MOV"), let videoUrl = URL(string: videoUrlString) {
-//            var firstFrame: UIImage? = nil
-//            var location: CLLocationCoordinate2D? = nil
-//            var date: Date? = nil
-//
-//            print(videoUrl)
-//
-//            (firstFrame, location, date) = Utils.getVideoMetadata(url: videoUrl)
-//
-//            print(firstFrame)
-//            print(location)
-//            print(date)
-//        } else {
-//            XCTFail("Can't load the test video")
-//        }
-//    }
     
     func testIsoToLocation() throws {
         let isoString = "+53.3717-001.4980+122.192/"
@@ -42,7 +34,7 @@ class UtilsTests: XCTestCase {
         
         let testLocation = Utils.iso6709ToCLLocationCoordinate2D(locationString: isoString)
         
-        XCTAssert(correctLocation.latitude == testLocation?.latitude
+        XCTAssertTrue(correctLocation.latitude == testLocation?.latitude
                     && correctLocation.longitude == testLocation?.longitude)
     }
     

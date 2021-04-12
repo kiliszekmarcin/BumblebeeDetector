@@ -17,8 +17,6 @@
 		D31ECCAC26247546009EC1DE /* bee_square.png in Resources */ = {isa = PBXBuildFile; fileRef = D31ECCA2262474DA009EC1DE /* bee_square.png */; };
 		D31ECCAF26247549009EC1DE /* bee.png in Resources */ = {isa = PBXBuildFile; fileRef = D31ECCA1262474DA009EC1DE /* bee.png */; };
 		D31ECCB5262475D1009EC1DE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B23D7C25A6532700C67B68 /* Utils.swift */; };
-		D31ECCBE2624768B009EC1DE /* test_video.MOV in Resources */ = {isa = PBXBuildFile; fileRef = D31ECCBD2624768B009EC1DE /* test_video.MOV */; };
-		D31ECCC526247709009EC1DE /* test_video.MOV in Resources */ = {isa = PBXBuildFile; fileRef = D31ECCBD2624768B009EC1DE /* test_video.MOV */; };
 		D31ECCC926247D86009EC1DE /* LocalisationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31ECCC826247D86009EC1DE /* LocalisationTests.swift */; };
 		D31ECCCD26247D93009EC1DE /* RequestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31ECCCC26247D93009EC1DE /* RequestsTests.swift */; };
 		D31ECCD126247DA2009EC1DE /* ImageQualityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31ECCD026247DA2009EC1DE /* ImageQualityTests.swift */; };
@@ -39,6 +37,12 @@
 		D37A622A25EF12EC00163207 /* PhotoSelectActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */; };
 		D37A624725EF334E00163207 /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A624625EF334E00163207 /* PagingView.swift */; };
 		D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3875A0925B0A097002C1B80 /* AnimationView.swift */; };
+		D3A02C6D2624B4BA00D3BB9A /* test_video.MOV in Resources */ = {isa = PBXBuildFile; fileRef = D3A02C6C2624B4B900D3BB9A /* test_video.MOV */; };
+		D3A02C742624B4DD00D3BB9A /* test_video.MOV in Resources */ = {isa = PBXBuildFile; fileRef = D3A02C6C2624B4B900D3BB9A /* test_video.MOV */; };
+		D3A02C772624B5DA00D3BB9A /* Interpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B4D65B25F53880009F68AC /* Interpolation.swift */; };
+		D3A02C7A2624B99400D3BB9A /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D342E4E52611DF8D006AA53F /* Requests.swift */; };
+		D3A02C832624BAFE00D3BB9A /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A02C822624BAFE00D3BB9A /* Prediction.swift */; };
+		D3A02C862624BB0400D3BB9A /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A02C822624BAFE00D3BB9A /* Prediction.swift */; };
 		D3A2F647260E06D5006237B0 /* ImageQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2F646260E06D5006237B0 /* ImageQuality.swift */; };
 		D3A441E525DEF961003EFAEC /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A441E425DEF961003EFAEC /* FilledButton.swift */; };
 		D3B1975D25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */; };
@@ -75,7 +79,6 @@
 		D31ECC9D262473F0009EC1DE /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
 		D31ECCA1262474DA009EC1DE /* bee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bee.png; sourceTree = "<group>"; };
 		D31ECCA2262474DA009EC1DE /* bee_square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bee_square.png; sourceTree = "<group>"; };
-		D31ECCBD2624768B009EC1DE /* test_video.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test_video.MOV; sourceTree = "<group>"; };
 		D31ECCC826247D86009EC1DE /* LocalisationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalisationTests.swift; sourceTree = "<group>"; };
 		D31ECCCC26247D93009EC1DE /* RequestsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsTests.swift; sourceTree = "<group>"; };
 		D31ECCD026247DA2009EC1DE /* ImageQualityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageQualityTests.swift; sourceTree = "<group>"; };
@@ -92,6 +95,8 @@
 		D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectActionSheet.swift; sourceTree = "<group>"; };
 		D37A624625EF334E00163207 /* PagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingView.swift; sourceTree = "<group>"; };
 		D3875A0925B0A097002C1B80 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		D3A02C6C2624B4B900D3BB9A /* test_video.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test_video.MOV; sourceTree = "<group>"; };
+		D3A02C822624BAFE00D3BB9A /* Prediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
 		D3A2F646260E06D5006237B0 /* ImageQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageQuality.swift; sourceTree = "<group>"; };
 		D3A441E425DEF961003EFAEC /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
 		D3B1975C25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BumblebeeModelNew.mlmodel; sourceTree = "<group>"; };
@@ -184,7 +189,7 @@
 			children = (
 				D31ECCA2262474DA009EC1DE /* bee_square.png */,
 				D31ECCA1262474DA009EC1DE /* bee.png */,
-				D31ECCBD2624768B009EC1DE /* test_video.MOV */,
+				D3A02C6C2624B4B900D3BB9A /* test_video.MOV */,
 			);
 			path = Test_files;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				D3D0B42225A511950011E322 /* BumblebeeEdit.swift */,
+				D3A02C822624BAFE00D3BB9A /* Prediction.swift */,
 				D350A90A25E6C4C600CE31DF /* Bumblebee+CoreDataClass.swift */,
 				D350A90B25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift */,
 				D350A8C425E6C01800CE31DF /* Detector.xcdatamodeld */,
@@ -329,7 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D31ECCBE2624768B009EC1DE /* test_video.MOV in Resources */,
+				D3A02C6D2624B4BA00D3BB9A /* test_video.MOV in Resources */,
 				D30352F625A4F0710049C77C /* Preview Assets.xcassets in Resources */,
 				D31ECCA4262474DA009EC1DE /* bee_square.png in Resources */,
 				D31ECCA3262474DA009EC1DE /* bee.png in Resources */,
@@ -343,7 +349,7 @@
 			files = (
 				D31ECCAF26247549009EC1DE /* bee.png in Resources */,
 				D31ECCAC26247546009EC1DE /* bee_square.png in Resources */,
-				D31ECCC526247709009EC1DE /* test_video.MOV in Resources */,
+				D3A02C742624B4DD00D3BB9A /* test_video.MOV in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +362,7 @@
 			files = (
 				D366246A25DF03B300241EF7 /* LoadingIndicator.swift in Sources */,
 				D3D0B3F825A4FE860011E322 /* ImagePicker.swift in Sources */,
+				D3A02C832624BAFE00D3BB9A /* Prediction.swift in Sources */,
 				D3B1975D25E6983F006CDBB4 /* BumblebeeModelNew.mlmodel in Sources */,
 				D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */,
 				D3D0B42B25A51A560011E322 /* AddBeeView.swift in Sources */,
@@ -387,12 +394,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3A02C772624B5DA00D3BB9A /* Interpolation.swift in Sources */,
 				D31ECCD526247DB0009EC1DE /* InterpolationTests.swift in Sources */,
+				D3A02C7A2624B99400D3BB9A /* Requests.swift in Sources */,
 				D31ECCC926247D86009EC1DE /* LocalisationTests.swift in Sources */,
 				D31ECCE02624815F009EC1DE /* BumblebeeModel.mlmodel in Sources */,
 				D31ECCDD26248088009EC1DE /* Localisation.swift in Sources */,
 				D31ECCCD26247D93009EC1DE /* RequestsTests.swift in Sources */,
 				D31ECC9E262473F0009EC1DE /* UtilsTests.swift in Sources */,
+				D3A02C862624BB0400D3BB9A /* Prediction.swift in Sources */,
 				D31ECCB5262475D1009EC1DE /* Utils.swift in Sources */,
 				D31ECCD126247DA2009EC1DE /* ImageQualityTests.swift in Sources */,
 				D31ECCE3262482E4009EC1DE /* ImageQuality.swift in Sources */,

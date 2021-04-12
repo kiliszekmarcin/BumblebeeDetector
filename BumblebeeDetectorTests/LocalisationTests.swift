@@ -8,23 +8,38 @@
 import XCTest
 
 class LocalisationTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    private var sut: BeeLocaliser!
+    
+    override func setUp() {
+        super.setUp()
+        sut = BeeLocaliser()
+    }
+    
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testDetectBee() throws {
+    func testDetectBeeOnImage() throws {
         if let beeImage = UIImage(named: "bee", in: Bundle(for: type(of: self)), compatibleWith: nil)?.cgImage {
-            let localiser = BeeLocaliser()
-            let testImage = localiser.detectBee(onImage: beeImage)
+            let testImage = sut.detectBee(onImage: beeImage)
             
             XCTAssertNotNil(testImage)
         } else {
             XCTFail("Failed to load the test image")
+        }
+    }
+    
+    func testDetectBeeOnVideo() throws {
+        if let beeVideoUrlString = Bundle(for: type(of: self)).path(forResource: "test_video", ofType: "MOV") {
+            let beeVideoUrl = URL(fileURLWithPath: beeVideoUrlString)
+            
+            let detections = sut.detectBee(onVideo: beeVideoUrl, fps: 1)
+            
+            XCTAssertFalse(detections.isEmpty)
+        } else {
+            XCTFail("Failed to load the test video")
         }
     }
 
