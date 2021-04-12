@@ -11,6 +11,14 @@
 		D30352F125A4F0700049C77C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30352F025A4F0700049C77C /* ContentView.swift */; };
 		D30352F325A4F0710049C77C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30352F225A4F0710049C77C /* Assets.xcassets */; };
 		D30352F625A4F0710049C77C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30352F525A4F0710049C77C /* Preview Assets.xcassets */; };
+		D31ECC9E262473F0009EC1DE /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31ECC9D262473F0009EC1DE /* UtilsTests.swift */; };
+		D31ECCA3262474DA009EC1DE /* bee.png in Resources */ = {isa = PBXBuildFile; fileRef = D31ECCA1262474DA009EC1DE /* bee.png */; };
+		D31ECCA4262474DA009EC1DE /* bee_square.png in Resources */ = {isa = PBXBuildFile; fileRef = D31ECCA2262474DA009EC1DE /* bee_square.png */; };
+		D31ECCAC26247546009EC1DE /* bee_square.png in Resources */ = {isa = PBXBuildFile; fileRef = D31ECCA2262474DA009EC1DE /* bee_square.png */; };
+		D31ECCAF26247549009EC1DE /* bee.png in Resources */ = {isa = PBXBuildFile; fileRef = D31ECCA1262474DA009EC1DE /* bee.png */; };
+		D31ECCB5262475D1009EC1DE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B23D7C25A6532700C67B68 /* Utils.swift */; };
+		D31ECCBE2624768B009EC1DE /* test_video.MOV in Resources */ = {isa = PBXBuildFile; fileRef = D31ECCBD2624768B009EC1DE /* test_video.MOV */; };
+		D31ECCC526247709009EC1DE /* test_video.MOV in Resources */ = {isa = PBXBuildFile; fileRef = D31ECCBD2624768B009EC1DE /* test_video.MOV */; };
 		D325D9532614EED800119C5B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D325D9522614EED800119C5B /* Alamofire */; };
 		D342E4E62611DF8D006AA53F /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D342E4E52611DF8D006AA53F /* Requests.swift */; };
 		D34FAF8D25EEDD0600AB3725 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34FAF8C25EEDD0600AB3725 /* MapView.swift */; };
@@ -38,6 +46,16 @@
 		D3E1799425F6C66300102C30 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E1799325F6C66300102C30 /* ShareSheet.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D31ECC91262471F9009EC1DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D30352E325A4F0700049C77C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D30352EA25A4F0700049C77C;
+			remoteInfo = BumblebeeDetector;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		D30352EB25A4F0700049C77C /* BumblebeeDetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BumblebeeDetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30352EE25A4F0700049C77C /* BumblebeeDetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BumblebeeDetectorApp.swift; sourceTree = "<group>"; };
@@ -45,6 +63,12 @@
 		D30352F225A4F0710049C77C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D30352F525A4F0710049C77C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D30352F725A4F0710049C77C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D31ECC8C262471F9009EC1DE /* BumblebeeDetectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BumblebeeDetectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D31ECC90262471F9009EC1DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D31ECC9D262473F0009EC1DE /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
+		D31ECCA1262474DA009EC1DE /* bee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bee.png; sourceTree = "<group>"; };
+		D31ECCA2262474DA009EC1DE /* bee_square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bee_square.png; sourceTree = "<group>"; };
+		D31ECCBD2624768B009EC1DE /* test_video.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test_video.MOV; sourceTree = "<group>"; };
 		D342E4E52611DF8D006AA53F /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		D34FAF8C25EEDD0600AB3725 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		D350A8C525E6C01800CE31DF /* Bumblebee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bumblebee.xcdatamodel; sourceTree = "<group>"; };
@@ -80,6 +104,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D31ECC89262471F9009EC1DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -87,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				D30352ED25A4F0700049C77C /* BumblebeeDetector */,
+				D31ECC8D262471F9009EC1DE /* BumblebeeDetectorTests */,
 				D30352EC25A4F0700049C77C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				D30352EB25A4F0700049C77C /* BumblebeeDetector.app */,
+				D31ECC8C262471F9009EC1DE /* BumblebeeDetectorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,6 +142,7 @@
 				D30352F225A4F0710049C77C /* Assets.xcassets */,
 				D30352F725A4F0710049C77C /* Info.plist */,
 				D30352F425A4F0710049C77C /* Preview Content */,
+				D31ECC98262473A0009EC1DE /* Test_files */,
 			);
 			path = BumblebeeDetector;
 			sourceTree = "<group>";
@@ -119,6 +153,25 @@
 				D30352F525A4F0710049C77C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D31ECC8D262471F9009EC1DE /* BumblebeeDetectorTests */ = {
+			isa = PBXGroup;
+			children = (
+				D31ECC9D262473F0009EC1DE /* UtilsTests.swift */,
+				D31ECC90262471F9009EC1DE /* Info.plist */,
+			);
+			path = BumblebeeDetectorTests;
+			sourceTree = "<group>";
+		};
+		D31ECC98262473A0009EC1DE /* Test_files */ = {
+			isa = PBXGroup;
+			children = (
+				D31ECCA2262474DA009EC1DE /* bee_square.png */,
+				D31ECCA1262474DA009EC1DE /* bee.png */,
+				D31ECCBD2624768B009EC1DE /* test_video.MOV */,
+			);
+			path = Test_files;
 			sourceTree = "<group>";
 		};
 		D3D0B42625A51A370011E322 /* Views */ = {
@@ -148,6 +201,8 @@
 		D3DB09ED25DEDF96001E76AA /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D3D0B3F725A4FE860011E322 /* ImagePicker.swift */,
+				D3875A0925B0A097002C1B80 /* AnimationView.swift */,
 				D3DB09EF25DEE04C001E76AA /* ProfilePictureAndBackground.swift */,
 				D366246925DF03B300241EF7 /* LoadingIndicator.swift */,
 				D3A441E425DEF961003EFAEC /* FilledButton.swift */,
@@ -169,8 +224,6 @@
 				D3D1918825D2E98300DD9161 /* Localisation.swift */,
 				D3A2F646260E06D5006237B0 /* ImageQuality.swift */,
 				D3B4D65B25F53880009F68AC /* Interpolation.swift */,
-				D3D0B3F725A4FE860011E322 /* ImagePicker.swift */,
-				D3875A0925B0A097002C1B80 /* AnimationView.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -198,17 +251,39 @@
 			productReference = D30352EB25A4F0700049C77C /* BumblebeeDetector.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D31ECC8B262471F9009EC1DE /* BumblebeeDetectorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D31ECC95262471F9009EC1DE /* Build configuration list for PBXNativeTarget "BumblebeeDetectorTests" */;
+			buildPhases = (
+				D31ECC88262471F9009EC1DE /* Sources */,
+				D31ECC89262471F9009EC1DE /* Frameworks */,
+				D31ECC8A262471F9009EC1DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D31ECC92262471F9009EC1DE /* PBXTargetDependency */,
+			);
+			name = BumblebeeDetectorTests;
+			productName = BumblebeeDetectorTests;
+			productReference = D31ECC8C262471F9009EC1DE /* BumblebeeDetectorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		D30352E325A4F0700049C77C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					D30352EA25A4F0700049C77C = {
 						CreatedOnToolsVersion = 12.3;
+					};
+					D31ECC8B262471F9009EC1DE = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = D30352EA25A4F0700049C77C;
 					};
 				};
 			};
@@ -229,6 +304,7 @@
 			projectRoot = "";
 			targets = (
 				D30352EA25A4F0700049C77C /* BumblebeeDetector */,
+				D31ECC8B262471F9009EC1DE /* BumblebeeDetectorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -238,8 +314,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D31ECCBE2624768B009EC1DE /* test_video.MOV in Resources */,
 				D30352F625A4F0710049C77C /* Preview Assets.xcassets in Resources */,
+				D31ECCA4262474DA009EC1DE /* bee_square.png in Resources */,
+				D31ECCA3262474DA009EC1DE /* bee.png in Resources */,
 				D30352F325A4F0710049C77C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D31ECC8A262471F9009EC1DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D31ECCAF26247549009EC1DE /* bee.png in Resources */,
+				D31ECCAC26247546009EC1DE /* bee_square.png in Resources */,
+				D31ECCC526247709009EC1DE /* test_video.MOV in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,7 +368,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D31ECC88262471F9009EC1DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D31ECC9E262473F0009EC1DE /* UtilsTests.swift in Sources */,
+				D31ECCB5262475D1009EC1DE /* Utils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D31ECC92262471F9009EC1DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D30352EA25A4F0700049C77C /* BumblebeeDetector */;
+			targetProxy = D31ECC91262471F9009EC1DE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D30352F825A4F0710049C77C /* Debug */ = {
@@ -442,6 +548,48 @@
 			};
 			name = Release;
 		};
+		D31ECC93262471F9009EC1DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C6HZNQKNS3;
+				INFOPLIST_FILE = BumblebeeDetectorTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = test.BumblebeeDetectorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BumblebeeDetector.app/BumblebeeDetector";
+			};
+			name = Debug;
+		};
+		D31ECC94262471F9009EC1DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C6HZNQKNS3;
+				INFOPLIST_FILE = BumblebeeDetectorTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = test.BumblebeeDetectorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BumblebeeDetector.app/BumblebeeDetector";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -459,6 +607,15 @@
 			buildConfigurations = (
 				D30352FB25A4F0710049C77C /* Debug */,
 				D30352FC25A4F0710049C77C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D31ECC95262471F9009EC1DE /* Build configuration list for PBXNativeTarget "BumblebeeDetectorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D31ECC93262471F9009EC1DE /* Debug */,
+				D31ECC94262471F9009EC1DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
