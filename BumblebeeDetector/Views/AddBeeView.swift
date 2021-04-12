@@ -189,9 +189,6 @@ extension AddBeeView {
                     newBee.profileImage = firstImage
                 }
                 
-                // get the background image
-                newBee.backgroundImage = localiser.getFirstFrame()
-                
                 self.detections = localiser.frames
                 self.interpolations = 0
                 self.time = -detectionStart.timeIntervalSinceNow

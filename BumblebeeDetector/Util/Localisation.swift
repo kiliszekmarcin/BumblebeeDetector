@@ -94,10 +94,6 @@ class BeeLocaliser {
         
         return detections
     }
-    
-    func getFirstFrame() -> UIImage? {
-        return self.firstFrame
-    }
 }
 
 
