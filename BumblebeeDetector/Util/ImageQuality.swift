@@ -41,7 +41,7 @@ class ImageQuality {
     }
     
     /// applies a convolution filter to an image and returns the convolved image, standard derivation and mean
-    func convolutionFilterToStDev(image: UIImage, kernel: [Int16], divisor: Int) -> (UIImage, Double, Double) {
+    private func convolutionFilterToStDev(image: UIImage, kernel: [Int16], divisor: Int) -> (UIImage, Double, Double) {
         precondition(kernel.count == 9 || kernel.count == 25 || kernel.count == 49, "Kernel size must be 3x3, 5x5 or 7x7.")
         
         let kernelSide = UInt32(sqrt(Float(kernel.count)))
@@ -78,7 +78,7 @@ class ImageQuality {
     }
     
     /// calculate standard deviation and mean of an edge image
-    func getStDevAndMean(data: UnsafeMutableRawPointer,
+    private func getStDevAndMean(data: UnsafeMutableRawPointer,
                       rowBytes: Int,
                       width: Int, height: Int,
                       orientation: UInt32? ) -> (Double, Double) {

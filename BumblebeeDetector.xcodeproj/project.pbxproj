@@ -25,6 +25,7 @@
 		D31ECCD526247DB0009EC1DE /* InterpolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31ECCD426247DB0009EC1DE /* InterpolationTests.swift */; };
 		D31ECCDD26248088009EC1DE /* Localisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D1918825D2E98300DD9161 /* Localisation.swift */; };
 		D31ECCE02624815F009EC1DE /* BumblebeeModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42E25A523010011E322 /* BumblebeeModel.mlmodel */; };
+		D31ECCE3262482E4009EC1DE /* ImageQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2F646260E06D5006237B0 /* ImageQuality.swift */; };
 		D325D9532614EED800119C5B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D325D9522614EED800119C5B /* Alamofire */; };
 		D342E4E62611DF8D006AA53F /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D342E4E52611DF8D006AA53F /* Requests.swift */; };
 		D34FAF8D25EEDD0600AB3725 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34FAF8C25EEDD0600AB3725 /* MapView.swift */; };
@@ -394,6 +395,7 @@
 				D31ECC9E262473F0009EC1DE /* UtilsTests.swift in Sources */,
 				D31ECCB5262475D1009EC1DE /* Utils.swift in Sources */,
 				D31ECCD126247DA2009EC1DE /* ImageQualityTests.swift in Sources */,
+				D31ECCE3262482E4009EC1DE /* ImageQuality.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
