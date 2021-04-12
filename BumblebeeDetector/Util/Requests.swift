@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 
 class Requests {
-    static func sendImages(images: [UIImage], imagesToSend: Int, method: Method, completion: @escaping (_ json: Any?)->()) -> [UIImage] {
+    static func sendImages(images: [UIImage], imagesToSend: Int = 5, method: Method = .evenlySpaced, completion: @escaping (_ json: Any?)->()) -> [UIImage] {
         let url = URL(string: "http://3.249.81.168/api/image")!
         let selectedImages = selectionMethod(images: images, howMany: imagesToSend, method: method)
         
@@ -41,6 +41,10 @@ class Requests {
     
     /// Selects which images will be sent to the API
     static func selectionMethod(images: [UIImage], howMany: Int, method: Method) -> [UIImage] {
+        if images.count <= howMany {
+            return images
+        }
+        
         switch method {
         case .evenlySpaced:
             // baseline: evenly spaced items

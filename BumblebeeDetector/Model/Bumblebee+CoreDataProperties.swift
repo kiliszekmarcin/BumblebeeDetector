@@ -60,11 +60,29 @@ extension Bumblebee {
     
     var detections: [UIImage] {
         set {
-            detectionsData = Utils.coreDataObjectFromImages(images: newValue)
+            let dataArray = NSMutableArray()
+            
+            for img in newValue {
+                if let data = img.pngData() {
+                    dataArray.add(data)
+                }
+            }
+            
+            detectionsData = try? NSKeyedArchiver.archivedData(withRootObject: dataArray, requiringSecureCoding: true)
         }
         get {
             if let imageData = detectionsData {
-                return Utils.imagesFromCoreData(object: imageData) ?? []
+                var imageArray = [UIImage]()
+                
+                if let dataArray = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: imageData) {
+                    for data in dataArray {
+                        if let data = data as? Data, let image = UIImage(data: data) {
+                            imageArray.append(image)
+                        }
+                    }
+                }
+                
+                return imageArray
             }
             
             return []

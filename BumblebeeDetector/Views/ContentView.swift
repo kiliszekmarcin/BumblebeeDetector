@@ -41,7 +41,7 @@ struct ContentView: View {
                 trailing:
                 NavigationLink(destination: AddBeeView()) {
                     Image(systemName: "plus")
-                }
+                }.accessibility(identifier: "Add new bee")
             )
         }
     }

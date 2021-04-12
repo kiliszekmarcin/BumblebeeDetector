@@ -20,13 +20,13 @@ struct PersistenceController {
             newItem.profileImageData = (UIImage(named: "frame1")?.jpegData(compressionQuality: 1))!
             newItem.backgroundImageData = UIImage(named: "background")?.jpegData(compressionQuality: 1)
             newItem.date = Date()
-            newItem.detectionsData = Utils.coreDataObjectFromImages(images: [
+            newItem.detections =  [
                 UIImage(named: "frame1.png")!,
                 UIImage(named: "frame2.png")!,
                 UIImage(named: "frame3.png")!,
                 UIImage(named: "frame4.png")!,
                 UIImage(named: "frame5.png")!
-            ])
+            ]
             newItem.predictions = [
                 Prediction(species: "Bombus hortorum", confidence: 0.568412),
                 Prediction(species: "Bombus sylvestris", confidence: 0.18754341)

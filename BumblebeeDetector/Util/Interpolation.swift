@@ -35,6 +35,7 @@ class Interpolation {
         }
     }
     
+    /// use interpolation to detect bee on the video
     func detectByInterpolation(fps: Double, threshold: CGFloat) -> [UIImage] {
         // initialise arrays to store the data
         let times: [Double] = Array(stride(from: 0.0, to: duration, by: 1/fps))
@@ -94,7 +95,8 @@ class Interpolation {
         return detections
     }
     
-    func detectBeeAtTime(time: Double) -> CGRect? {
+    /// detect a bee in the specified time
+    private func detectBeeAtTime(time: Double) -> CGRect? {
         do {
             let time = CMTimeMakeWithSeconds(Float64(time), preferredTimescale: 600)
             let img = try generator.copyCGImage(at: time, actualTime: nil)
@@ -108,7 +110,8 @@ class Interpolation {
         return nil
     }
     
-    func detectBeeOnImage(cgimage: CGImage) -> CGRect? {
+    /// detect a bee on an image
+    private func detectBeeOnImage(cgimage: CGImage) -> CGRect? {
         do {
             let modelInput = try BumblebeeModelInput.init(imageWith: cgimage, iouThreshold: nil, confidenceThreshold: nil)
             let prediction = try model.prediction(input: modelInput)
@@ -127,7 +130,8 @@ class Interpolation {
         return nil
     }
     
-    func interpolate(coordinates: [CGRect?], times: [Double], threshold: CGFloat) -> [CGRect?] {
+    /// interpolate values in the array
+    private func interpolate(coordinates: [CGRect?], times: [Double], threshold: CGFloat) -> [CGRect?] {
         if coordinates.isEmpty {
             return []
         }
@@ -243,33 +247,3 @@ class Interpolation {
         return coords
     }
 }
-
-
-/*
- input -> array of optional cgrects, output array of cgrects
- 
- if first == nil {
-    first = detect
- }
- if last == nil {
-    last = detect
- }
- if middle == nil {
-    middle = detect
- }
- 
- if middle - (first + last) / 2  > threshold {
-    array[first:middle] = interpolate
-    array[middle:last] = interpolate
- } else {
-    number_of_steps = input.size - 2
-    step_size = (last - first) / number_of_steps
- 
-    for i in range(1, input.size) {
-        array[i] = first + step_size * i
-    }
- }
- 
- 
- 
- */
