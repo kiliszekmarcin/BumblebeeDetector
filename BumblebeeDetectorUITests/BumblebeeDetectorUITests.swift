@@ -60,7 +60,7 @@ class BumblebeeDetectorUITests: XCTestCase {
         XCTAssert(app.staticTexts["Detected bee:"].waitForExistence(timeout: 30))
         
         // wait for predictions to appear
-        XCTAssert(app.staticTexts["Predictions:"].waitForExistence(timeout: 30))
+        XCTAssert(app.staticTexts["Predictions:"].waitForExistence(timeout: 65))
         
         // check if all elements in place
         XCTAssert(app.maps.firstMatch.exists)
