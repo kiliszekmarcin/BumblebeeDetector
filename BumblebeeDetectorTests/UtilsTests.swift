@@ -48,4 +48,36 @@ class UtilsTests: XCTestCase {
         
         XCTAssert(testOutput == expectedOutput)
     }
+    
+    func testSquarify() throws {
+        // regular
+        var testRect = CGRect(x: 200, y: 200, width: 200, height: 300)
+        var squarified = Utils.squarify(rect: testRect, maxWidth: 1000, maxHeight: 1000)
+        
+        XCTAssert(squarified.width == squarified.height)
+        
+        // won't fit with x
+        testRect = CGRect(x: 0, y: 200, width: 200, height: 300)
+        squarified = Utils.squarify(rect: testRect, maxWidth: 1000, maxHeight: 1000)
+        
+        XCTAssert(squarified.width == squarified.height)
+        
+        // won't fit with y
+        testRect = CGRect(x: 200, y: 0, width: 200, height: 300)
+        squarified = Utils.squarify(rect: testRect, maxWidth: 1000, maxHeight: 1000)
+        
+        XCTAssert(squarified.width == squarified.height)
+        
+        // over max height
+        testRect = CGRect(x: 200, y: 200, width: 900, height: 300)
+        squarified = Utils.squarify(rect: testRect, maxWidth: 1080, maxHeight: 720)
+        
+        XCTAssert(squarified.width == 900 && squarified.height == 720)
+        
+        // over max width
+        testRect = CGRect(x: 200, y: 200, width: 300, height: 900)
+        squarified = Utils.squarify(rect: testRect, maxWidth: 720, maxHeight: 1080)
+        
+        XCTAssert(squarified.width == 720 && squarified.height == 900)
+    }
 }

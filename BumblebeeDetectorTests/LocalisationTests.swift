@@ -23,7 +23,7 @@ class LocalisationTests: XCTestCase {
 
     func testDetectBeeOnImage() throws {
         if let beeImage = UIImage(named: "bee", in: Bundle(for: type(of: self)), compatibleWith: nil)?.cgImage {
-            let testImage = sut.detectBee(onImage: beeImage)
+            let testImage = sut.detectBeeImg(onImage: beeImage)
             
             XCTAssertNotNil(testImage)
         } else {

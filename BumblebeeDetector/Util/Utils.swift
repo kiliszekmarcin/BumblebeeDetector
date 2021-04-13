@@ -108,7 +108,7 @@ class Utils {
     }
     
     /// turn a CGRect into a square keeping the bee inside and possibly in the middle
-    static private func squarify(rect: CGRect, maxWidth: CGFloat, maxHeight: CGFloat) -> CGRect {
+    static func squarify(rect: CGRect, maxWidth: CGFloat, maxHeight: CGFloat) -> CGRect {
         // x, y are top left corned of the rect
         
         // try expanding the rectangle to a square, and then if it doens't fit in bounds, shift it so it does

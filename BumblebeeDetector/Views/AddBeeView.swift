@@ -166,7 +166,7 @@ struct AddBeeView: View {
             ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
         }
         .toolbar {
-            Button("Save") { savePressed() }.disabled(self.newBee.videoURL == nil || self.isShowActivity != "" || self.newBee.predictions.isEmpty)
+            Button("Save") { savePressed() }.disabled(self.newBee.videoURL == nil || self.isShowActivity != "" || self.newBee.detections.isEmpty)
         }
     }
 }
@@ -201,10 +201,11 @@ extension AddBeeView {
                 
                 newBee.detections = localiser.detectBee(onVideo: url, fps: 16)
                 
-                if let firstImage = newBee.detections.first {
-                    newBee.profileImage = firstImage
+                if let profilePic = localiser.profilePicture {
+                    newBee.profileImage = profilePic
                 }
                 
+                self.isShowActivity = ""
                 sendImagesToAPI()
             }
         } else if let photo = newBee.profileImage {
@@ -219,11 +220,15 @@ extension AddBeeView {
                 let localiser = BeeLocaliser()
                 
                 if let cgPhoto = photo.cgImage,
-                   let detection = localiser.detectBee(onImage: cgPhoto) {
+                   let detection = localiser.detectBeeImg(onImage: cgPhoto) {
                     newBee.detections = [detection]
-                    newBee.profileImage = detection
                 }
                 
+                if let profilePic = localiser.profilePicture {
+                    newBee.profileImage = profilePic
+                }
+                
+                self.isShowActivity = ""
                 sendImagesToAPI()
             }
         }

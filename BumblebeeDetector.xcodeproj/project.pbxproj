@@ -56,6 +56,7 @@
 		D3D0B42F25A523010011E322 /* BumblebeeModelOld.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D3D0B42E25A523010011E322 /* BumblebeeModelOld.mlmodel */; };
 		D3D1918925D2E98300DD9161 /* Localisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D1918825D2E98300DD9161 /* Localisation.swift */; };
 		D3DB09F025DEE04C001E76AA /* ProfilePictureAndBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DB09EF25DEE04C001E76AA /* ProfilePictureAndBackground.swift */; };
+		D3E13F4626261C4200A4D966 /* BumblebeeModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D3B1975C25E6983F006CDBB4 /* BumblebeeModel.mlmodel */; };
 		D3E1799425F6C66300102C30 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E1799325F6C66300102C30 /* ShareSheet.swift */; };
 /* End PBXBuildFile section */
 
@@ -464,6 +465,7 @@
 				D31ECC9E262473F0009EC1DE /* UtilsTests.swift in Sources */,
 				D3A02C862624BB0400D3BB9A /* Prediction.swift in Sources */,
 				D31ECCB5262475D1009EC1DE /* Utils.swift in Sources */,
+				D3E13F4626261C4200A4D966 /* BumblebeeModel.mlmodel in Sources */,
 				D31ECCD126247DA2009EC1DE /* ImageQualityTests.swift in Sources */,
 				D3000E4C2624D74600BC4006 /* ImageSimilarity.swift in Sources */,
 				D31ECCE3262482E4009EC1DE /* ImageQuality.swift in Sources */,
