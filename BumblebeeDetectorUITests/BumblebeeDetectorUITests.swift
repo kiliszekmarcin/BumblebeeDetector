@@ -46,7 +46,7 @@ class BumblebeeDetectorUITests: XCTestCase {
         app.buttons["Detect"].tap()
         
         // check if loading displayed
-        XCTAssert(app.staticTexts["Loading"].exists)
+        XCTAssert(app.staticTexts["Detecting"].exists || app.staticTexts["Predicting"].exists)
         
         // fill in the name
         var nameTextField = app.textFields["Enter a nickname"].firstMatch
