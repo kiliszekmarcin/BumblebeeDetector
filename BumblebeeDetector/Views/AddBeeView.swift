@@ -22,7 +22,7 @@ struct AddBeeView: View {
     @State var editedBee: Bumblebee?
     @State var changesToDetections = false
     
-    @State var imagesToSend: Double = 1
+    @State var imagesToSend: Double = 10
     
     @State var selectionMethod: Method = .evenlySpaced
     @State var selectedImages: [UIImage] = []
@@ -122,7 +122,7 @@ struct AddBeeView: View {
                     }
                 }.padding()
                 
-                if newBee.detections.isEmpty {
+                if editedBee == nil {
                     // detection controlls
                     VStack {
                         HStack(spacing: 10.0) {
@@ -166,7 +166,7 @@ struct AddBeeView: View {
             ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
         }
         .toolbar {
-            Button("Save") { savePressed() }.disabled(self.newBee.videoURL == nil || self.isShowActivity != "")
+            Button("Save") { savePressed() }.disabled(self.newBee.videoURL == nil || self.isShowActivity != "" || self.newBee.predictions.isEmpty)
         }
     }
 }
