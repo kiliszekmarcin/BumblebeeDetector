@@ -125,18 +125,29 @@ struct AddBeeView: View {
                         }
                         .padding()
                         .shadow(radius: 7)
-                    }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
-                        ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
                     }
                 }
             }
             .navigationBarTitle(newBee.name == "" ? "Add a new bee" : newBee.name)
             
-        }.modifier(PhotoSelectActionSheet(
-                    presented: $isShowActionSheet,
-                    imagePickerMediaType: $imagePickerMediaType,
-                    isShowImagePicker: $isShowImagePicker
-        ))
+        }.actionSheet(isPresented: $isShowActionSheet) {
+            ActionSheet(
+                title: Text("Select image source"),
+                message: nil,
+                buttons: [
+                    ActionSheet.Button.default(Text("Photo Library"), action: {
+                        self.imagePickerMediaType = .photoLibrary
+                        self.isShowImagePicker = true
+                    }),
+                    ActionSheet.Button.default(Text("Camera"), action: {
+                        self.imagePickerMediaType = .camera
+                        self.isShowImagePicker = true
+                    }),
+                    ActionSheet.Button.cancel()
+                ])
+        }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
+            ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
+        }
         .toolbar {
             Button("Save") { savePressed() }.disabled(self.newBee.videoURL == nil || self.isShowActivity)
         }

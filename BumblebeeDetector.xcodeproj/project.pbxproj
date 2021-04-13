@@ -36,7 +36,6 @@
 		D359AC232615DC5F007C95C6 /* BeeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D359AC222615DC5F007C95C6 /* BeeRow.swift */; };
 		D35E25CC260238820025EBEB /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E25CB260238820025EBEB /* DetailRow.swift */; };
 		D366246A25DF03B300241EF7 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D366246925DF03B300241EF7 /* LoadingIndicator.swift */; };
-		D37A622A25EF12EC00163207 /* PhotoSelectActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */; };
 		D37A624725EF334E00163207 /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A624625EF334E00163207 /* PagingView.swift */; };
 		D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3875A0925B0A097002C1B80 /* AnimationView.swift */; };
 		D3A02C6D2624B4BA00D3BB9A /* test_video.MOV in Resources */ = {isa = PBXBuildFile; fileRef = D3A02C6C2624B4B900D3BB9A /* test_video.MOV */; };
@@ -103,7 +102,6 @@
 		D359AC222615DC5F007C95C6 /* BeeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeeRow.swift; sourceTree = "<group>"; };
 		D35E25CB260238820025EBEB /* DetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRow.swift; sourceTree = "<group>"; };
 		D366246925DF03B300241EF7 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
-		D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectActionSheet.swift; sourceTree = "<group>"; };
 		D37A624625EF334E00163207 /* PagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingView.swift; sourceTree = "<group>"; };
 		D3875A0925B0A097002C1B80 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		D3A02C6C2624B4B900D3BB9A /* test_video.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test_video.MOV; sourceTree = "<group>"; };
@@ -260,7 +258,6 @@
 				D366246925DF03B300241EF7 /* LoadingIndicator.swift */,
 				D3A441E425DEF961003EFAEC /* FilledButton.swift */,
 				D34FAF8C25EEDD0600AB3725 /* MapView.swift */,
-				D37A622925EF12EC00163207 /* PhotoSelectActionSheet.swift */,
 				D37A624625EF334E00163207 /* PagingView.swift */,
 				D3E1799325F6C66300102C30 /* ShareSheet.swift */,
 				D35E25CB260238820025EBEB /* DetailRow.swift */,
@@ -431,7 +428,6 @@
 				D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */,
 				D3D0B42B25A51A560011E322 /* AddBeeView.swift in Sources */,
 				D35E25CC260238820025EBEB /* DetailRow.swift in Sources */,
-				D37A622A25EF12EC00163207 /* PhotoSelectActionSheet.swift in Sources */,
 				D3D0B42325A511950011E322 /* BumblebeeEdit.swift in Sources */,
 				D3DB09F025DEE04C001E76AA /* ProfilePictureAndBackground.swift in Sources */,
 				D37A624725EF334E00163207 /* PagingView.swift in Sources */,

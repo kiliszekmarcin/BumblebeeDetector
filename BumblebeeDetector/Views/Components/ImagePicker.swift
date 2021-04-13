@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ImagePicker: UIViewControllerRepresentable {
     
-    var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    var sourceType: UIImagePickerController.SourceType
     
     @Binding var selectedImage: UIImage?
     @Binding var selectedVideoUrl: URL?
