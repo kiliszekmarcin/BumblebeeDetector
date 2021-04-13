@@ -12,6 +12,7 @@ import AVFoundation
 class BeeLocaliser {
     let model: BumblebeeModel
     var profilePicture: UIImage?
+    var detections: Int = 0
     
     init() {
         do {
@@ -38,6 +39,8 @@ class BeeLocaliser {
     
     /// Detects a bee on CGImage, and returns a cgrect scaled down to fit the size of the detection
     private func detectBeeRect(onImage image: CGImage) -> CGRect? {
+        detections += 1
+        
         do {
             let modelInput = try BumblebeeModelInput.init(imageWith: image, iouThreshold: nil, confidenceThreshold: nil)
             let prediction = try model.prediction(input: modelInput)

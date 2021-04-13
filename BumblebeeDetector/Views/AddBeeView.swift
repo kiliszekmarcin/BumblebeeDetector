@@ -29,6 +29,13 @@ struct AddBeeView: View {
     @State var selectionMethod: Method = .evenlySpaced
     @State var selectedImages: [UIImage] = []
     
+    @State var interpolate: Bool = false
+    @State var threshold: CGFloat = 0.025
+    
+    @State var detections: Int = 0
+    @State var interpolations: Int = 0
+    @State var time: Double = 0.0
+    
     var body: some View {
         ZStack() {
             ScrollView {
@@ -64,7 +71,7 @@ struct AddBeeView: View {
                             
                             AnimationView(
                                 imageSize: CGSize(width: 200, height: 200),
-                                animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 16))
+                                animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 20))
                             ).frame(width: 200, height: 200, alignment: .center)
                             .cornerRadius(11)
                             .padding(4)
@@ -74,6 +81,20 @@ struct AddBeeView: View {
                         }
                         
                         if researchMode && newBee.videoURL != nil {
+                            if self.detections != 0 || self.interpolations != 0 || self.time != 0.0 {
+                                DetailRow(
+                                    title: "Detections",
+                                    caption: "\(self.detections)")
+                                
+                                DetailRow(
+                                    title: "Interpolations",
+                                    caption: "\(self.interpolations)")
+                                
+                                DetailRow(
+                                    title: "Time it took",
+                                    caption: String(format: "%.2f", self.time) + " s")
+                            }
+                            
                             if !self.selectedImages.isEmpty {
                                 HStack {
                                     Text("Selected frames:")
@@ -126,8 +147,23 @@ struct AddBeeView: View {
                     }
                 }.padding()
                 
+                // detection controlls
                 if editedBee == nil {
-                    // detection controlls
+                    if researchMode && newBee.videoURL != nil {
+                        Toggle(isOn: $interpolate) {
+                            Text("Interpolate")
+                                .font(.headline)
+                        }.padding(.horizontal)
+                        
+                        if self.interpolate {
+                            VStack {
+                                Text("\(self.threshold)")
+                                Slider(value: $threshold, in: 0...0.05)
+                                    .padding(.horizontal)
+                            }
+                        }
+                    }
+                    
                     VStack {
                         HStack(spacing: 10.0) {
                             FilledButton(
@@ -201,13 +237,35 @@ extension AddBeeView {
             self.newBee.predictions = []
             
             DispatchQueue(label: "beeDetection").async {
-                let localiser = BeeLocaliser()
+                self.time = 0.0
+                self.detections = 0
+                self.interpolations = 0
+                let detectionStart = Date()
                 
-                newBee.detections = localiser.detectBee(onVideo: url, fps: 16)
-                
-                if let profilePic = localiser.profilePicture {
-                    newBee.profileImage = profilePic
+                if interpolate {
+                    let interpolator = Interpolation(videoUrl: url)
+                    
+                    newBee.detections = interpolator.detectByInterpolation(fps: 16, threshold: threshold)
+                    
+                    if let firstImage = newBee.detections.first {
+                        newBee.profileImage = firstImage
+                    }
+                    
+                    self.detections = interpolator.detections
+                    self.interpolations = interpolator.interpolations
+                } else {
+                    let localiser = BeeLocaliser()
+                    
+                    newBee.detections = localiser.detectBee(onVideo: url, fps: 16)
+                    
+                    if let profilePic = localiser.profilePicture {
+                        newBee.profileImage = profilePic
+                    }
+                    
+                    self.detections = localiser.detections
                 }
+                
+                self.time = -detectionStart.timeIntervalSinceNow
                 
                 self.isShowActivity = ""
                 
