@@ -85,10 +85,10 @@ class Requests {
 
             return selectedImages
         
-        case .test:
+        case .belowAverage:
             var selectedImages: [UIImage] = images
             
-            while selectedImages.count > 10 {
+            while selectedImages.count > howMany {
                 // calculate standard derivations of edges in the detections
                 let stDevs = ImageQuality().sequenceSharpnessStDev(images: selectedImages)
                 
@@ -100,7 +100,7 @@ class Requests {
                 var filtered = filterOrReturnMin(toFilter: zip(stDevs, selectedImages), value: avgStDev, min: howMany)
                 selectedImages = filtered.map { $0.1 }
                 
-                if selectedImages.count <= 10 { return selectedImages }
+                if selectedImages.count <= howMany { return selectedImages }
                 
                 // calculate image similarities
                 let similarities = ImageSimilarity.imageArrayDistances(array: selectedImages).map { Double($0) }
@@ -111,6 +111,26 @@ class Requests {
                 // remove the below average similarities
                 filtered = filterOrReturnMin(toFilter: zip(similarities, selectedImages), value: Double(avgSimilarity), min: howMany)
                 selectedImages = filtered.map { $0.1 }
+            }
+            
+            return selectedImages
+            
+        case .mostDifferent:
+            var selectedImages = images
+            
+            while selectedImages.count > howMany {
+                let similarities = ImageSimilarity.imageArrayDistances(array: selectedImages)
+                
+                // sort the similarities and get rid of bottom 25%
+                var sorted = zip(similarities, selectedImages).sorted { $0.0 > $1.0 }
+                let reduced = Int(Double(sorted.count)*0.75)
+                if reduced >= howMany {
+                    sorted = Array(sorted.prefix(reduced))
+                } else {
+                    sorted = Array(sorted.prefix(howMany))
+                }
+                
+                selectedImages = sorted.map { $0.1 }
             }
             
             return selectedImages
@@ -135,7 +155,8 @@ enum Method: String, CaseIterable, Identifiable {
     case evenlySpaced
     case highestStDev
     case sections
-    case test
+    case belowAverage
+    case mostDifferent
 
     var id: String { self.rawValue }
 }
