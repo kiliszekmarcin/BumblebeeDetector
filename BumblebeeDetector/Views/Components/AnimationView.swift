@@ -3,7 +3,7 @@
 //  BumblebeeDetector
 //
 //  Created by Marcin Kiliszek on 14/01/2021.
-//
+//  adapted from https://stackoverflow.com/a/61013899
 
 import SwiftUI
 import UIKit

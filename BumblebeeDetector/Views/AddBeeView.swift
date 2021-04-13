@@ -189,7 +189,7 @@ struct AddBeeView: View {
             
         }.actionSheet(isPresented: $isShowActionSheet) {
             ActionSheet(
-                title: Text("Select image source"),
+                title: Text("Select video source"),
                 message: nil,
                 buttons: [
                     ActionSheet.Button.default(Text("Photo Library"), action: {

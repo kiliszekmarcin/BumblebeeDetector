@@ -3,7 +3,7 @@
 //  BumblebeeDetector
 //
 //  Created by Marcin Kiliszek on 08/03/2021.
-// adapted from https://developer.apple.com/forums/thread/123951 posted by https://developer.apple.com/forums/profile/Jim+Dovey
+//  adapted from https://developer.apple.com/forums/thread/123951 posted by https://developer.apple.com/forums/profile/Jim+Dovey
 
 import SwiftUI
 
