@@ -135,7 +135,7 @@ struct AddBeeView: View {
                             
                             FilledButton(
                                 title: "Detect",
-                                disabled: self.isShowActivity != "" || newBee.videoURL == nil
+                                disabled: self.isShowActivity != "" || (newBee.videoURL == nil && newBee.profileImage == nil)
                             ) {
                                 detectPressed()
                             }
@@ -162,7 +162,7 @@ struct AddBeeView: View {
                     }),
                     ActionSheet.Button.cancel()
                 ])
-        }.sheet(isPresented: $isShowImagePicker, onDismiss: { videoPicked() }) {
+        }.sheet(isPresented: $isShowImagePicker, onDismiss: { beePicked() }) {
             ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
         }
         .toolbar {
@@ -173,18 +173,23 @@ struct AddBeeView: View {
 
 
 extension AddBeeView {
-    func videoPicked() {
+    func beePicked() {
         if let url = newBee.videoURL {
+            // video
             let newBeeMetadata = Utils.getVideoMetadata(url: url)
             
             newBee.backgroundImage = newBeeMetadata.firstFrame
             newBee.date = newBeeMetadata.date
             newBee.location = newBeeMetadata.location
+        } else if let photo = newBee.profileImage {
+            // photo
+            newBee.backgroundImage = photo
         }
     }
     
     func detectPressed() {
         if let url = newBee.videoURL {
+            // video
             self.isShowActivity = "Detecting"
             self.changesToDetections = true
             
@@ -198,6 +203,25 @@ extension AddBeeView {
                 
                 if let firstImage = newBee.detections.first {
                     newBee.profileImage = firstImage
+                }
+                
+                sendImagesToAPI()
+            }
+        } else if let photo = newBee.profileImage {
+            // photo
+            self.isShowActivity = "Detecting"
+            self.changesToDetections = true
+            
+            self.newBee.detections = []
+            self.newBee.predictions = []
+            
+            DispatchQueue(label: "beeDetection").async {
+                let localiser = BeeLocaliser()
+                
+                if let cgPhoto = photo.cgImage,
+                   let detection = localiser.detectBee(onImage: cgPhoto) {
+                    newBee.detections = [detection]
+                    newBee.profileImage = detection
                 }
                 
                 sendImagesToAPI()
