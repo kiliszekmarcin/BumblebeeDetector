@@ -15,11 +15,13 @@ struct ContentView: View {
     
     private var bumblebees: FetchedResults<Bumblebee>
     
+    @State var researchToggle: Bool = true
+    
     var body: some View {
         NavigationView {
             List {
                 ForEach(bumblebees, id: \.id) { bee in
-                    NavigationLink(destination: AddBeeView(newBee: BumblebeeEdit(bumblebee: bee), editedBee: bee)
+                    NavigationLink(destination: AddBeeView(researchMode: researchToggle, newBee: BumblebeeEdit(bumblebee: bee), editedBee: bee)
                     ) {
                         BeeRow(bee: bee)
                     }
@@ -38,8 +40,11 @@ struct ContentView: View {
                 
             .navigationBarTitle("Detections")
             .navigationBarItems(
+                leading: Button(action: {researchToggle.toggle()}, label: {
+                    Image(systemName: "command.circle" + (researchToggle ? ".fill" : ""))
+                }),
                 trailing:
-                NavigationLink(destination: AddBeeView()) {
+                NavigationLink(destination: AddBeeView(researchMode: researchToggle)) {
                     Image(systemName: "plus")
                 }.accessibility(identifier: "Add new bee")
             )

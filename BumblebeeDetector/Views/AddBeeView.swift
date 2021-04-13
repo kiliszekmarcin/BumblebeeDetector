@@ -12,6 +12,8 @@ struct AddBeeView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment (\.presentationMode) var presentationMode
     
+    var researchMode: Bool
+    
     @State var newBee = BumblebeeEdit()
 
     @State private var isShowImagePicker = false
@@ -62,7 +64,7 @@ struct AddBeeView: View {
                             
                             AnimationView(
                                 imageSize: CGSize(width: 200, height: 200),
-                                animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
+                                animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 16))
                             ).frame(width: 200, height: 200, alignment: .center)
                             .cornerRadius(11)
                             .padding(4)
@@ -71,38 +73,40 @@ struct AddBeeView: View {
                             .shadow(radius: 7)
                         }
                         
-                        if !self.selectedImages.isEmpty {
-                            HStack {
-                                Text("Selected frames:")
-                                    .font(.headline)
-                                
-                                Spacer()
-                                
-                                AnimationView(
-                                    imageSize: CGSize(width: 200, height: 200),
-                                    animatedImage: UIImage.animatedImage(with: self.selectedImages, duration: TimeInterval(2))
-                                ).frame(width: 200, height: 200, alignment: .center)
-                                .cornerRadius(15)
-                                .padding(4)
-                                .background(Color.white)
-                                .cornerRadius(15)
-                                .shadow(radius: 7)
+                        if researchMode && newBee.videoURL != nil {
+                            if !self.selectedImages.isEmpty {
+                                HStack {
+                                    Text("Selected frames:")
+                                        .font(.headline)
+                                    
+                                    Spacer()
+                                    
+                                    AnimationView(
+                                        imageSize: CGSize(width: 200, height: 200),
+                                        animatedImage: UIImage.animatedImage(with: self.selectedImages, duration: TimeInterval(2))
+                                    ).frame(width: 200, height: 200, alignment: .center)
+                                    .cornerRadius(15)
+                                    .padding(4)
+                                    .background(Color.white)
+                                    .cornerRadius(15)
+                                    .shadow(radius: 7)
+                                }
                             }
-                        }
-                        
-                        Button("Predict using \(Int(self.imagesToSend)) frames") {
-                            self.selectedImages = []
-                            sendImagesToAPI()
-                        }
-                        Slider(value: $imagesToSend, in: 1...20, step: 1)
-                            .padding(.horizontal)
-                        
-                        Picker("Selection method", selection: $selectionMethod) {
-                            ForEach(Method.allCases, id: \.id) { method in
-                                Text(method.rawValue)
-                                    .tag(method)
+                            
+                            Button("Predict using \(Int(self.imagesToSend)) frames") {
+                                self.selectedImages = []
+                                sendImagesToAPI()
                             }
-                        }.pickerStyle(SegmentedPickerStyle())
+                            Slider(value: $imagesToSend, in: 1...20, step: 1)
+                                .padding(.horizontal)
+                            
+                            Picker("Selection method", selection: $selectionMethod) {
+                                ForEach(Method.allCases, id: \.id) { method in
+                                    Text(method.rawValue)
+                                        .tag(method)
+                                }
+                            }.pickerStyle(SegmentedPickerStyle())
+                        }
                         
                         if !newBee.predictions.isEmpty {
                             HStack {
@@ -206,7 +210,10 @@ extension AddBeeView {
                 }
                 
                 self.isShowActivity = ""
-                sendImagesToAPI()
+                
+                if !researchMode {
+                    sendImagesToAPI()
+                }
             }
         } else if let photo = newBee.profileImage {
             // photo
@@ -314,11 +321,11 @@ struct AddBeeView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                AddBeeView(newBee: exampleBee)
+                AddBeeView(researchMode: true, newBee: exampleBee)
             }.previewDevice("iPhone 12").previewDisplayName("Example bee")
             
             NavigationView {
-                AddBeeView(newBee: placeholderBee)
+                AddBeeView(researchMode: true, newBee: placeholderBee)
             }.previewDevice("iPhone 12").previewDisplayName("Placeholder")
         }
     }
