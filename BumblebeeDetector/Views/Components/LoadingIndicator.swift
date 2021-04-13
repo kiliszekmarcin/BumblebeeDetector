@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LoadingIndicator: View {
+    var loadingText: String
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -15,7 +17,7 @@ struct LoadingIndicator: View {
                 .opacity(0.5)
                 .cornerRadius(15)
             
-            ProgressView("Loading")
+            ProgressView(loadingText)
                 .brightness(1)
         }
     }
@@ -23,7 +25,7 @@ struct LoadingIndicator: View {
 
 struct LoadingIndicator_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingIndicator()
+        LoadingIndicator(loadingText: "Loading")
             .previewLayout(.sizeThatFits)
     }
 }

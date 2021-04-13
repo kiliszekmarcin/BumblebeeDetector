@@ -17,7 +17,7 @@ struct AddBeeView: View {
     @State private var isShowImagePicker = false
     @State private var imagePickerMediaType = UIImagePickerController.SourceType.photoLibrary
     @State private var isShowActionSheet = false
-    @State private var isShowActivity = false
+    @State private var isShowActivity = ""
     
     @State var editedBee: Bumblebee?
     @State var changesToDetections = false
@@ -128,14 +128,14 @@ struct AddBeeView: View {
                         HStack(spacing: 10.0) {
                             FilledButton(
                                 title: "Select a video",
-                                disabled: self.isShowActivity
+                                disabled: self.isShowActivity != ""
                             ) {
                                 self.isShowActionSheet = true
                             }
                             
                             FilledButton(
                                 title: "Detect",
-                                disabled: self.isShowActivity || newBee.videoURL == nil
+                                disabled: self.isShowActivity != "" || newBee.videoURL == nil
                             ) {
                                 detectPressed()
                             }
@@ -166,7 +166,7 @@ struct AddBeeView: View {
             ImagePicker(sourceType: imagePickerMediaType, selectedImage: self.$newBee.profileImage, selectedVideoUrl: self.$newBee.videoURL)
         }
         .toolbar {
-            Button("Save") { savePressed() }.disabled(self.newBee.videoURL == nil || self.isShowActivity)
+            Button("Save") { savePressed() }.disabled(self.newBee.videoURL == nil || self.isShowActivity != "")
         }
     }
 }
@@ -185,7 +185,7 @@ extension AddBeeView {
     
     func detectPressed() {
         if let url = newBee.videoURL {
-            self.isShowActivity = true
+            self.isShowActivity = "Detecting"
             self.changesToDetections = true
             
             self.newBee.detections = []
@@ -206,7 +206,7 @@ extension AddBeeView {
     }
     
     func sendImagesToAPI() {
-        self.isShowActivity = true
+        self.isShowActivity = "Predicting"
         
         self.newBee.predictions = []
         
@@ -230,7 +230,7 @@ extension AddBeeView {
                     }
                 }
                 
-                self.isShowActivity = false
+                self.isShowActivity = ""
             }
         }
     }

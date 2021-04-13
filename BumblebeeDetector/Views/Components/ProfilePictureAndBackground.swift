@@ -13,7 +13,7 @@ struct ProfilePictureAndBackground: View {
     let backgroundPicture : UIImage?
     let location : CLLocationCoordinate2D?
     
-    let loading : Bool
+    let loading : String
     
     @State var index = 0
     
@@ -52,11 +52,11 @@ struct ProfilePictureAndBackground: View {
                 .resizable()
                 .scaledToFill()
                 .frame(width: 200, height: 200)
-                .blur(radius: loading ? 5.0 : 0)
+                .blur(radius: loading != "" ? 5.0 : 0)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: 4))
                 .shadow(radius: 7)
-                .overlay(loading ? LoadingIndicator() : nil)
+                .overlay(loading != "" ? LoadingIndicator(loadingText: loading) : nil)
                 .offset(y: backgroundPicture == nil ? 0 : -130)
                 .padding()
                 .padding(.bottom, backgroundPicture == nil ? 0 : -130)
@@ -90,28 +90,28 @@ struct ProfilePictureAndBackground_Previews: PreviewProvider {
                 profilePicture: beeImage,
                 backgroundPicture: beeBackground,
                 location: britishMuseum,
-                loading: false
+                loading: ""
             )
             
             ProfilePictureAndBackground(
                 profilePicture: beeImage,
                 backgroundPicture: beeBackground,
                 location: nil,
-                loading: true
+                loading: "Detecting"
             )
             
             ProfilePictureAndBackground(
                 profilePicture: placeholderImg,
                 backgroundPicture: nil,
                 location: nil,
-                loading: false
+                loading: ""
             )
             
             ProfilePictureAndBackground(
                 profilePicture: placeholderImg,
                 backgroundPicture: nil,
                 location: nil,
-                loading: true
+                loading: "Predicting"
             )
         }
         .previewLayout(.sizeThatFits)
