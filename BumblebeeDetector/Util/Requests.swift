@@ -48,7 +48,9 @@ class Requests {
         switch method {
         case .evenlySpaced:
             // baseline: evenly spaced items
-            let indices = Array(stride(from: 0, to: images.count-1, by: images.count/howMany))
+            let step = Double(images.count)/Double(howMany)
+            var indices = Array(0..<howMany) // generate range of how many elements
+            indices = indices.map { Int(Double($0) * step) } // multiply range by step and cast to int
             let selectedImages = indices.map { images[$0] }
 
             return selectedImages
@@ -68,7 +70,7 @@ class Requests {
             // calculate standard derivations of edges in the detections
             let stDevs = ImageQuality().sequenceSharpnessStDev(images: images)
             
-            for i in 0...howMany {
+            for i in 0..<howMany {
                 var indexRange = i*(images.count/howMany)...(i+1)*(images.count/howMany)
                 if indexRange.upperBound >= images.count {
                     indexRange = i*(images.count/howMany)...(images.count - 1)
@@ -137,7 +139,7 @@ class Requests {
         }
     }
     
-    static func filterOrReturnMin(toFilter: Zip2Sequence<[Double], [UIImage]>, value: Double, min: Int) -> [(Double, UIImage)] {
+    static private func filterOrReturnMin(toFilter: Zip2Sequence<[Double], [UIImage]>, value: Double, min: Int) -> [(Double, UIImage)] {
         // filter acording to the filter value
         let filtered = toFilter.filter { $0.0 > value }
         

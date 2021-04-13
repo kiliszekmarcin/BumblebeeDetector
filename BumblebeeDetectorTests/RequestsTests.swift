@@ -72,5 +72,50 @@ class RequestsTests: XCTestCase {
             XCTFail("Failed to load the test image")
         }
     }
+    
+    func testSelectionMethod_even() throws {
+        if let beeImage = UIImage(named: "bee_square", in: Bundle(for: type(of: self)), compatibleWith: nil) {
+            let images = Array(repeating: beeImage, count: 50)
+            let howMany = 10
+            
+            for method in Method.allCases {
+                let selected = Requests.selectionMethod(images: images, howMany: howMany, method: method)
+                
+                XCTAssertTrue(selected.count == howMany, "method: \(method), expected: \(howMany), got: \(selected.count)")
+            }
+        } else {
+            XCTFail("Failed to load the test image")
+        }
+    }
+    
+    func testSelectionMethod_uneven() throws {
+        if let beeImage = UIImage(named: "bee_square", in: Bundle(for: type(of: self)), compatibleWith: nil) {
+            let images = Array(repeating: beeImage, count: 54)
+            let howMany = 10
+            
+            for method in Method.allCases {
+                let selected = Requests.selectionMethod(images: images, howMany: howMany, method: method)
+                
+                XCTAssertTrue(selected.count == howMany, "method: \(method), expected: \(howMany), got: \(selected.count)")
+            }
+        } else {
+            XCTFail("Failed to load the test image")
+        }
+    }
+    
+    func testSelectionMethod_lower() throws {
+        if let beeImage = UIImage(named: "bee_square", in: Bundle(for: type(of: self)), compatibleWith: nil) {
+            let images = Array(repeating: beeImage, count: 5)
+            let howMany = 10
+            
+            for method in Method.allCases {
+                let selected = Requests.selectionMethod(images: images, howMany: howMany, method: method)
+                
+                XCTAssertTrue(selected.count == images.count)
+            }
+        } else {
+            XCTFail("Failed to load the test image")
+        }
+    }
 
 }
