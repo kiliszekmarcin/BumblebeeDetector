@@ -80,4 +80,42 @@ class UtilsTests: XCTestCase {
         
         XCTAssert(squarified.width == 720 && squarified.height == 900)
     }
+    
+    func testAnyJsonToPredictions_predictions() throws {
+        let json: Any = [
+            "pred" : [
+                ["Bombus hypnorum", 44.63],
+                ["Bombus pascuorum", 36.05]
+            ]
+        ]
+        
+        let predictions = Utils.anyJsonToPredictions(json: json)
+        
+        XCTAssertTrue(predictions[0].species == "Bombus hypnorum")
+        XCTAssertTrue(predictions[0].confidence == 44.63)
+        
+        XCTAssertTrue(predictions[1].species == "Bombus pascuorum")
+        XCTAssertTrue(predictions[1].confidence == 36.05)
+    }
+    
+    func testAnyJsonToPredictions_error() throws {
+        let json: Any = [
+            "error" : "Some error message"
+        ]
+        
+        let predictions = Utils.anyJsonToPredictions(json: json)
+        
+        XCTAssertTrue(predictions[0].species == "Some error message")
+    }
+    
+    func testAnyJsonToPredictions_wrongJson() throws {
+        let json: Any = [
+            "wrong" : "wrong"
+        ]
+        
+        let predictions = Utils.anyJsonToPredictions(json: json)
+        
+        XCTAssertTrue(predictions[0].species == "Error")
+    }
+    
 }
