@@ -242,22 +242,7 @@ extension AddBeeView {
         DispatchQueue(label: "request").async {
             self.selectedImages = Requests.sendImages(images: newBee.detections, imagesToSend: Int(self.imagesToSend), method: selectionMethod) { json in
                 // parse json into the classifications array
-                if let jsonDict = json as? [String: Any] {
-                    if let jsonDeeper = jsonDict["pred"] as? [Any] {
-                        for item in jsonDeeper {
-                            if let item = item as? [Any] {
-                                let species = item[0] as! String
-                                let confidence = item[1] as! Double
-                                
-                                newBee.predictions.append(Prediction(species: species, confidence: confidence))
-                            }
-                        }
-                    } else if let errorMessage = jsonDict["error"] {
-                        newBee.predictions.append(Prediction(species: errorMessage as! String, confidence: 1.0))
-                    } else {
-                        newBee.predictions.append(Prediction(species: "Error", confidence: 1.0))
-                    }
-                }
+                newBee.predictions = Utils.anyJsonToPredictions(json: json)
                 
                 self.isShowActivity = ""
             }

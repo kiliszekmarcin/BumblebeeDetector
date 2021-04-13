@@ -177,4 +177,27 @@ class Utils {
             return rect
         }
     }
+    
+    static func anyJsonToPredictions(json: Any?) -> [Prediction] {
+        var predictions: [Prediction] = []
+        
+        if let jsonDict = json as? [String: Any] {
+            if let jsonDeeper = jsonDict["pred"] as? [Any] {
+                for item in jsonDeeper {
+                    if let item = item as? [Any] {
+                        let species = item[0] as! String
+                        let confidence = item[1] as! Double
+                        
+                        predictions.append(Prediction(species: species, confidence: confidence))
+                    }
+                }
+            } else if let errorMessage = jsonDict["error"] {
+                predictions.append(Prediction(species: errorMessage as! String, confidence: 1.0))
+            } else {
+                predictions.append(Prediction(species: "Error", confidence: 1.0))
+            }
+        }
+        
+        return predictions
+    }
 }

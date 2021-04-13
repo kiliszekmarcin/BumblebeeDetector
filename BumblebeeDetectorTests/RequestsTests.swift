@@ -17,18 +17,7 @@ class RequestsTests: XCTestCase {
             
             _ = Requests.sendImages(images: [beeImage]) { json in
                 // parse json into the classifications array
-                if let jsonDict = json as? [String: Any] {
-                    if let jsonDeeper = jsonDict["pred"] as? [Any] {
-                        for item in jsonDeeper {
-                            if let item = item as? [Any] {
-                                let species = item[0] as! String
-                                let confidence = item[1] as! Double
-                                
-                                predictions.append(Prediction(species: species, confidence: confidence))
-                            }
-                        }
-                    }
-                }
+                predictions = Utils.anyJsonToPredictions(json: json)
                 
                 expectation.fulfill()
             }
@@ -49,18 +38,7 @@ class RequestsTests: XCTestCase {
             
             _ = Requests.sendImages(images: Array(repeating: beeImage, count: 50), imagesToSend: 5) { json in
                 // parse json into the classifications array
-                if let jsonDict = json as? [String: Any] {
-                    if let jsonDeeper = jsonDict["pred"] as? [Any] {
-                        for item in jsonDeeper {
-                            if let item = item as? [Any] {
-                                let species = item[0] as! String
-                                let confidence = item[1] as! Double
-                                
-                                predictions.append(Prediction(species: species, confidence: confidence))
-                            }
-                        }
-                    }
-                }
+                predictions = Utils.anyJsonToPredictions(json: json)
                 
                 expectation.fulfill()
             }
