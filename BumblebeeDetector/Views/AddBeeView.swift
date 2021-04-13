@@ -64,16 +64,33 @@ struct AddBeeView: View {
                                 imageSize: CGSize(width: 200, height: 200),
                                 animatedImage: UIImage.animatedImage(with: newBee.detections, duration: TimeInterval(newBee.detections.count / 30))
                             ).frame(width: 200, height: 200, alignment: .center)
+                            .cornerRadius(11)
+                            .padding(4)
+                            .background(Color.white)
+                            .cornerRadius(15)
+                            .shadow(radius: 7)
                         }
                         
                         if !self.selectedImages.isEmpty {
-                            AnimationView(
-                                imageSize: CGSize(width: 200, height: 200),
-                                animatedImage: UIImage.animatedImage(with: self.selectedImages, duration: TimeInterval(2))
-                            ).frame(width: 200, height: 200, alignment: .center)
+                            HStack {
+                                Text("Selected frames:")
+                                    .font(.headline)
+                                
+                                Spacer()
+                                
+                                AnimationView(
+                                    imageSize: CGSize(width: 200, height: 200),
+                                    animatedImage: UIImage.animatedImage(with: self.selectedImages, duration: TimeInterval(2))
+                                ).frame(width: 200, height: 200, alignment: .center)
+                                .cornerRadius(15)
+                                .padding(4)
+                                .background(Color.white)
+                                .cornerRadius(15)
+                                .shadow(radius: 7)
+                            }
                         }
                         
-                        Button("Detect using \(Int(self.imagesToSend)) frames") {
+                        Button("Predict using \(Int(self.imagesToSend)) frames") {
                             self.selectedImages = []
                             sendImagesToAPI()
                         }
@@ -105,7 +122,7 @@ struct AddBeeView: View {
                     }
                 }.padding()
                 
-                if editedBee == nil {
+                if newBee.detections.isEmpty {
                     // detection controlls
                     VStack {
                         HStack(spacing: 10.0) {

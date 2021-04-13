@@ -20,7 +20,6 @@ struct AnimationView: UIViewRepresentable {
         let animationImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height))
 
         animationImageView.clipsToBounds = true
-//        animationImageView.layer.cornerRadius = 5
         animationImageView.autoresizesSubviews = true
         animationImageView.contentMode = UIView.ContentMode.scaleAspectFit
 

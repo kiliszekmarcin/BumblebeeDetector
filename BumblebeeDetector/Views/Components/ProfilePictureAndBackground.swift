@@ -69,7 +69,7 @@ extension ProfilePictureAndBackground {
         func body(content: Content) -> some View {
             content
                 .frame(width: UIScreen.main.bounds.width - 30, height: 275)
-                .cornerRadius(15)
+                .cornerRadius(11)
                 .padding(4)
                 .background(Color.white)
                 .cornerRadius(15)
