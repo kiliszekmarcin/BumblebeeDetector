@@ -26,11 +26,6 @@ class BumblebeeDetectorUITests: XCTestCase {
         XCTAssert(app.staticTexts["Detections"].exists)
         XCTAssert(app.buttons["Add new bee"].exists)
         
-        // make sure research mode is off
-        if app.buttons["command.circle.fill"].exists {
-            app.buttons["command.circle.fill"].tap()
-        }
-        
         // //// ADD NEW BEE
         // go to add bee screen
         app.buttons["Add new bee"].tap()
@@ -63,6 +58,12 @@ class BumblebeeDetectorUITests: XCTestCase {
         
         // wait for the detection to finish
         XCTAssert(app.staticTexts["Detected bee:"].waitForExistence(timeout: 30))
+        
+        // predict if not started
+        // make sure research mode is off
+        if app.buttons["Predict"].exists {
+            app.buttons["Predict"].tap()
+        }
         
         // wait for predictions to appear
         XCTAssert(app.staticTexts["Predictions:"].waitForExistence(timeout: 70))

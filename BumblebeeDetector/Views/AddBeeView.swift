@@ -117,7 +117,7 @@ struct AddBeeView: View {
                             Button("Predict using \(Int(self.imagesToSend)) frames") {
                                 self.selectedImages = []
                                 sendImagesToAPI()
-                            }
+                            }.accessibility(identifier: "Predict")
                             Slider(value: $imagesToSend, in: 1...20, step: 1)
                                 .padding(.horizontal)
                             
