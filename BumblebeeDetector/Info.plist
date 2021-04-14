@@ -34,7 +34,12 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Access to the Microphone is needed to record videos for localisation.</string>
 	<key>UILaunchScreen</key>
-	<dict/>
+	<dict>
+		<key>UIImageRespectsSafeAreaInsets</key>
+		<true/>
+		<key>UIImageName</key>
+		<string>backgroundBee</string>
+	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

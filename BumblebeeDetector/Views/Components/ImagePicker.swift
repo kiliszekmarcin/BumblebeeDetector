@@ -14,6 +14,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     @Binding var selectedImage: UIImage?
     @Binding var selectedVideoUrl: URL?
+    var mediaTypes = ["public.movie", "public.image"]
     @Environment(\.presentationMode) private var presentationMode
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
@@ -21,7 +22,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
         imagePicker.sourceType = sourceType
-        imagePicker.mediaTypes = ["public.movie", "public.image"]
+        imagePicker.mediaTypes = mediaTypes
         imagePicker.delegate = context.coordinator
         
         return imagePicker

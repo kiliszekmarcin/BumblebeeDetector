@@ -37,6 +37,9 @@
 		D35E25CC260238820025EBEB /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E25CB260238820025EBEB /* DetailRow.swift */; };
 		D366246A25DF03B300241EF7 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D366246925DF03B300241EF7 /* LoadingIndicator.swift */; };
 		D37A624725EF334E00163207 /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A624625EF334E00163207 /* PagingView.swift */; };
+		D37B205226273BB0003735D2 /* ResearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37B205126273BB0003735D2 /* ResearchView.swift */; };
+		D37B205726273C7D003735D2 /* EdgeDetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37B205626273C7D003735D2 /* EdgeDetectionView.swift */; };
+		D37B205C26273C84003735D2 /* ImageSimilarityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37B205B26273C84003735D2 /* ImageSimilarityView.swift */; };
 		D3875A0A25B0A097002C1B80 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3875A0925B0A097002C1B80 /* AnimationView.swift */; };
 		D3A02C6D2624B4BA00D3BB9A /* test_video.MOV in Resources */ = {isa = PBXBuildFile; fileRef = D3A02C6C2624B4B900D3BB9A /* test_video.MOV */; };
 		D3A02C742624B4DD00D3BB9A /* test_video.MOV in Resources */ = {isa = PBXBuildFile; fileRef = D3A02C6C2624B4B900D3BB9A /* test_video.MOV */; };
@@ -104,6 +107,9 @@
 		D35E25CB260238820025EBEB /* DetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRow.swift; sourceTree = "<group>"; };
 		D366246925DF03B300241EF7 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		D37A624625EF334E00163207 /* PagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingView.swift; sourceTree = "<group>"; };
+		D37B205126273BB0003735D2 /* ResearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchView.swift; sourceTree = "<group>"; };
+		D37B205626273C7D003735D2 /* EdgeDetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeDetectionView.swift; sourceTree = "<group>"; };
+		D37B205B26273C84003735D2 /* ImageSimilarityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSimilarityView.swift; sourceTree = "<group>"; };
 		D3875A0925B0A097002C1B80 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		D3A02C6C2624B4B900D3BB9A /* test_video.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test_video.MOV; sourceTree = "<group>"; };
 		D3A02C822624BAFE00D3BB9A /* Prediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
@@ -231,6 +237,9 @@
 				D3DB09ED25DEDF96001E76AA /* Components */,
 				D30352F025A4F0700049C77C /* ContentView.swift */,
 				D3D0B42A25A51A560011E322 /* AddBeeView.swift */,
+				D37B205126273BB0003735D2 /* ResearchView.swift */,
+				D37B205626273C7D003735D2 /* EdgeDetectionView.swift */,
+				D37B205B26273C84003735D2 /* ImageSimilarityView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -422,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D33D141125F3E4B800980D98 /* ImageSimilarity.swift in Sources */,
+				D37B205226273BB0003735D2 /* ResearchView.swift in Sources */,
 				D366246A25DF03B300241EF7 /* LoadingIndicator.swift in Sources */,
 				D3D0B3F825A4FE860011E322 /* ImagePicker.swift in Sources */,
 				D3A02C832624BAFE00D3BB9A /* Prediction.swift in Sources */,
@@ -437,10 +447,12 @@
 				D30352F125A4F0700049C77C /* ContentView.swift in Sources */,
 				D350A8C925E6C16D00CE31DF /* PersistenceController.swift in Sources */,
 				D3A441E525DEF961003EFAEC /* FilledButton.swift in Sources */,
+				D37B205C26273C84003735D2 /* ImageSimilarityView.swift in Sources */,
 				D3D0B42F25A523010011E322 /* BumblebeeModelOld.mlmodel in Sources */,
 				D30352EF25A4F0700049C77C /* BumblebeeDetectorApp.swift in Sources */,
 				D3A2F647260E06D5006237B0 /* ImageQuality.swift in Sources */,
 				D3D1918925D2E98300DD9161 /* Localisation.swift in Sources */,
+				D37B205726273C7D003735D2 /* EdgeDetectionView.swift in Sources */,
 				D350A90D25E6C4C600CE31DF /* Bumblebee+CoreDataProperties.swift in Sources */,
 				D359AC232615DC5F007C95C6 /* BeeRow.swift in Sources */,
 				D350A8C625E6C01800CE31DF /* Detector.xcdatamodeld in Sources */,

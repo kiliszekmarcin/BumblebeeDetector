@@ -40,9 +40,9 @@ struct ContentView: View {
                 
             .navigationBarTitle("Detections")
             .navigationBarItems(
-                leading: Button(action: {researchToggle.toggle()}, label: {
+                leading: NavigationLink(destination: ResearchView(researchToggle: $researchToggle)) {
                     Image(systemName: "command.circle" + (researchToggle ? ".fill" : ""))
-                }),
+                },
                 trailing:
                 NavigationLink(destination: AddBeeView(researchMode: researchToggle)) {
                     Image(systemName: "plus")
