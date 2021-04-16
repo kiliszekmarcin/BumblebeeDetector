@@ -126,7 +126,7 @@ struct AddBeeView: View {
                                     Text(method.rawValue)
                                         .tag(method)
                                 }
-                            }.pickerStyle(SegmentedPickerStyle())
+                            }
                         }
                         
                         if !newBee.predictions.isEmpty {

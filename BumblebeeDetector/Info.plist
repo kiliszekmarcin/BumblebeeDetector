@@ -36,7 +36,7 @@
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIImageRespectsSafeAreaInsets</key>
-		<true/>
+		<false/>
 		<key>UIImageName</key>
 		<string>backgroundBee</string>
 	</dict>
