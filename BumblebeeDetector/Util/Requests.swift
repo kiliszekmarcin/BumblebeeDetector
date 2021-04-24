@@ -64,7 +64,7 @@ class Requests {
     
             return Array(sharpestImages.prefix(howMany))
             
-        case .sections:
+        case .sectionedMaxStDev:
             // idea 2: divide into n section and pick the sharpest image from each (more diverse data?)
             var selectedImages: [UIImage] = []
             // calculate standard derivations of edges in the detections
@@ -88,6 +88,7 @@ class Requests {
             return selectedImages
         
         case .belowAverage:
+            // idea 3: go in a loop removing images with below average st dev and similarity distance
             var selectedImages: [UIImage] = images
             
             while selectedImages.count > howMany {
@@ -118,6 +119,7 @@ class Requests {
             return selectedImages
             
         case .mostDifferent:
+            // idea 4: pick most different images by going in a loop, calculating differences to the next image and deleting bottom 25%
             var selectedImages = images
             
             while selectedImages.count > howMany {
@@ -136,6 +138,26 @@ class Requests {
             }
             
             return selectedImages
+            
+        case .pairwiseStDevAndDifferent:
+            // idea 5: go in pairs and get rid of the less sharp image in each pair.
+            // then pick most different images using the MostDifferent method.
+            var selectedImages: [UIImage] = []
+            let stDevs = ImageQuality().sequenceSharpnessStDev(images: images)
+            
+            for index in stride(from: 0, to: stDevs.count, by: 2) {
+                // if it's not the last element, compare st devs and keep the one with higher st dev.
+                if index != selectedImages.count-1 {
+                    if stDevs[index] > stDevs[index+1] {
+                        selectedImages.append(images[index])
+                    } else {
+                        selectedImages.append(images[index+1])
+                    }
+                }
+            }
+            
+            // after removing the less sharp half of images, use the mostDifferent method.
+            return selectionMethod(images: selectedImages, howMany: howMany, method: .mostDifferent)
         }
     }
     
@@ -156,9 +178,10 @@ class Requests {
 enum Method: String, CaseIterable, Identifiable {
     case evenlySpaced
     case highestStDev
-    case sections
+    case sectionedMaxStDev
     case belowAverage
     case mostDifferent
+    case pairwiseStDevAndDifferent
 
     var id: String { self.rawValue }
 }
