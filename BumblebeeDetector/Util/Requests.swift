@@ -147,7 +147,7 @@ class Requests {
             
             for index in stride(from: 0, to: stDevs.count, by: 2) {
                 // if it's not the last element, compare st devs and keep the one with higher st dev.
-                if index != selectedImages.count-1 {
+                if index != stDevs.count-1 {
                     if stDevs[index] > stDevs[index+1] {
                         selectedImages.append(images[index])
                     } else {
