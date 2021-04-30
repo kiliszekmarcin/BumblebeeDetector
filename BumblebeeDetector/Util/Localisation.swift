@@ -46,16 +46,22 @@ class BeeLocaliser {
             let prediction = try model.prediction(input: modelInput)
             let coordinates = prediction.coordinates //[0] - x centre of detection, [1] - y centre of detection, [2] - width, [3] - height
             
-            if coordinates.count != 0 {
-                let beeRect = Utils.detectionCGRectToCropping(
-                    detX: coordinates[0].doubleValue,
-                    detY: coordinates[1].doubleValue,
-                    detW: coordinates[2].doubleValue,
-                    detH: coordinates[3].doubleValue,
-                    orgW: Double(image.width),
-                    orgH: Double(image.height))
-                
-                return beeRect
+            let threshold = 0.8
+            if prediction.confidence.count >= 1 {
+                print(prediction.confidence[0])
+                if let doubleConf = prediction.confidence[0] as? Double {
+                    if doubleConf > threshold && coordinates.count != 0 {
+                        let beeRect = Utils.detectionCGRectToCropping(
+                            detX: coordinates[0].doubleValue,
+                            detY: coordinates[1].doubleValue,
+                            detW: coordinates[2].doubleValue,
+                            detH: coordinates[3].doubleValue,
+                            orgW: Double(image.width),
+                            orgH: Double(image.height))
+                        
+                        return beeRect
+                    }
+                }
             }
         } catch let error {
             print("Error when predicting bumblebee location")
