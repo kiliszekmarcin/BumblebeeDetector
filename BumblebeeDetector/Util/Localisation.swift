@@ -48,7 +48,6 @@ class BeeLocaliser {
             
             let threshold = 0.8
             if prediction.confidence.count >= 1 {
-                print(prediction.confidence[0])
                 if let doubleConf = prediction.confidence[0] as? Double {
                     if doubleConf > threshold && coordinates.count != 0 {
                         let beeRect = Utils.detectionCGRectToCropping(
