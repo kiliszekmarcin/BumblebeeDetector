@@ -24,9 +24,9 @@ struct AddBeeView: View {
     @State var editedBee: Bumblebee?
     @State var changesToDetections = false
     
-    @State var imagesToSend: Double = 10
+    @State var imagesToSend: Double = 13
+    @State var selectionMethod: Method = .belowAverage
     
-    @State var selectionMethod: Method = .evenlySpaced
     @State var selectedImages: [UIImage] = []
     
     @State var interpolate: Bool = false
