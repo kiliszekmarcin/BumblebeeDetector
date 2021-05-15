@@ -15,7 +15,7 @@ struct ContentView: View {
     
     private var bumblebees: FetchedResults<Bumblebee>
     
-    @State var researchToggle: Bool = true
+    @State var researchToggle: Bool = false
     
     var body: some View {
         NavigationView {

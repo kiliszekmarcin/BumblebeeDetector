@@ -3,7 +3,7 @@
 //  BumblebeeDetector
 //
 //  Created by Marcin Kiliszek on 26/03/2021.
-//
+//  snippets of code used from https://developer.apple.com/documentation/accelerate/finding_the_sharpest_image_in_a_sequence_of_captured_images
 
 import UIKit
 import Accelerate
